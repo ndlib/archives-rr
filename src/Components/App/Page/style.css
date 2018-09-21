@@ -1,0 +1,9 @@
+.mainContent {
+  min-height: 80vh;
+}
+
+@media print {
+  .mainContent {
+    min-height: auto;
+  }
+}

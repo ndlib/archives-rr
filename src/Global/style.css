@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.container-fluid {
+  margin: 0 auto;
+  padding: 0 10px;
+  position: relative;
+}
+
+.text-content {
+  margin: 20px auto;
+}
+
+@media screen and (max-width: 1199px) {
+  .container-fluid {
+  width: calc(100% - 10px);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .container-fluid {
+    width: 1200px;
+  }
+}
+
+/* print specific styles */
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+@media screen {
+  .print-only {
+    display: none;
+  }
+}

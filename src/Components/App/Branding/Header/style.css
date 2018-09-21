@@ -1,0 +1,63 @@
+/* university branding */
+.brandHeading {
+  clear: both;
+  width: 100%;
+}
+
+.university{
+  background: #002a5d;
+  clear: both;
+  color: white;
+  height: 50px;
+  top: 0;
+}
+
+.university a,
+.university a:hover,
+.university a:visited {
+  color: #00000000;
+  line-height: 50px;
+}
+
+.nddotedu{
+  background-image: url(https://www.nd.edu/assets/images/brandbar/dept-nd-white@2x.png) !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50px !important;
+  position: absolute;
+  width: 310px !important;
+}
+
+.ndoffice {
+  background-image: url(https://www.nd.edu/brandbar/images/dept-prov@2x.png);
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50px;
+  position: absolute;
+  right: 30px;
+  width: 234px;
+}
+
+@media screen and (max-width: 680px) {
+  .nddotedu {
+    margin: 0 auto;
+    position: relative;
+  }
+  .ndoffice {
+    display: none;
+  }
+}
+
+/* application branding */
+
+.appTitle {
+  background: #082142 url('./fade.png') 0 0px repeat-x;
+  padding: 20px 0;
+}
+.appTitle h1{
+  color: white;
+  font-family: GPCMed,sans-serif;
+  font-size: 38px;
+  margin: 0;
+}

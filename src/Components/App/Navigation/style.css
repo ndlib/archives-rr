@@ -1,0 +1,24 @@
+.navigationBar {
+  background-color: #c9972c;
+  height: 40px;
+  width: 100%;
+}
+
+.navigationBar a,
+.navigationBar a:hover,
+.navigationBar a:visited {
+  color: black;
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 20px;
+  text-decoration: none;
+}
+.navigationBar a.active {
+  background-color: #b09043;
+}
+
+.navigationBar .right {
+  position: absolute;
+  right: 10px;
+}
