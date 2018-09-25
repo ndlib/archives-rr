@@ -16,9 +16,9 @@ class Page extends Component{
   componentDidMount() {
     // populate the store
     const { dispatch } = this.props
-    dispatch(fetchContentType('division'))
-    dispatch(fetchContentType('office'))
-    dispatch(fetchContentType('policy'))
+    dispatch(fetchContentType('division', 'fields.name'))
+    dispatch(fetchContentType('office', 'fields.name'))
+    dispatch(fetchContentType('policy', 'fields.recordTypeTitle'))
   }
 
   render() {

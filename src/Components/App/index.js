@@ -12,9 +12,10 @@ import configureStore from '../../Store/configureStore'
 // Page also does the initial population of the store
 import Page from './Page'
 
-// routes
+// components for routes
 import Home from '../Home'
 import Divisions from '../Divisions'
+import Offices from '../Offices'
 import Policies from '../Policies'
 import Policy from '../Policy'
 
@@ -29,8 +30,9 @@ const App = () => {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path='/divisions' component={Divisions} />
-            <Route exact path='/policies' component={Policies} />
-            <Route exact path='/policies/:id' component={Policy} />
+            <Route exact path='/offices' component={Offices} />
+            <Route exact path='/policies/:office?' component={Policies} />
+            <Route exact path='/policy/:id' component={Policy} />
           </Switch>
         </Page>
       </Provider>

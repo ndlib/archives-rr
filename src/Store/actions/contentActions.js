@@ -1,3 +1,6 @@
+import { contentfulBaseUrl } from '../../Constants/contentfulBaseUrl'
+
+// action types
 export const RECEIVE_DIVISIONS = 'RECEIVE_DIVISIONS'
 export const RECEIVE_OFFICES = 'RECEIVE_OFFICES'
 export const RECEIVE_POLICIES = 'RECEIVE_POLICIES'
@@ -9,10 +12,20 @@ const receiveContent = (actionType, json) => {
   }
 }
 
-export const fetchContentType = (type) => {
-  return dispatch => {
-    const url = encodeURI(`https://cdtegp71x5.execute-api.us-east-1.amazonaws.com/arr/query?locale=en-US&query=content_type%3D${type}%26include%3d2`)
+export const fetchContentType = (type, orderField) => {
+  // setup url
+  // This part is for contentful_direct. It should not encode URI components
+  const query = `query?locale=en-US&query=`
+  // This is passed to Contentful and needs components encoded. (e.g. '&', '=')
+  // Get a specific content type
+  // Do the ordering here so we don't have to later
+  // Include a depth of 2 so we can see the division data from the policy and not just a link
+  const queryValue = encodeURIComponent(`content_type=${type}&order=${orderField}&include=2`)
+  // Put it all together as a safe URL
+  const url = encodeURI(`${contentfulBaseUrl}${query}${queryValue}`)
 
+  // dispatch and fetch data
+  return dispatch => {
     return fetch(
       url, {
         method: 'get',

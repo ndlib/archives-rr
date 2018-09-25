@@ -14,6 +14,10 @@ const Navigation = () => {
           activeClassName='active'
         >University Divisions</NavLink>
         <NavLink
+          to='/offices'
+          activeClassName='active'
+        >University Offices</NavLink>
+        <NavLink
           to='/policies'
           activeClassName='active'
         >Search</NavLink>
