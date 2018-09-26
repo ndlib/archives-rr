@@ -1,19 +1,19 @@
 const forward = (migration) => {
-  // Policy content type
-  const policy = migration.createContentType('policy')
-    .name('Policy')
-    .description('Record retention policy')
+  // Schedule content type
+  const schedule = migration.createContentType('schedule')
+    .name('Schedule')
+    .description('Record retention schedule')
     .displayField('recordTypeTitle')
 
   // Fields
 
   // record type title
-  policy.createField('recordTypeTitle')
+  schedule.createField('recordTypeTitle')
     .name('Record Type Title')
     .type('Symbol').required(true)
 
   // functional category
-  policy.createField('category')
+  schedule.createField('category')
     .name('Functional Category')
     .type('Symbol').required(true)
     .validations([{'in': [
@@ -38,31 +38,31 @@ const forward = (migration) => {
       'Student Records, Residential Life',
       'University Auxiliary Services Records'
     ]}])
-  policy.changeEditorInterface('category', 'dropdown')
+  schedule.changeEditorInterface('category', 'dropdown')
 
   // schedule id #
-  policy.createField('scheduleId')
+  schedule.createField('scheduleId')
     .name('Schedule ID #')
     .type('Symbol').required(true)
 
   // record type description
-  policy.createField('recordTypeDescription')
+  schedule.createField('recordTypeDescription')
     .name('Record Type Description')
     .type('Text').required(true)
 
   // official copy
-  policy.createField('officialCopy')
+  schedule.createField('officialCopy')
     .name('Official Copy')
     .type('Symbol')
 
   // retention
-  policy.createField('retention')
+  schedule.createField('retention')
     .name('Retention')
     .type('Symbol').required(true)
-  policy.changeEditorInterface('retention', 'singleLine', {'helpText': '1, 3, 5, 7, 10, 15, 20, etc. years, Permanent, Reference'})
+  schedule.changeEditorInterface('retention', 'singleLine', {'helpText': '1, 3, 5, 7, 10, 15, 20, etc. years, Permanent, Reference'})
 
   // trigger event
-  policy.createField('triggerEvent')
+  schedule.createField('triggerEvent')
     .name('Trigger Event')
     .type('Symbol').required(true)
     .validations([{'in': [
@@ -104,10 +104,10 @@ const forward = (migration) => {
       'Maintain in office until no longer needed for reference',
       'Maintain until superseded or obsolete'
     ]}])
-    policy.changeEditorInterface('triggerEvent', 'dropdown')
+    schedule.changeEditorInterface('triggerEvent', 'dropdown')
 
   // disposition
-  policy.createField('disposition')
+  schedule.createField('disposition')
     .name('Disposition')
     .type('Symbol').required(true)
     .validations([{'in': [
@@ -116,10 +116,10 @@ const forward = (migration) => {
       'Transfer to the University Archives for appraisal',
       'Deposit into CurateND'
     ]}])
-  policy.changeEditorInterface('disposition', 'dropdown')
+  schedule.changeEditorInterface('disposition', 'dropdown')
 
   // disposition method
-  policy.createField('dispositionMethod')
+  schedule.createField('dispositionMethod')
     .name('Disposition Method')
     .type('Symbol')
     .validations([{'in': [
@@ -127,28 +127,28 @@ const forward = (migration) => {
       'Shred',
       'Secure Shred'
     ]}])
-  policy.changeEditorInterface('dispositionMethod', 'dropdown')
+  schedule.changeEditorInterface('dispositionMethod', 'dropdown')
 
   // reference copy
-  policy.createField('referenceCopy')
+  schedule.createField('referenceCopy')
     .name('Reference Copy')
     .type('Symbol')
     .validations([{'in': [
       'Maintain in office until no longer needed for reference'
     ]}])
-  policy.changeEditorInterface('referenceCopy', 'dropdown')
+  schedule.changeEditorInterface('referenceCopy', 'dropdown')
 
   // reference copy disposition
-  policy.createField('referenceCopyDisposition')
+  schedule.createField('referenceCopyDisposition')
     .name('Reference Copy Disposition')
     .type('Symbol')
     .validations([{'in': [
       'Destroy'
     ]}])
-  policy.changeEditorInterface('referenceCopyDisposition', 'dropdown')
+  schedule.changeEditorInterface('referenceCopyDisposition', 'dropdown')
 
   // reference copy disposition method
-  policy.createField('referenceCopyDispositionMethod')
+  schedule.createField('referenceCopyDispositionMethod')
     .name('Reference Copy Disposition Method')
     .type('Symbol')
     .validations([{'in': [
@@ -156,10 +156,10 @@ const forward = (migration) => {
       'Shred',
       'Secure Shred'
     ]}])
-  policy.changeEditorInterface('referenceCopyDispositionMethod', 'dropdown')
+  schedule.changeEditorInterface('referenceCopyDispositionMethod', 'dropdown')
 
   // data classification
-  policy.createField('dataClassification')
+  schedule.createField('dataClassification')
     .name('Data Classification')
     .type('Symbol')
     .validations([{'in': [
@@ -168,55 +168,55 @@ const forward = (migration) => {
       'Sensitive',
       'Highly Sensitive'
     ]}])
-  policy.changeEditorInterface('dataClassification', 'dropdown')
+  schedule.changeEditorInterface('dataClassification', 'dropdown')
 
   // storage requirements
-  policy.createField('storageRequirements')
+  schedule.createField('storageRequirements')
     .name('Storage Requirements')
     .type('Text')
 
   // legal reference
-  policy.createField('legalReference')
+  schedule.createField('legalReference')
     .name('Legal Reference')
     .type('Text')
 
   // notes
-  policy.createField('notes')
+  schedule.createField('notes')
     .name('Notes')
     .type('Text')
 
   // system of record
-  policy.createField('systemOfRecord')
+  schedule.createField('systemOfRecord')
     .name('System of Record')
     .type('Text')
-  policy.changeEditorInterface('systemOfRecord', 'multipleLine', {'helpText': '(Internal)'})
+  schedule.changeEditorInterface('systemOfRecord', 'multipleLine', {'helpText': '(Internal)'})
 
   // archives notes
-  policy.createField('archivesNotes')
+  schedule.createField('archivesNotes')
     .name('Archives Notes')
     .type('Text')
-  policy.changeEditorInterface('archivesNotes', 'multipleLine', {'helpText': '(Internal)'})
+  schedule.changeEditorInterface('archivesNotes', 'multipleLine', {'helpText': '(Internal)'})
 
   // general counsel notes
-  policy.createField('generalCounselNotes')
+  schedule.createField('generalCounselNotes')
     .name('General Counsel Notes')
     .type('Text')
-  policy.changeEditorInterface('generalCounselNotes', 'multipleLine', {'helpText': '(Internal)'})
+  schedule.changeEditorInterface('generalCounselNotes', 'multipleLine', {'helpText': '(Internal)'})
 
   // date approved by general counsel
-  policy.createField('dateApprovedByGeneralCounsel')
+  schedule.createField('dateApprovedByGeneralCounsel')
     .name('Date Approved By General Counsel')
     .type('Date').required(true)
-  policy.changeEditorInterface('dateApprovedByGeneralCounsel', 'datePicker', {'format': 'dateonly'})
+  schedule.changeEditorInterface('dateApprovedByGeneralCounsel', 'datePicker', {'format': 'dateonly'})
 
   // date reivsed
-  policy.createField('dateRevised')
+  schedule.createField('dateRevised')
     .name('Date Revised')
     .type('Date')
-  policy.changeEditorInterface('dateRevised', 'datePicker', {'format': 'dateonly'})
+  schedule.changeEditorInterface('dateRevised', 'datePicker', {'format': 'dateonly'})
 
   // office
-  policy.createField('office')
+  schedule.createField('office')
     .name('Office')
     .type('Link').required(true)
     .linkType('Entry')
@@ -224,7 +224,7 @@ const forward = (migration) => {
 }
 
 const reverse = (migration) => {
-  migration.deleteContentType('policy')
+  migration.deleteContentType('schedule')
 }
 
 module.exports = forward

@@ -18,7 +18,7 @@ class Page extends Component{
     const { dispatch } = this.props
     dispatch(fetchContentType('division', 'fields.name'))
     dispatch(fetchContentType('office', 'fields.name'))
-    dispatch(fetchContentType('policy', 'fields.recordTypeTitle'))
+    dispatch(fetchContentType('schedule', 'fields.recordTypeTitle'))
   }
 
   render() {

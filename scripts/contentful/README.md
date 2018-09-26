@@ -1,6 +1,6 @@
-**Contentful migration scripts for Archives Record Retention Policy Database**
+**Contentful migration scripts for Archives Record Retention Schedule Database**
 
-These should only need to be run when setting up a new space for the Archives Records Retention Policy DB.
+These should only need to be run when setting up a new space for the Archives Records Retention Schedule DB.
 
 
 **Install**

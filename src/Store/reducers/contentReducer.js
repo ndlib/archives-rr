@@ -2,7 +2,7 @@
 import {
   RECEIVE_DIVISIONS,
   RECEIVE_OFFICES,
-  RECEIVE_POLICIES
+  RECEIVE_SCHEDULES
 } from  '../actions/contentActions'
 
 // populate the store based on they type of content received in the action
@@ -18,9 +18,9 @@ export default (state = {}, action) => {
         offices: action.payload,
         ...state
       }
-    case RECEIVE_POLICIES:
+    case RECEIVE_SCHEDULES:
       return {
-        policies: action.payload,
+        schedules: action.payload,
         ...state
       }
     default:

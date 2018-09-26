@@ -16,8 +16,8 @@ import Page from './Page'
 import Home from '../Home'
 import Divisions from '../Divisions'
 import Offices from '../Offices'
-import Policies from '../Policies'
-import Policy from '../Policy'
+import Schedules from '../Schedules'
+import Schedule from '../Schedule'
 
 // create store
 const store = configureStore()
@@ -31,8 +31,8 @@ const App = () => {
             <Route exact path='/' component={Home} />
             <Route exact path='/divisions' component={Divisions} />
             <Route exact path='/offices' component={Offices} />
-            <Route exact path='/policies/:office?' component={Policies} />
-            <Route exact path='/policy/:id' component={Policy} />
+            <Route exact path='/schedules/:office?' component={Schedules} />
+            <Route exact path='/schedule/:id' component={Schedule} />
           </Switch>
         </Page>
       </Provider>

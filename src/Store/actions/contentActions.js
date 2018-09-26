@@ -3,7 +3,7 @@ import { contentfulBaseUrl } from '../../Constants/contentfulBaseUrl'
 // action types
 export const RECEIVE_DIVISIONS = 'RECEIVE_DIVISIONS'
 export const RECEIVE_OFFICES = 'RECEIVE_OFFICES'
-export const RECEIVE_POLICIES = 'RECEIVE_POLICIES'
+export const RECEIVE_SCHEDULES = 'RECEIVE_SCHEDULES'
 
 const receiveContent = (actionType, json) => {
   return {
@@ -19,7 +19,7 @@ export const fetchContentType = (type, orderField) => {
   // This is passed to Contentful and needs components encoded. (e.g. '&', '=')
   // Get a specific content type
   // Do the ordering here so we don't have to later
-  // Include a depth of 2 so we can see the division data from the policy and not just a link
+  // Include a depth of 2 so we can see the division data from the schedule and not just a link
   const queryValue = encodeURIComponent(`content_type=${type}&order=${orderField}&include=2`)
   // Put it all together as a safe URL
   const url = encodeURI(`${contentfulBaseUrl}${query}${queryValue}`)
@@ -46,8 +46,8 @@ export const fetchContentType = (type, orderField) => {
         case 'office':
           dispatch(receiveContent(RECEIVE_OFFICES, json))
           break
-        case 'policy':
-          dispatch(receiveContent(RECEIVE_POLICIES, json))
+        case 'schedule':
+          dispatch(receiveContent(RECEIVE_SCHEDULES, json))
           break
         default:
           console.log('no type for content fetch')
