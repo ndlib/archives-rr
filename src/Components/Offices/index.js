@@ -1,42 +1,14 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
-import OfficeLink from './OfficeLink'
+import OfficeList from './OfficeList'
 
 const Offices = (props) => {
-  if(
-    props &&
-    props.contentReducer &&
-    props.contentReducer.offices
-  ) {
-    return (
-      <React.Fragment>
-        <div className='text-content'>List of University Offices goes here</div>
-        <ul>
-          {
-            props.contentReducer.offices.map(
-              office => {
-                return (
-                  <OfficeLink
-                    key={office.sys.id}
-                    office={office}
-                  />
-                )
-              }
-            )
-          }
-        </ul>
-      </React.Fragment>
-    )
-  }
-  return null
-
+  return (
+    <React.Fragment>
+      <div className='text-content'>List of University Offices goes here</div>
+      <OfficeList/>
+    </React.Fragment>
+  )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    ...state
-  }
-}
-
-export default connect(mapStateToProps)(Offices)
+export default Offices

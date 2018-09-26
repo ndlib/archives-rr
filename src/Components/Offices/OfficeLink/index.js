@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import { schedulesReady } from '../../../Modules/storeReady'
 // We only want to have a link if this office has schedules visible to the user
 const OfficeLink = ({office, showEmpty, ...props}) => {
 
@@ -10,7 +11,7 @@ const OfficeLink = ({office, showEmpty, ...props}) => {
   let hasSchedules = false
 
   // check that it has at least one schedule
-  if(props && props.contentReducer && props.contentReducer.schedules) {
+  if(schedulesReady(props)) {
      hasSchedules = props.contentReducer.schedules.some((schedule) => {
       return schedule.fields.office.fields.name === office.fields.name
     })

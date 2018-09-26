@@ -21,6 +21,13 @@ class Page extends Component{
     dispatch(fetchContentType('schedule', 'fields.recordTypeTitle'))
   }
 
+  componentDidUpdate(prevProps) {
+    // reset page to top after navigation
+    if(this.props.location !== prevProps.loction) {
+      window.scrollTo(0, 0)
+    }
+  }
+
   render() {
     return (
       <div className='page'>
