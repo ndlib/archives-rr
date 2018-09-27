@@ -27,7 +27,7 @@ export const findOffice = (props) => {
 export const filterSchedules = (props, office) => {
   let schedules = props.contentReducer.schedules
   if(office) {
-    schedules.filter(
+    schedules = schedules.filter(
       schedule => {
         return schedule.fields.office.sys.id === props.match.params.office
       }

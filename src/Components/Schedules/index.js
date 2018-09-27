@@ -32,10 +32,8 @@ const Schedules = (props) => {
           office={office}
         />
         <SearchTools/>
-        <ScheduleList schedules={schedules}/>
-        <ScheduleCount
-          schedules={schedules}
-        />
+        <ScheduleCount schedules={schedules} />
+        <ScheduleList schedules={schedules} />
       </React.Fragment>
     )
   }
