@@ -1,3 +1,4 @@
+// helper functions to let you know if the store is ready
 export const divisionsReady = (props) => {
   return props && props.contentReducer && props.contentReducer.divisions
 }

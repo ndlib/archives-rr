@@ -20,7 +20,7 @@ const OfficeLink = ({office, showEmpty, ...props}) => {
   if(hasSchedules) {
     return (
       <li key={office.sys.id}>
-        <Link to={`/schedules/${office.sys.id}`}>{office.fields.name}</Link>
+        <Link to={`/schedules-by-office/${office.sys.id}`}>{office.fields.name}</Link>
       </li>
     )
   }

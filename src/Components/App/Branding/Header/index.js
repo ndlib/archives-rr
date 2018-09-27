@@ -17,7 +17,7 @@ const Header = () => {
       </div>
       <div className='appTitle'>
         <div className='container-fluid'>
-          <h1>Archives Record Retention Schedule Database</h1>
+          <h1>Records Retention Schedules</h1>
         </div>
       </div>
     </div>

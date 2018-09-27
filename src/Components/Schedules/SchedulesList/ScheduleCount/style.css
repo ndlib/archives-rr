@@ -1,0 +1,9 @@
+.scheduleCount {
+  font-size: small;
+  margin: 20px 0;
+}
+
+.scheduleCount .number {
+  font-size: larger;
+  font-weight: bold;
+}
