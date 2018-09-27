@@ -6,14 +6,17 @@ import './style.css'
 
 const FilterDisclaimer = ({isFiltered, office}) => {
   if(isFiltered && office) {
+    // let user know results are filtered by office
     return (
       <div className='filteredBy'>Only showing schedules for <span className='filter'>{office.fields.name}</span>. <Link to='/schedules'> (Show all schedules)</Link></div>
     )
   } else if (isFiltered && !office){
+    // tried to filter, but invalid office - warn user
     return (
       <div className='filteredBy'><span className='filter'>Could not find a matching office, showing all available schedules.</span></div>
     )
   } else {
+    // no filtering means no message
     return null
   }
 }
