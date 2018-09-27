@@ -10,20 +10,20 @@ import Loading from '../../../Loading'
 const DivisionList = ({divisionLeader, ...props}) => {
   if(divisionsReady(props) && officesReady(props)) {
     // filter out divisions with different divisional leader
-    let filteredDivisions = props.contentReducer.divisions.filter(
+    let divisions = props.contentReducer.divisions.filter(
       division => {
         return division.fields.divisionLeader === divisionLeader
       }
     )
 
     // move "Office of the [divsionLeader]" to the top of the list
-    filteredDivisions = mainOfficeFirst(filteredDivisions, divisionLeader)
+    divisions = mainOfficeFirst(divisions, divisionLeader)
 
     return (
       <div className='divisionList'>
         <h2>{divisionLeader}</h2>
         <ul>
-          { filteredDivisions.map(
+          { divisions.map(
             division => {
               return (
                 <li key={division.sys.id}>

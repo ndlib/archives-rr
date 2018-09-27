@@ -11,24 +11,19 @@ import {
   isFiltered,
   findOffice,
   filterSchedules,
-  hasSearch,
   searchMatches
 } from './functions'
 
 const Schedules = (props) => {
   if (schedulesReady(props) && officesReady(props)) {
     // get data ready with some helper functions
-    const filtered = isFiltered(props)
     const office = findOffice(props)
-    let schedules = filterSchedules(props, office)
-    if(hasSearch(props)) {
-      schedules = searchMatches(schedules, props.match.params.search)
-    }
+    const schedules = searchMatches(filterSchedules(props, office), props)
 
     return (
       <React.Fragment>
         <FilterDisclaimer
-          isFiltered={filtered}
+          isFiltered={isFiltered(props)}
           office={office}
         />
         <SearchTools/>

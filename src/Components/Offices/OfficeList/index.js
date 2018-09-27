@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { mainOfficeFirst } from '../../../Modules/mainOfficeFirst'
-import { divisionsReady, officesReady } from '../../../Modules/storeReady'
+import storeReady from '../../../Modules/storeReady'
 import OfficeLink from '../OfficeLink'
 import Loading from '../../Loading'
 
 const OfficeList = ({divisionLeader, division, showEmpty, ...props}) => {
-  if(divisionsReady(props) && officesReady(props)) {
+  if(storeReady(props)) {
 
     let offices = props.contentReducer.offices
     if(division) {
@@ -32,6 +32,7 @@ const OfficeList = ({divisionLeader, division, showEmpty, ...props}) => {
                   key={office.sys.id}
                   office={office}
                   showEmpty={showEmpty}
+                  {...props}
                 />
               )
             }

@@ -45,9 +45,12 @@ export const hasSearch = (props) => {
 }
 
 // do search actions on provided schedules
-export const searchMatches = (schedules, query) => {
-  console.log(`Searching with query: ${query}`)
-  // TODO SEARCH WORK
+export const searchMatches = (schedules, props) => {
+  if(hasSearch(props)) {
+    console.log(`Searching with query: ${props.match.params.search}`)
+    // TODO SEARCH WORK
+  }
+
 
   return schedules
 }
