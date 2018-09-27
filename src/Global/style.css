@@ -16,7 +16,7 @@ body {
 
 @media screen and (max-width: 1199px) {
   .container-fluid {
-  width: calc(100% - 10px);
+  width: calc(100% - 20px);
   }
 }
 
