@@ -1,12 +1,14 @@
 import React from 'react'
 
+import DynamicContent from '../DynamicContent'
 import RecordTypeList from './RecordTypeList'
 
 const RecordTypes = (props) => {
   return (
     <React.Fragment>
-      <div className='text-content'>List of Record Types goes here</div>
-      <RecordTypeList/>
+      <DynamicContent slug='recordTypes'>
+        <RecordTypeList/>
+      </DynamicContent>
     </React.Fragment>
   )
 }

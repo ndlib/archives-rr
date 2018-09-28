@@ -1,6 +1,9 @@
 import React from 'react'
+import DynamicContent from '../DynamicContent'
 
 const Home = () => {
-  return (<div className='text-content'>Some text on the page.</div>)
+  return (
+    <DynamicContent slug='home'/>
+  )
 }
 export default Home

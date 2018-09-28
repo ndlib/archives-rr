@@ -1,12 +1,14 @@
 import React from 'react'
 
+import DynamicContent from '../DynamicContent'
 import CategoryList from './CategoryList'
 
 const Categories = (props) => {
     return (
       <React.Fragment>
-        <div className='text-content'>List of Functional Categories goes here</div>
-        <CategoryList/>
+        <DynamicContent slug={'categories'}>
+          <CategoryList/>
+        </DynamicContent>
       </React.Fragment>
     )
 }

@@ -10,9 +10,10 @@ const forward = (migration) => {
       .type('Symbol').required(true)
 
   page.createField('slug')
-    .name('Page')
+    .name('Slug')
     .type('Symbol').required(true)
-  page.changeEditorInterface('slug', 'slugEditor', {'helpText': ''})
+    .validations([{'unique': true}, {'in': ['home', 'recordTypes', 'categories']}])
+  page.changeEditorInterface('slug', 'dropdown', {'helpText': 'This is the page url that will utilize these fields.'})
 
   page.createField('mainText')
     .name('Main Body Text')
