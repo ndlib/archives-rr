@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { pagesReady } from '../../Store/storeReady'
@@ -21,6 +22,10 @@ const DynamicContent = ({slug, children, ...props}) => {
     )
   }
   return <Loading/>
+}
+
+DynamicContent.propTypes = {
+  slug: PropTypes.string.isRequired
 }
 
 const mapStateToProps = (state) => { return { ...state } }

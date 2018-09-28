@@ -8,7 +8,6 @@ import Loading from '../../Loading'
 
 const RecordTypeList = ({category, showEmpty, ...props}) => {
   if(storeReady(props)) {
-    console.log('store ready')
     let recordTypes = props.contentReducer.recordTypes
     if(category) {
       recordTypes = recordTypes.filter(
