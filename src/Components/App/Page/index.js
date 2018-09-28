@@ -16,9 +16,10 @@ class Page extends Component{
   componentDidMount() {
     // populate the store
     const { dispatch } = this.props
-    dispatch(fetchContentType('division', 'fields.name'))
-    dispatch(fetchContentType('office', 'fields.name'))
-    dispatch(fetchContentType('schedule', 'fields.recordTypeTitle'))
+    dispatch(fetchContentType('page', 'fields.name'))
+    dispatch(fetchContentType('category', 'fields.name'))
+    dispatch(fetchContentType('recordType', 'fields.name'))
+    dispatch(fetchContentType('schedule', 'fields.scheduleId'))
   }
 
   componentDidUpdate(prevProps) {
@@ -43,11 +44,6 @@ class Page extends Component{
 
 }
 
-// subscribe to the store
-const mapStateToProps = (state) => {
-  return {
-    ...state
-  }
-}
+const mapStateToProps = (state) => { return { ...state } }
 
 export default withRouter(connect(mapStateToProps)(Page))

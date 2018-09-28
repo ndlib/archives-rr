@@ -4,16 +4,16 @@ import { Link } from 'react-router-dom'
 
 import './style.css'
 
-const FilterDisclaimer = ({isFiltered, office}) => {
-  if(isFiltered && office) {
-    // let user know results are filtered by office
+const FilterDisclaimer = ({isFiltered, recordType}) => {
+  if(isFiltered && recordType) {
+    // let user know results are filtered by recordType
     return (
-      <div className='filteredBy'>Only showing schedules for <span className='filter'>{office.fields.name}</span>. <Link to='/schedules'> (Show all schedules)</Link></div>
+      <div className='filteredBy'>Only showing schedules for <span className='filter'>{recordType.fields.name}</span>. <Link to='/schedules'> (Show all schedules)</Link></div>
     )
-  } else if (isFiltered && !office){
-    // tried to filter, but invalid office - warn user
+  } else if (isFiltered && !recordType){
+    // tried to filter, but invalid recordType - warn user
     return (
-      <div className='filteredBy'><span className='filter'>Could not find a matching office, showing all available schedules.</span></div>
+      <div className='filteredBy'><span className='filter'>Could not find a matching recordType, showing all available schedules.</span></div>
     )
   } else {
     // no filtering means no message
@@ -23,7 +23,7 @@ const FilterDisclaimer = ({isFiltered, office}) => {
 
 FilterDisclaimer.propTypes = {
   isFiltered: PropTypes.bool.isRequired,
-  office: PropTypes.object
+  recordType: PropTypes.object
 }
 
 export default FilterDisclaimer

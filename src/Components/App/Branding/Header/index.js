@@ -9,7 +9,7 @@ const Header = () => {
             <div className='nddotedu'>
               <a href='http://nd.edu'>University <i>of</i> Notre Dame</a>
             </div>
-            <div className='ndoffice'>
+            <div className='ndrecordType'>
               <a href='http://provost.nd.edu'>Office <i>of the</i> Provost</a>
             </div>
           </nav>

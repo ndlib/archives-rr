@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { officesReady, schedulesReady } from '../../Modules/storeReady'
+import { recordTypesReady, schedulesReady } from '../../Store/storeReady'
 import Loading from '../Loading'
 import SearchTools from './SearchTools'
 import FilterDisclaimer from './FilterDisclaimer'
@@ -9,22 +9,24 @@ import ScheduleCount from './ScheduleCount'
 import ScheduleList from './SchedulesList'
 import {
   isFiltered,
-  findOffice,
-  filterSchedules,
-  searchMatches
-} from './functions'
+  findRecordType,
+  filterSchedules
+} from './functions/filter'
+import searchResults from './functions/search'
 
 const Schedules = (props) => {
-  if (schedulesReady(props) && officesReady(props)) {
-    // get data ready with some helper functions
-    const office = findOffice(props)
-    const schedules = searchMatches(filterSchedules(props, office), props)
+  if (schedulesReady(props) && recordTypesReady(props)) {
+    // check if we have an recordType and if there is one, filter out schedules
+    // from other recordTypes
+    // also check if there is a search query and filter results based on that
+    const recordType = findRecordType(props)
+    const schedules = searchResults(filterSchedules(props, recordType), props)
 
     return (
       <React.Fragment>
         <FilterDisclaimer
           isFiltered={isFiltered(props)}
-          office={office}
+          recordType={recordType}
         />
         <SearchTools/>
         <ScheduleCount schedules={schedules} />
@@ -35,10 +37,6 @@ const Schedules = (props) => {
   return <Loading/>
 }
 
-const mapStateToProps = (state) => {
-  return {
-    ...state
-  }
-}
+const mapStateToProps = (state) => { return { ...state } }
 
 export default connect(mapStateToProps)(Schedules)

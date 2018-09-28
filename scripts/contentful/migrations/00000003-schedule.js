@@ -3,42 +3,22 @@ const forward = (migration) => {
   const schedule = migration.createContentType('schedule')
     .name('Schedule')
     .description('Record retention schedule')
-    .displayField('recordTypeTitle')
+    .displayField('scheduleId')
 
   // Fields
-
   // record type title
-  schedule.createField('recordTypeTitle')
+  schedule.createField('recordType')
     .name('Record Type Title')
-    .type('Symbol').required(true)
+    .type('Link').required(true)
+    .linkType('Entry')
+    .validations([{ linkContentType: ['recordType']}])
 
   // functional category
-  schedule.createField('category')
-    .name('Functional Category')
-    .type('Symbol').required(true)
-    .validations([{'in': [
-      'Administrative Records',
-      'Alumni and Development Records',
-      'Archives, Libraries, and Museums Records',
-      'Athletics Records',
-      'Audio/Visual Records',
-      'Curriculum and Instruction Records',
-      'Equipment and Supplies Records',
-      'Facilities and Property Records',
-      'Financial and Accounting Records',
-      'Fire, Safety, and Security Records',
-      'Grants and Research Records',
-      'Health Services and Medical Records',
-      'Human Resources and Personnel Records',
-      'Information Technology Records',
-      'Legal Records',
-      'Publications and Promotions Records',
-      'Student Records, Academic',
-      'Student Records, Financial Services',
-      'Student Records, Residential Life',
-      'University Auxiliary Services Records'
-    ]}])
-  schedule.changeEditorInterface('category', 'dropdown')
+  // schedule.createField('category')
+  //   .name('Functional Category')
+  //   .type('Link').required(true)
+  //   .linkType('Entry')
+  //   .validations([{ linkContentType: ['category']}])
 
   // schedule id #
   schedule.createField('scheduleId')
@@ -100,8 +80,8 @@ const forward = (migration) => {
       'After project completion, or when released from all litigation, claims, or audits',
       'After project end date',
       'Maintain according to the requirements of the grant agency for the projects referenced on the effort certification report',
-      'Maintain in office until all administrative and legal issues are resolved and until no longer needed for reference',
-      'Maintain in office until no longer needed for reference',
+      'Maintain in recordType until all administrative and legal issues are resolved and until no longer needed for reference',
+      'Maintain in recordType until no longer needed for reference',
       'Maintain until superseded or obsolete'
     ]}])
     schedule.changeEditorInterface('triggerEvent', 'dropdown')
@@ -134,7 +114,7 @@ const forward = (migration) => {
     .name('Reference Copy')
     .type('Symbol')
     .validations([{'in': [
-      'Maintain in office until no longer needed for reference'
+      'Maintain in recordType until no longer needed for reference'
     ]}])
   schedule.changeEditorInterface('referenceCopy', 'dropdown')
 
@@ -178,7 +158,7 @@ const forward = (migration) => {
   // legal reference
   schedule.createField('legalReference')
     .name('Legal Reference')
-    .type('Text')
+    .type('Symbol')
 
   // notes
   schedule.createField('notes')
@@ -189,19 +169,19 @@ const forward = (migration) => {
   schedule.createField('systemOfRecord')
     .name('System of Record')
     .type('Text')
-  schedule.changeEditorInterface('systemOfRecord', 'multipleLine', {'helpText': '(Internal)'})
+  schedule.changeEditorInterface('systemOfRecord', 'markdown', {'helpText': '(Internal)'})
 
   // archives notes
   schedule.createField('archivesNotes')
     .name('Archives Notes')
     .type('Text')
-  schedule.changeEditorInterface('archivesNotes', 'multipleLine', {'helpText': '(Internal)'})
+  schedule.changeEditorInterface('archivesNotes', 'markdown', {'helpText': '(Internal)'})
 
   // general counsel notes
   schedule.createField('generalCounselNotes')
     .name('General Counsel Notes')
     .type('Text')
-  schedule.changeEditorInterface('generalCounselNotes', 'multipleLine', {'helpText': '(Internal)'})
+  schedule.changeEditorInterface('generalCounselNotes', 'markdown', {'helpText': '(Internal)'})
 
   // date approved by general counsel
   schedule.createField('dateApprovedByGeneralCounsel')
@@ -215,12 +195,6 @@ const forward = (migration) => {
     .type('Date')
   schedule.changeEditorInterface('dateRevised', 'datePicker', {'format': 'dateonly'})
 
-  // office
-  schedule.createField('office')
-    .name('Office')
-    .type('Link').required(true)
-    .linkType('Entry')
-    .validations([{ linkContentType: ['office']}])
 }
 
 const reverse = (migration) => {

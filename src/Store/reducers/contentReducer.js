@@ -1,26 +1,32 @@
 // include the action types we care about
 import {
-  RECEIVE_DIVISIONS,
-  RECEIVE_OFFICES,
-  RECEIVE_SCHEDULES
+  RECEIVE_CATEGORYS,
+  RECEIVE_RECORDTYPES,
+  RECEIVE_SCHEDULES,
+  RECEIVE_PAGES
 } from  '../actions/contentActions'
 
 // populate the store based on they type of content received in the action
 export default (state = {}, action) => {
   switch (action.type) {
-    case RECEIVE_DIVISIONS:
+    case RECEIVE_CATEGORYS:
       return {
-        divisions: action.payload,
+        categories: action.payload,
         ...state
       }
-    case RECEIVE_OFFICES:
+    case RECEIVE_RECORDTYPES:
       return {
-        offices: action.payload,
+        recordTypes: action.payload,
         ...state
       }
     case RECEIVE_SCHEDULES:
       return {
         schedules: action.payload,
+        ...state
+      }
+    case RECEIVE_PAGES:
+      return {
+        pages: action.payload,
         ...state
       }
     default:

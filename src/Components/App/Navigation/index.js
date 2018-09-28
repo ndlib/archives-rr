@@ -10,13 +10,13 @@ const Navigation = () => {
           to='/'
         >Home</Link>
         <NavLink
-          to='/divisions'
+          to='/categories'
           activeClassName='active'
-        >University Divisions</NavLink>
+        >Categories</NavLink>
         <NavLink
-          to='/offices'
+          to='/recordTypes'
           activeClassName='active'
-        >University Offices</NavLink>
+        >Record Types</NavLink>
         <NavLink
           to='/schedules'
           activeClassName='active'

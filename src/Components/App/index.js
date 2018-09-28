@@ -14,8 +14,8 @@ import Page from './Page'
 
 // components for routes
 import Home from '../Home'
-import Divisions from '../Divisions'
-import Offices from '../Offices'
+import Categories from '../Categories'
+import RecordTypes from '../RecordTypes'
 import Schedules from '../Schedules'
 import Schedule from '../Schedule'
 
@@ -29,10 +29,10 @@ const App = () => {
         <Page>
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route exact path='/divisions' component={Divisions} />
-            <Route exact path='/offices' component={Offices} />
+            <Route exact path='/categories' component={Categories} />
+            <Route exact path='/recordTypes' component={RecordTypes} />
             <Route exact path='/schedules/:search?' component={Schedules} />
-            <Route exact path='/schedules-by-office/:office/:search?' component={Schedules} />
+            <Route exact path='/schedules-by-recordType/:recordType/:search?' component={Schedules} />
             <Route exact path='/schedule/:id' component={Schedule} />
           </Switch>
         </Page>

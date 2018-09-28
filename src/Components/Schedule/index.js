@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import Loading from '../Loading'
-import { schedulesReady } from '../../Modules/storeReady'
+import { schedulesReady } from '../../Store/storeReady'
 
 const Schedule = ({match, ...props}) => {
   if(schedulesReady(props)) {
@@ -34,9 +34,6 @@ const Schedule = ({match, ...props}) => {
 
 }
 
-const mapStateToProps = (state) => {
-  return {
-    ...state
-  }
-}
+const mapStateToProps = (state) => { return { ...state } }
+
 export default connect(mapStateToProps)(Schedule)
