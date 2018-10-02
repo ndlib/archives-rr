@@ -2,7 +2,6 @@ import { contentfulBaseUrl } from '../../Constants/contentfulBaseUrl'
 
 // action types
 export const RECEIVE_CATEGORYS = 'RECEIVE_CATEGORYS'
-export const RECEIVE_RECORDTYPES = 'RECEIVE_RECORDTYPES'
 export const RECEIVE_SCHEDULES = 'RECEIVE_SCHEDULES'
 export const RECEIVE_PAGES = 'RECEIVE_PAGES'
 
@@ -43,9 +42,6 @@ export const fetchContentType = (type, orderField) => {
       switch(type) {
         case 'category':
           dispatch(receiveContent(RECEIVE_CATEGORYS, json))
-          break
-        case 'recordType':
-          dispatch(receiveContent(RECEIVE_RECORDTYPES, json))
           break
         case 'schedule':
           dispatch(receiveContent(RECEIVE_SCHEDULES, json))

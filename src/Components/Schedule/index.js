@@ -16,6 +16,8 @@ const Schedule = ({match, ...props}) => {
       return (
         <React.Fragment>
           <div className='text-content'>Information about schedule {schedule.sys.id}</div>
+          <div>Schedule ID: {schedule.fields.scheduleId}</div>
+          <div>Belongs to function category: {schedule.fields.category.fields.name}</div>
           <pre style={{whiteSpace: 'pre-wrap'}}>
             {JSON.stringify(schedule)}
           </pre>

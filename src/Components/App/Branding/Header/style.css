@@ -28,7 +28,7 @@
   width: 310px !important;
 }
 
-.ndrecordType {
+.ndoffice {
   background-image: url(https://www.nd.edu/brandbar/images/dept-prov@2x.png);
   background-position: 0px 0px;
   background-repeat: no-repeat;
@@ -44,7 +44,7 @@
     margin: 0 auto;
     position: relative;
   }
-  .ndrecordType {
+  .ndoffice {
     display: none;
   }
 }

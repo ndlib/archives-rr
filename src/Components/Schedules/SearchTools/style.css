@@ -7,3 +7,10 @@
   padding: 20px;
   width: calc(100% - 42px);
 }
+
+.searchField {
+  font-size: larger;
+  width: calc(100% - 130px);
+  line-height: 2em;
+  padding: 0 10px;
+}

@@ -5,9 +5,7 @@ const reducerReady = (props) => {
 export const categoriesReady = (props) => {
   return reducerReady(props) && props.contentReducer.categories
 }
-export const recordTypesReady = (props) => {
-  return reducerReady(props) && props.contentReducer.recordTypes
-}
+
 export const schedulesReady = (props) => {
   return reducerReady(props) && props.contentReducer.schedules
 }
@@ -17,7 +15,7 @@ export const pagesReady = (props) => {
 }
 
 const storeReady = (props) => {
-  return categoriesReady(props) && recordTypesReady(props) && schedulesReady(props) && pagesReady(props)
+  return categoriesReady(props) && schedulesReady(props) && pagesReady(props)
 }
 
 export default storeReady

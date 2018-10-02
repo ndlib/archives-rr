@@ -1,7 +1,6 @@
 // include the action types we care about
 import {
   RECEIVE_CATEGORYS,
-  RECEIVE_RECORDTYPES,
   RECEIVE_SCHEDULES,
   RECEIVE_PAGES
 } from  '../actions/contentActions'
@@ -11,23 +10,18 @@ export default (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_CATEGORYS:
       return {
-        categories: action.payload,
-        ...state
-      }
-    case RECEIVE_RECORDTYPES:
-      return {
-        recordTypes: action.payload,
-        ...state
+        ...state,
+        categories: action.payload
       }
     case RECEIVE_SCHEDULES:
       return {
-        schedules: action.payload,
-        ...state
+        ...state,
+        schedules: action.payload
       }
     case RECEIVE_PAGES:
       return {
-        pages: action.payload,
-        ...state
+        ...state,
+        pages: action.payload
       }
     default:
       return state

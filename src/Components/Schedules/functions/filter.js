@@ -2,34 +2,34 @@
 
 // return true if there's a search query
 export const isFiltered = (props) => {
-  if (props.match && props.match.params && props.match.params.recordType) {
+  if (props.match && props.match.params && props.match.params.category) {
     return true
   }
   return false
 }
 
-// if there is an recordType id in the url find it in the store and return interval
-export const findRecordType = (props) => {
-  let recordType
-  // check if there is an recordType id in the url
+// if there is an category id in the url find it in the store and return interval
+export const findCategory = (props) => {
+  let categories
+  // check if there is an category id in the url
   if(isFiltered(props)) {
-    // find recordType with matching id from url
-    recordType = props.contentReducer.recordTypes.filter(
-      o => {
-        return o.sys.id === props.match.params.recordType
+    // find category with matching id from url
+    categories = props.contentReducer.categories.filter(
+      record => {
+        return record.sys.id === props.match.params.categories
       }
     ).shift()
   }
-  return recordType
+  return categories
 }
 
-// filter schedules by recordType or return them all if no recordType
-export const filterSchedules = (props, recordType) => {
+// filter schedules by category or return them all if no category
+export const filterSchedules = (props, category) => {
   let schedules = props.contentReducer.schedules
-  if(recordType) {
+  if(category) {
     schedules = schedules.filter(
       schedule => {
-        return schedule.fields.recordType.sys.id === props.match.params.recordType
+        return schedule.fields.category.sys.id === props.match.params.category
       }
     )
   }
