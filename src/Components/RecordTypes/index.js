@@ -14,7 +14,6 @@ import {
 const RecordTypes = (props) => {
   if (categoriesReady(props)) {
     const category = findCategory(props)
-
     return (
       <React.Fragment>
         <FilterDisclaimer
@@ -22,7 +21,7 @@ const RecordTypes = (props) => {
           category={category}
         />
         <SearchTools/>
-        <RecordTypeList cateogry={category} />
+        <RecordTypeList category={category} />
       </React.Fragment>
     )
   }

@@ -10,17 +10,17 @@ export const isFiltered = (props) => {
 
 // if there is an category id in the url find it in the store and return interval
 export const findCategory = (props) => {
-  let categories
+  let category
   // check if there is an category id in the url
   if(isFiltered(props)) {
     // find category with matching id from url
-    categories = props.contentReducer.categories.filter(
-      record => {
-        return record.sys.id === props.match.params.categories
+    category = props.contentReducer.categories.filter(
+      c => {
+        return c.sys.id === props.match.params.category
       }
     ).shift()
   }
-  return categories
+  return category
 }
 
 // filter recordTypes by category or return them all if no category

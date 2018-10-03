@@ -1,6 +1,5 @@
 import React, { Component} from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
 import RecordTypeCount from './RecordTypeCount'
 import RecordTypeListItem from './RecordTypeListItem'
 import Loading from '../../Loading'
@@ -36,5 +35,6 @@ class RecordTypeList extends Component {
     return <Loading/>
   }
 }
+
 const mapStateToProps = (state) => { return { ...state } }
-export default withRouter(connect(mapStateToProps)(RecordTypeList))
+export default connect(mapStateToProps)(RecordTypeList)

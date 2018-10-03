@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
+import { Link } from 'react-router-dom'
 
 import RecordTypesList from '../../RecordTypes/RecordTypesList'
 import { categoriesReady, recordTypesReady} from '../../../Store/storeReady'
@@ -22,6 +22,9 @@ const CategoryList = (props) => {
                   <RecordTypesList
                     category={category}
                   />
+                  <Link to={`/recordTypes-by-category/${category.sys.id}`}>
+                    <div>View all record types for {category.fields.name}.</div>
+                  </Link>
                 </li>
               )
             })
@@ -36,4 +39,4 @@ const CategoryList = (props) => {
 
 const mapStateToProps = (state) => { return { ...state } }
 
-export default withRouter(connect(mapStateToProps)(CategoryList))
+export default connect(mapStateToProps)(CategoryList)
