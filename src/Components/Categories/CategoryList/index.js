@@ -22,7 +22,7 @@ const CategoryList = (props) => {
                   <RecordTypesList
                     category={category}
                   />
-                  <Link to={`/recordTypes-by-category/${category.sys.id}`}>
+                  <Link to={`/records-by-category/${category.sys.id}`}>
                     <div>View all record types for {category.fields.name}.</div>
                   </Link>
                 </li>

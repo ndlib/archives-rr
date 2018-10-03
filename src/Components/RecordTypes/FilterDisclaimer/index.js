@@ -8,12 +8,12 @@ const FilterDisclaimer = ({isFiltered, category}) => {
   if(isFiltered && category) {
     // let user know results are filtered by category
     return (
-      <div className='filteredBy'>Only showing recordTypes for <span className='filter'>{category.fields.name}</span>. <Link to='/recordTypes'> (Show all recordTypes)</Link></div>
+      <div className='filteredBy'>Only showing record types for <span className='filter'>{category.fields.name}</span>. <Link to='/recordTypes'> (Show all record types)</Link></div>
     )
   } else if (isFiltered && !category){
     // tried to filter, but invalid category - warn user
     return (
-      <div className='filteredBy'><span className='filter'>Could not find a matching category, showing all available recordTypes.</span></div>
+      <div className='filteredBy'><span className='filter'>Could not find a matching category, showing all available record types.</span></div>
     )
   } else {
     // no filtering means no message
