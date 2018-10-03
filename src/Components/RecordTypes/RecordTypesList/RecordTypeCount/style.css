@@ -1,9 +1,9 @@
-.scheduleCount {
+.recordTypeCount {
   font-size: small;
   margin: 20px 0;
 }
 
-.scheduleCount .number {
+.recordTypeCount .number {
   font-size: larger;
   font-weight: bold;
 }

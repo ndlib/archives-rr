@@ -6,27 +6,27 @@ import { connect } from 'react-redux'
 
 import './style.css'
 
-const ScheduleListItem = ({schedule, ...props}) => {
+const RecordTypeListItem = ({recordType, ...props}) => {
   let searchWords = []
   if(props && props.searchReducer && props.searchReducer.terms) {
     searchWords = props.searchReducer.terms
   }
   return (
-    <div className='scheduleRow'>
-      <Link to={`/schedule/${schedule.sys.id}`}
+    <div className='recordTypeRow'>
+      <Link to={`/recordType/${recordType.sys.id}`}
       ><Highligter
         highlightClassName="wordMatch"
         searchWords={searchWords}
         autoEscape={true}
-        textToHighlight={schedule.fields.scheduleId}
+        textToHighlight={recordType.fields.recordType}
       /></Link>
     </div>
   )
 }
 
-ScheduleListItem.propTypes = {
-  schedule: PropTypes.object.isRequired
+RecordTypeListItem.propTypes = {
+  recordType: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => { return { ...state } }
-export default connect(mapStateToProps)(ScheduleListItem)
+export default connect(mapStateToProps)(RecordTypeListItem)

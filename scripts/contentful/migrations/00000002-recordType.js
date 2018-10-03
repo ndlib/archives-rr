@@ -1,6 +1,6 @@
 const forward = (migration) => {
   // Schedule content type
-  const record = migration.createContentType('record')
+  const record = migration.createContentType('recordType')
     .name('Record Type')
     .description('Record retention record')
     .displayField('recordType')

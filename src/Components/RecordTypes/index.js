@@ -5,13 +5,13 @@ import { categoriesReady } from '../../Store/storeReady'
 import Loading from '../Loading'
 import SearchTools from './SearchTools'
 import FilterDisclaimer from './FilterDisclaimer'
-import ScheduleList from './SchedulesList'
+import RecordTypeList from './RecordTypesList'
 import {
   isFiltered,
   findCategory
 } from './functions/filter'
 
-const Schedules = (props) => {
+const RecordTypes = (props) => {
   if (categoriesReady(props)) {
     const category = findCategory(props)
 
@@ -22,7 +22,7 @@ const Schedules = (props) => {
           category={category}
         />
         <SearchTools/>
-        <ScheduleList cateogry={category} />
+        <RecordTypeList cateogry={category} />
       </React.Fragment>
     )
   }
@@ -31,4 +31,4 @@ const Schedules = (props) => {
 
 const mapStateToProps = (state) => { return { ...state } }
 
-export default connect(mapStateToProps)(Schedules)
+export default connect(mapStateToProps)(RecordTypes)

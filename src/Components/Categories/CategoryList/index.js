@@ -1,12 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 
-import SchedulesList from '../../Schedules/SchedulesList'
-import { categoriesReady, schedulesReady} from '../../../Store/storeReady'
+import RecordTypesList from '../../RecordTypes/RecordTypesList'
+import { categoriesReady, recordTypesReady} from '../../../Store/storeReady'
 import Loading from '../../Loading'
 
 const CategoryList = (props) => {
-  if(categoriesReady(props) && schedulesReady(props)) {
+  if(categoriesReady(props) && recordTypesReady(props)) {
     // filter out categories with different categoryal leader
     let categories = props.contentReducer.categories
 
@@ -18,7 +19,7 @@ const CategoryList = (props) => {
               return (
                 <li key={category.sys.id}>
                   <h3>{category.fields.name}</h3>
-                  <SchedulesList
+                  <RecordTypesList
                     category={category}
                   />
                 </li>
@@ -35,4 +36,4 @@ const CategoryList = (props) => {
 
 const mapStateToProps = (state) => { return { ...state } }
 
-export default connect(mapStateToProps)(CategoryList)
+export default withRouter(connect(mapStateToProps)(CategoryList))

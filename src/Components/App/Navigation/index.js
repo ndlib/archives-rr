@@ -14,7 +14,7 @@ const Navigation = () => {
           activeClassName='active'
         >Categories</NavLink>
         <NavLink
-          to='/schedules'
+          to='/recordTypes'
           activeClassName='active'
         >Search</NavLink>
         <span className='right'><a href='/'>Login</a></span>

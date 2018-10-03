@@ -23,15 +23,15 @@ export const findCategory = (props) => {
   return categories
 }
 
-// filter schedules by category or return them all if no category
-export const filterSchedules = (props, category) => {
-  let schedules = props.contentReducer.schedules
+// filter recordTypes by category or return them all if no category
+export const filterRecordTypes = (props, category) => {
+  let recordTypes = props.contentReducer.recordTypes
   if(category) {
-    schedules = schedules.filter(
-      schedule => {
-        return schedule.fields.category.sys.id === props.match.params.category
+    recordTypes = recordTypes.filter(
+      recordType => {
+        return recordType.fields.category.sys.id === category.sys.id
       }
     )
   }
-  return schedules
+  return recordTypes
 }

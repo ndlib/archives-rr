@@ -31,9 +31,9 @@ class SearchTools extends Component {
   }
 
   searchSubmit() {
-    let base = 'schedules'
+    let base = 'recordTypes'
     if(this.props.match.params && this.props.match.params.category) {
-      base = `schedules-by-category/${this.props.match.params.category}`
+      base = `recordTypes-by-category/${this.props.match.params.category}`
     }
 
     this.props.dispatch(submitSearch(splitTerms(cleanSearchString(this.state.searchValue))))

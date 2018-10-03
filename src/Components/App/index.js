@@ -15,8 +15,8 @@ import Page from './Page'
 // components for routes
 import Home from '../Home'
 import Categories from '../Categories'
-import Schedules from '../Schedules'
-import Schedule from '../Schedule'
+import RecordTypes from '../RecordTypes'
+import RecordType from '../RecordType'
 
 // create store
 const store = configureStore()
@@ -29,9 +29,9 @@ const App = () => {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path='/categories' component={Categories} />
-            <Route exact path='/schedules/:search?' component={Schedules} />
-            <Route exact path='/schedules-by-category/:category/:search?' component={Schedules} />
-            <Route exact path='/schedule/:id' component={Schedule} />
+            <Route exact path='/recordTypes/:search?' component={RecordTypes} />
+            <Route exact path='/recordTypes-by-category/:category/:search?' component={RecordTypes} />
+            <Route exact path='/recordType/:id' component={RecordType} />
           </Switch>
         </Page>
       </Provider>

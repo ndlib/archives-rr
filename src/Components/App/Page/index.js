@@ -18,7 +18,7 @@ class Page extends Component{
     const { dispatch } = this.props
     dispatch(fetchContentType('page', 'fields.name'))
     dispatch(fetchContentType('category', 'fields.name'))
-    dispatch(fetchContentType('schedule', 'fields.scheduleId'))
+    dispatch(fetchContentType('recordType', 'fields.recordType'))
   }
 
   componentDidUpdate(prevProps) {

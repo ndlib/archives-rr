@@ -2,7 +2,7 @@ import { returnResults } from '../../../Store/actions/searchActions'
 
 const searchAbleFields = [
   'recordType',
-  'scheduleId',
+  'recordTypeId',
   'recordTypeDescription',
   'officialCopy',
   //'retention',
@@ -75,8 +75,8 @@ export const searchTerms = (props) => {
   return terms
 }
 
-// do search actions on provided schedules
-const searchResults = (schedules, props) => {
+// do search actions on provided recordTypes
+const searchResults = (recordTypes, props) => {
   if(hasSearch(props)) {
     const terms = searchTerms(props)
     console.log(`Searching with query: ["${terms.join('", "')}"]`)
@@ -89,9 +89,9 @@ const searchResults = (schedules, props) => {
 
 
   }
-  //props.dispatch(returnResults(schedules))
+  //props.dispatch(returnResults(recordTypes))
 
-  return schedules
+  return recordTypes
 }
 
 export default searchResults
