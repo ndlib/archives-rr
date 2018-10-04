@@ -6,28 +6,28 @@ import { submitSearch } from '../../../Store/actions/searchActions'
 import SubmitSearch from './SubmitSearch'
 import {
   hasSearch,
-  cleanSearchString,
+  removeQueryOperator,
   splitTerms
 } from '../functions/search'
+import { filterRecordsByCategory } from '../functions/filter'
 import './style.css'
 
 class SearchTools extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      searchValue: hasSearch(props) ? cleanSearchString(this.props.match.params.search) : ''
+      searchValue: hasSearch(props) ? removeQueryOperator(this.props.match.params.search) : ''
     }
-    this.props.dispatch(submitSearch(splitTerms(cleanSearchString(this.props.match.params.search))))
     this.searchFieldOnChange = this.searchFieldOnChange.bind(this)
     this.searchSubmit = this.searchSubmit.bind(this)
   }
 
-  onReceiveProps(nextProps) {
-    if(nextProps.match.params.search !== this.match.params.search) {
-      if (hasSearch(nextProps)) {
-        this.setState({searchValue: cleanSearchString(nextProps.match.params.search)})
-      }
-    }
+  componentDidMount() {
+    this.props.search(
+      splitTerms(this.state.searchValue),
+      filterRecordsByCategory(this.props, this.props.category),
+      this.props.dispatch
+    )
   }
 
   searchSubmit() {
@@ -35,13 +35,16 @@ class SearchTools extends Component {
     if(this.props.match.params && this.props.match.params.category) {
       base = `records-by-category/${this.props.match.params.category}`
     }
-
-    this.props.dispatch(submitSearch(splitTerms(cleanSearchString(this.state.searchValue))))
+    this.props.search(
+      splitTerms(this.state.searchValue),
+      filterRecordsByCategory(this.props, this.props.category),
+      this.props.dispatch
+    )
     this.props.history.push(`/${base}/q=${this.state.searchValue}`)
   }
 
   searchFieldOnChange(event) {
-    this.setState({searchValue: cleanSearchString(event.target.value)})
+    this.setState({searchValue: removeQueryOperator(event.target.value)})
   }
 
   render() {
@@ -67,4 +70,16 @@ class SearchTools extends Component {
 }
 
 const mapStateToProps = (state) => { return { ...state } }
-export default withRouter(connect(mapStateToProps)(SearchTools))
+const mapDispatchToProps = (dispatch) => ({ dispatch })
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const search = (terms, recordTypes, dispatch) => {
+    dispatch(submitSearch(terms, recordTypes))
+  }
+  return {...stateProps, ...dispatchProps, ...ownProps, search}
+}
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+    mergeProps
+  )(SearchTools))

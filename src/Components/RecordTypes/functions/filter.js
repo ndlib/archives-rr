@@ -24,7 +24,7 @@ export const findCategory = (props) => {
 }
 
 // filter recordTypes by category or return them all if no category
-export const filterRecordTypes = (props, category) => {
+export const filterRecordsByCategory = (props, category) => {
   let recordTypes = props.contentReducer.recordTypes
   if(category) {
     recordTypes = recordTypes.filter(

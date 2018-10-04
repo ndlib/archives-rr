@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { categoriesReady } from '../../Store/storeReady'
+import storeReady from '../../Store/storeReady'
 import Loading from '../Loading'
 import SearchTools from './SearchTools'
 import FilterDisclaimer from './FilterDisclaimer'
@@ -12,7 +12,7 @@ import {
 } from './functions/filter'
 
 const RecordTypes = (props) => {
-  if (categoriesReady(props)) {
+  if (storeReady(props)) {
     const category = findCategory(props)
     return (
       <React.Fragment>
@@ -20,7 +20,7 @@ const RecordTypes = (props) => {
           isFiltered={isFiltered(props)}
           category={category}
         />
-        <SearchTools/>
+        <SearchTools category={category}/>
         <RecordTypeList category={category} />
       </React.Fragment>
     )

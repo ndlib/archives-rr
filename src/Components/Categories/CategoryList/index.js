@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import RecordTypesList from '../../RecordTypes/RecordTypesList'
+import SimpleRecordTypesList from './SimpleRecordTypesList'
 import { categoriesReady, recordTypesReady} from '../../../Store/storeReady'
 import Loading from '../../Loading'
 
@@ -19,7 +19,7 @@ const CategoryList = (props) => {
               return (
                 <li key={category.sys.id}>
                   <h3>{category.fields.name}</h3>
-                  <RecordTypesList
+                  <SimpleRecordTypesList
                     category={category}
                   />
                   <Link to={`/records-by-category/${category.sys.id}`}>

@@ -1,32 +1,5 @@
 import { returnResults } from '../../../Store/actions/searchActions'
 
-const searchAbleFields = [
-  'recordType',
-  'recordTypeId',
-  'recordTypeDescription',
-  'officialCopy',
-  //'retention',
-  //'triggerEvent',
-  //'disposition',
-  //'dispositionMethod',
-  //'referenceCopy',
-  //'referenceCopyDisposition',
-  //'referenceCopyDispositionMethod',
-  'storageRequirements',
-  'legalReference',
-  'notes',
-
-  // restricted fields
-  'systemOfRecord',
-  'archivesNotes',
-  'generalCounselNotes'
-]
-
-const dateFields = [
-  'dateApprovedByGeneralCounsel',
-  'dateRevised'
-]
-
 // return true if there's a search query
 export const hasSearch = (props) => {
   // has search params
@@ -40,7 +13,7 @@ export const hasSearch = (props) => {
   return false
 }
 
-export const cleanSearchString = (string) => {
+export const removeQueryOperator = (string) => {
   if(string) {
     return decodeURI(string.replace('q=', ''))
   }
@@ -69,29 +42,8 @@ export const splitTerms = (searchString) => {
 export const searchTerms = (props) => {
   let terms = []
   if(hasSearch(props)) {
-    const searchString = cleanSearchString(props.match.params.search)
+    const searchString = removeQueryOperator(props.match.params.search)
     terms = splitTerms(searchString)
   }
   return terms
 }
-
-// do search actions on provided recordTypes
-const searchResults = (recordTypes, props) => {
-  if(hasSearch(props)) {
-    const terms = searchTerms(props)
-    console.log(`Searching with query: ["${terms.join('", "')}"]`)
-    // TODO SEARCH WORK
-
-    // for each term
-    // for each searchable field
-    // result should return sys.id, fields where terms found
-    // then sort by number of fields found in
-
-
-  }
-  //props.dispatch(returnResults(recordTypes))
-
-  return recordTypes
-}
-
-export default searchResults

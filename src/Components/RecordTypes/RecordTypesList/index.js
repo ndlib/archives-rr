@@ -1,18 +1,18 @@
 import React, { Component} from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import RecordTypeCount from './RecordTypeCount'
 import RecordTypeListItem from './RecordTypeListItem'
 import Loading from '../../Loading'
 import { recordTypesReady } from '../../../Store/storeReady'
 import {
-  filterRecordTypes
+  filterRecordsByCategory
 } from '../functions/filter'
-import searchResults from '../functions/search'
 
 class RecordTypeList extends Component {
   render() {
     if(recordTypesReady(this.props)){
-    const recordTypes = searchResults(filterRecordTypes(this.props, this.props.category), this.props)
+    const recordTypes = filterRecordsByCategory(this.props, this.props.category)
       return (
         <React.Fragment>
           <RecordTypeCount recordTypes={recordTypes} />
@@ -37,4 +37,4 @@ class RecordTypeList extends Component {
 }
 
 const mapStateToProps = (state) => { return { ...state } }
-export default connect(mapStateToProps)(RecordTypeList)
+export default withRouter(connect(mapStateToProps)(RecordTypeList))
