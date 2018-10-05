@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
-import { submitSearch } from '../../../Store/actions/searchActions'
+import { submitSearch, clearSearch } from '../../../Store/actions/searchActions'
 import SubmitSearch from './SubmitSearch'
 import {
   hasSearch,
@@ -20,6 +20,7 @@ class SearchTools extends Component {
     }
     this.searchFieldOnChange = this.searchFieldOnChange.bind(this)
     this.searchSubmit = this.searchSubmit.bind(this)
+    this.submitOnEnter = this.submitOnEnter.bind(this)
   }
 
   componentDidMount() {
@@ -28,6 +29,10 @@ class SearchTools extends Component {
       filterRecordsByCategory(this.props, this.props.category),
       this.props.dispatch
     )
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(clearSearch())
   }
 
   searchSubmit() {
@@ -47,6 +52,13 @@ class SearchTools extends Component {
     this.setState({searchValue: removeQueryOperator(event.target.value)})
   }
 
+  submitOnEnter(event) {
+    // keycode 13 is the ENTER key
+    if(event.keyCode === 13) {
+      this.searchSubmit()
+    }
+  }
+
   render() {
     return (
       <div className='searchTools'>
@@ -56,7 +68,8 @@ class SearchTools extends Component {
           name="searchField"
           spellCheck="true"
           defaultValue={this.state.searchValue || ''}
-          onChange={(e) => { this.searchFieldOnChange(e)}}
+          onChange={(e) => { this.searchFieldOnChange(e) }}
+          onKeyDown={(e) => { this.submitOnEnter(e) }}
         />
         <SubmitSearch
           searchBoxValue={this.state.searchValue}

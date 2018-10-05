@@ -1,6 +1,7 @@
 import {
   SUBMIT_SEARCH,
-  RESULTS_READY
+  RESULTS_READY,
+  CLEAR_SEARCH
 } from '../actions/searchActions'
 
 export default(state = {}, action) => {
@@ -17,6 +18,13 @@ export default(state = {}, action) => {
         ...state,
         searching: false,
         results: action.results
+      }
+    case CLEAR_SEARCH:
+      return {
+        ...state,
+        terms: [],
+        searching: false,
+        results: []
       }
     default:
       return state

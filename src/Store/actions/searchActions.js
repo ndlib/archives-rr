@@ -27,6 +27,7 @@ const dateFields = [
 
 export const SUBMIT_SEARCH = 'SUBMIT_SEARCH'
 export const RESULTS_READY = 'RESULTS_READY'
+export const CLEAR_SEARCH = 'CLEAR_SEARCH'
 
 export const submitSearch = (terms, recordTypes) => {
   return dispatch => {
@@ -48,7 +49,7 @@ export const submitSearch = (terms, recordTypes) => {
         })
       })
     })
-    
+
     dispatch(returnResults(results))
   }
 }
@@ -59,9 +60,16 @@ const startSearch = (terms) => {
     terms: terms,
   }
 }
+
 const returnResults = (results) => {
   return {
     type: RESULTS_READY,
     results: results
+  }
+}
+
+export const clearSearch = () => {
+  return {
+    type: CLEAR_SEARCH
   }
 }

@@ -1,21 +1,31 @@
 // helper functions to let you know if the store is ready
-const reducerReady = (props) => {
+const contentReducerReady = (props) => {
   return props && props.contentReducer
 }
 export const categoriesReady = (props) => {
-  return reducerReady(props) && props.contentReducer.categories
+  return contentReducerReady(props) && props.contentReducer.categories
 }
 
 export const recordTypesReady = (props) => {
-  return reducerReady(props) && props.contentReducer.recordTypes
+  return contentReducerReady(props) && props.contentReducer.recordTypes
 }
 
 export const pagesReady = (props) => {
-  return reducerReady(props) && props.contentReducer.pages
+  return contentReducerReady(props) && props.contentReducer.pages
 }
 
-const storeReady = (props) => {
+export const contentStoreReady = (props) => {
   return categoriesReady(props) && recordTypesReady(props) && pagesReady(props)
 }
 
-export default storeReady
+export const searchStoreExists = (props) => {
+  return props && props.searchReducer
+}
+
+export const searchStoreReady = (props) => {
+  return searchStoreExists(props) && !props.searchReducer.searching
+}
+
+export const allReady = (props) => {
+  return searchStoreReady(props) && contentStoreReady(props)
+}
