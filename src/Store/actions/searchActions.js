@@ -34,22 +34,34 @@ export const submitSearch = (terms, recordTypes) => {
     dispatch(startSearch(terms))
 
     let results = []
-    terms.forEach(term => {
-      recordTypes.forEach(recordType => {
+    recordTypes.forEach(recordType => {
+      terms.forEach(term => {
         searchableFields.forEach(field => {
           if(recordType.fields[field] && recordType.fields[field].toLowerCase().indexOf(term) > -1) {
             let result = results.find((r) => {return r.id === recordType.sys.id})
             if(!result) {
-              results.push({id: recordType.sys.id, fieldsWithTerm: [field]})
+              results.push({
+                id: recordType.sys.id,
+                fieldsWithTerm: [field],
+                hitCount: 1})
             } else {
-              const i = results.findIndex(r => {return r.id === recordType.sys.id})
-              results[i].fieldsWithTerm.push(field)
+              const i = results.findIndex(
+                r => {
+                  return r.id === recordType.sys.id
+              })
+              if(results[i].fieldsWithTerm.indexOf(field) < 0) {
+                results[i].fieldsWithTerm.push(field)
+              }
+              results[i].hitCount += 1
             }
           }
         })
       })
     })
-
+    // order results by most hits
+    results.sort((r1, r2) => {
+      return r2.hitCount - r1.hitCount
+    })
     dispatch(returnResults(results))
   }
 }

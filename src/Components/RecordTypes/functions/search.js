@@ -1,5 +1,3 @@
-import { returnResults } from '../../../Store/actions/searchActions'
-
 // return true if there's a search query
 export const hasSearch = (props) => {
   // has search params
