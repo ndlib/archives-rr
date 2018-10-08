@@ -21,7 +21,9 @@ const ListOrResults = ({recordTypes, ...props}) => {
             recordTypes={recordTypes}
             results={props.searchReducer.results}
           /> :
-          <RecordTypeList recordTypes={recordTypes} />
+          <RecordTypeList
+            recordTypes={recordTypes} 
+          />
         }
       </React.Fragment>
     )

@@ -31,7 +31,7 @@ const App = () => {
             <Route exact path='/categories' component={Categories} />
             <Route exact path='/recordTypes/:search?' component={RecordTypes} />
             <Route exact path='/records-by-category/:category/:search?' component={RecordTypes} />
-            <Route exact path='/recordType/:id' component={RecordType} />
+            <Route exact path='/recordType/:id/:search?' component={RecordType} />
           </Switch>
         </Page>
       </Provider>

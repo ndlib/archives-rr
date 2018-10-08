@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Highligter from 'react-highlight-words'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 
 import './style.css'
 
@@ -17,9 +18,9 @@ const SearchResult = ({result, recordTypes, ...props}) => {
   ).shift() || { id: '', fieldsWithTerm: []}
   return(
     <div className='result'>
-      <Link to={`/recordType/${result.id}`}>
+      <Link to={`/recordType/${result.id}/${props.match.params.search}`}>
       <Highligter
-        highlightClassName="wordMatch"
+        highlightClassName="term-match"
         searchWords={searchWords}
         autoEscape={true}
         textToHighlight={recordFromResult.fields.recordType}
@@ -36,7 +37,7 @@ const SearchResult = ({result, recordTypes, ...props}) => {
             className='resultField'
           >
             <Highligter
-              highlightClassName="wordMatch"
+              highlightClassName="term-match"
               searchWords={searchWords}
               autoEscape={true}
               textToHighlight={recordFromResult.fields[field]}
@@ -49,4 +50,4 @@ const SearchResult = ({result, recordTypes, ...props}) => {
 }
 
 const mapStateToProps = (state) => { return { ...state } }
-export default connect(mapStateToProps)(SearchResult)
+export default withRouter(connect(mapStateToProps)(SearchResult))

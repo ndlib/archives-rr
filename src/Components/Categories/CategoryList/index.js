@@ -2,8 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import SimpleRecordTypesList from './SimpleRecordTypesList'
+import RecordTypesList from '../../RecordTypes/ListOrResults/RecordTypesList'
 import { categoriesReady, recordTypesReady} from '../../../Store/storeReady'
+import { filterRecordsByCategory } from '../../RecordTypes/functions/filter'
 import Loading from '../../Loading'
 
 const CategoryList = (props) => {
@@ -19,8 +20,8 @@ const CategoryList = (props) => {
               return (
                 <li key={category.sys.id}>
                   <h3>{category.fields.name}</h3>
-                  <SimpleRecordTypesList
-                    category={category}
+                  <RecordTypesList
+                    recordTypes={filterRecordsByCategory(props, category)}
                   />
                   <Link to={`/records-by-category/${category.sys.id}`}>
                     <div>View all record types for {category.fields.name}.</div>
