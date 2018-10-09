@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import RecordTypeListItem from './RecordTypeListItem'
-import Loading from '../../../Loading'
-import { recordTypesReady } from '../../../../Store/storeReady'
+import Loading from '../Loading'
+import { recordTypesReady } from '../../Store/storeReady'
 
 const RecordTypeList = (props) => {
   if(recordTypesReady(props)){

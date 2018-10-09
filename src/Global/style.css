@@ -4,6 +4,15 @@ body {
   font-family: sans-serif;
 }
 
+a,
+a:visited {
+  color: #004da3;
+}
+
+a:hover {
+  color: #4a3651;
+}
+
 .container-fluid {
   margin: 0 auto;
   padding: 0 10px;

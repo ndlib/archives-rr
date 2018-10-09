@@ -1,0 +1,31 @@
+.collapseList {
+  max-height: 400px; /* approximate max height */
+  margin: 0 4em;
+  overflow-y: hidden;
+  transition-property: all;
+  transition-duration: .5s;
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+.collapseList.closed {
+  max-height: 0;
+}
+
+.functionalCategory {
+  background-repeat: no-repeat;
+  cursor: pointer;
+  padding-left: 28px;
+}
+
+.moreChevron {
+  background-image: url("./icons/baseline-expand_more-24px.svg");
+}
+
+.lessChevron {
+  background-image: url("./icons/baseline-expand_less-24px.svg");
+}
+
+.lastLink {
+  display: block;
+  margin: 1em 0 0;
+}

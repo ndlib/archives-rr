@@ -8,8 +8,8 @@ import {
   hasSearch,
   removeQueryOperator,
   splitTerms
-} from '../functions/search'
-import { filterRecordsByCategory } from '../functions/filter'
+} from '../../../Functions/search'
+import { filterRecordsByCategory } from '../../../Functions/filter'
 import './style.css'
 
 class SearchTools extends Component {

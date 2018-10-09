@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import Highlighter from 'react-highlight-words'
 import Loading from '../Loading'
 import { recordTypesReady } from '../../Store/storeReady'
-import { searchTerms } from '../RecordTypes/functions/search'
+import { searchTerms } from '../../Functions/search'
+import RecordField from './RecordField'
 
 const RecordType = (props) => {
   if(recordTypesReady(props)) {
@@ -13,24 +13,55 @@ const RecordType = (props) => {
       return s.sys.id === props.match.params.id
     }).shift()
 
-    let searchWords = searchTerms(props)
-    console.log(searchWords, props)
+    const terms = searchTerms(props)
+    const fields = [
+      'recordType',
+      'recordTypeId',
+      'recordTypeDescription',
+      'officialCopy',
+      'retention',
+      'triggerEvent',
+      'disposition',
+      'dispositionMethod',
+      'referenceCopy',
+      'referenceCopyDisposition',
+      'referenceCopyDispositionMethod',
+      'storageRequirements',
+      'legalReference',
+      'notes',
+
+      // restricted fields
+      'systemOfRecord',
+      'archivesNotes',
+      'generalCounselNotes',
+
+      // date fields
+      'dateApprovedByGeneralCounsel',
+      'dateRevised'
+    ]
 
     // render if it exists
     if(recordType) {
       return (
         <React.Fragment>
-          <div className='text-content'>Information about recordType {recordType.sys.id}</div>
-          <div>RecordType ID: {recordType.fields.recordTypeId}</div>
-          <div>Belongs to function category: {recordType.fields.category.fields.name}</div>
-          <pre style={{whiteSpace: 'pre-wrap'}}>
-            <Highlighter
-              highlightClassName="term-match"
-              searchWords={searchWords}
-              autoEscape={true}
-              textToHighlight={JSON.stringify(recordType)}
-            />
-          </pre>
+          <h1>{recordType.fields.category.fields.name}</h1>
+          {
+            fields.map(field => {
+              return (
+                <RecordField
+                  key={field}
+                  label={
+                    field
+                    .replace(/([A-Z])/g, ' $1')
+                    .replace(/^./, (str) => { return str.toUpperCase() })
+                  }
+                  field={field}
+                  recordType={recordType}
+                  terms={terms}
+                />
+              )
+            })
+          }
         </React.Fragment>
       )
     }

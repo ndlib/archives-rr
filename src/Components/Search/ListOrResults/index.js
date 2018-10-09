@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
 import DisplayCount from './DisplayCount'
-import RecordTypeList from './RecordTypesList'
+import RecordTypeList from '../../RecordTypesList'
 import SearchResultsList from './SearchResultsList'
 import { allReady } from '../../../Store/storeReady'
-import { hasSearch } from '../functions/search'
+import { hasSearch } from '../../../Functions/search'
 import Loading from '../../Loading'
 
 const ListOrResults = ({recordTypes, ...props}) => {
@@ -22,7 +22,7 @@ const ListOrResults = ({recordTypes, ...props}) => {
             results={props.searchReducer.results}
           /> :
           <RecordTypeList
-            recordTypes={recordTypes} 
+            recordTypes={recordTypes}
           />
         }
       </React.Fragment>

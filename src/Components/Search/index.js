@@ -10,9 +10,9 @@ import {
   isFiltered,
   findCategory,
   filterRecordsByCategory
-} from './functions/filter'
+} from '../../Functions/filter'
 
-const RecordTypes = (props) => {
+const Search = (props) => {
   if (contentStoreReady(props)) {
     const category = findCategory(props)
     const recordTypes = filterRecordsByCategory(props, category) || []
@@ -32,4 +32,4 @@ const RecordTypes = (props) => {
 
 const mapStateToProps = (state) => { return { ...state } }
 
-export default connect(mapStateToProps)(RecordTypes)
+export default connect(mapStateToProps)(Search)
