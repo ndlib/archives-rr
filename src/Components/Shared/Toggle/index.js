@@ -6,26 +6,22 @@ import './style.css'
 class Toggle extends Component {
   constructor(props) {
     super(props)
-    this.state = { open: this.props.defaultOpen || false }
-    this.onClick = this.onClick.bind(this)
-  }
-
-  onClick() {
-    this.setState({open: !this.state.open})
+    this.state = { open: this.props.defaultOpen }
   }
 
   render() {
     return (
       <React.Fragment>
-      <span
-        className={ this.state.open ? 'less' : 'more' }
-        onClick={this.onClick}
-      >{this.props.label}</span>
-      <div
-        className={ this.state.open ? 'open' : 'closed' }
-      >
-        { this.props.children }
-      </div>
+        <span
+          className={ this.state.open ? 'less' : 'more' }
+          onClick={() => { this.setState({open: !this.state.open}) }}
+        >{ this.state.open && this.props.labelExpandedContent ?
+          this.props.labelExpandedContent :
+          this.props.label
+          }</span>
+        <div className={ this.state.open ? 'open' : 'closed' }>
+          { this.props.children }
+        </div>
       </React.Fragment>
     )
   }
@@ -34,5 +30,11 @@ class Toggle extends Component {
 Toggle.propTypes = {
   label: PropTypes.object.isRequired,
   children: PropTypes.object.isRequired,
+  labelExpandedContent: PropTypes.object,
+  defaultOpen: PropTypes.bool
+}
+
+Toggle.defaultProps = {
+  defaultOpen: false
 }
 export default Toggle
