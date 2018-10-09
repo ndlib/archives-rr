@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import Loading from '../Shared/Loading'
 import { recordTypesReady } from '../../Store/storeReady'
-import { searchTerms } from '../../Functions/search'
+import { searchTerms } from '../../Functions/searchHelpers'
 import RecordField from './RecordField'
+import { displayFields }  from '../../Constants/fields'
 
 const RecordType = (props) => {
   if(recordTypesReady(props)) {
@@ -14,31 +15,7 @@ const RecordType = (props) => {
     }).shift()
 
     const terms = searchTerms(props)
-    const fields = [
-      'recordType',
-      'recordTypeId',
-      'recordTypeDescription',
-      'officialCopy',
-      'retention',
-      'triggerEvent',
-      'disposition',
-      'dispositionMethod',
-      'referenceCopy',
-      'referenceCopyDisposition',
-      'referenceCopyDispositionMethod',
-      'storageRequirements',
-      'legalReference',
-      'notes',
 
-      // restricted fields
-      'systemOfRecord',
-      'archivesNotes',
-      'generalCounselNotes',
-
-      // date fields
-      'dateApprovedByGeneralCounsel',
-      'dateRevised'
-    ]
 
     // render if it exists
     if(recordType) {
@@ -46,7 +23,7 @@ const RecordType = (props) => {
         <React.Fragment>
           <h1>{recordType.fields.category.fields.name}</h1>
           {
-            fields.map(field => {
+            displayFields.map(field => {
               return (
                 <RecordField
                   key={field}

@@ -6,7 +6,7 @@ import DisplayCount from './DisplayCount'
 import RecordTypeList from '../../Shared/RecordTypesList'
 import SearchResultsList from './SearchResultsList'
 import { allReady } from '../../../Store/storeReady'
-import { hasSearch } from '../../../Functions/search'
+import { hasSearch } from '../../../Functions/searchHelpers'
 import Loading from '../../Shared/Loading'
 
 const ListOrResults = ({recordTypes, ...props}) => {

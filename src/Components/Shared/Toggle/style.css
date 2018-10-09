@@ -1,0 +1,20 @@
+.more::before {
+  background-image: url("./icons/baseline-expand_more-24px.svg");
+  background-repeat: no-repeat;
+  display: block;
+  width: 28px;
+  height: 24px;
+}
+
+.less::before {
+  background-image: url("./icons/baseline-expand_less-24px.svg");
+  background-repeat: no-repeat;
+  display: block;
+  width: 28px;
+  height: 24px;
+}
+
+.closed {
+  max-height: 0;
+  overflow-y: hidden;
+}

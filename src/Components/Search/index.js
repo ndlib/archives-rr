@@ -10,7 +10,7 @@ import {
   isFiltered,
   findCategory,
   filterRecordsByCategory
-} from '../../Functions/filter'
+} from '../../Functions/filterHelpers'
 
 const Search = (props) => {
   if (contentStoreReady(props)) {

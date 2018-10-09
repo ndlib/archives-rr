@@ -4,12 +4,13 @@ import { withRouter } from 'react-router'
 
 import { submitSearch, clearSearch } from '../../../Store/actions/searchActions'
 import SubmitSearch from './SubmitSearch'
+import AdvancedSearch from './AdvancedSearch'
 import {
   hasSearch,
   removeQueryOperator,
   splitTerms
-} from '../../../Functions/search'
-import { filterRecordsByCategory } from '../../../Functions/filter'
+} from '../../../Functions/searchHelpers'
+import { filterRecordsByCategory } from '../../../Functions/filterHelpers'
 import './style.css'
 
 class SearchTools extends Component {
@@ -79,6 +80,7 @@ class SearchTools extends Component {
           props={this.props}
           onSubmit={this.searchSubmit}
         />
+        <AdvancedSearch/>
       </div>
     )
   }

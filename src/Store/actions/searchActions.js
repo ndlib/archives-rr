@@ -1,29 +1,8 @@
-const searchableFields = [
-  'recordType',
-  'recordTypeId',
-  'recordTypeDescription',
-  'officialCopy',
-  //'retention',
-  //'triggerEvent',
-  //'disposition',
-  //'dispositionMethod',
-  //'referenceCopy',
-  //'referenceCopyDisposition',
-  //'referenceCopyDispositionMethod',
-  'storageRequirements',
-  'legalReference',
-  'notes',
-
-  // restricted fields
-  'systemOfRecord',
-  'archivesNotes',
-  'generalCounselNotes'
-]
-
-const dateFields = [
-  'dateApprovedByGeneralCounsel',
-  'dateRevised'
-]
+import {
+  searchableFields,
+  //dateFields,
+  //predefinedFields
+} from '../../Constants/fields'
 
 export const SUBMIT_SEARCH = 'SUBMIT_SEARCH'
 export const RESULTS_READY = 'RESULTS_READY'
@@ -31,6 +10,7 @@ export const CLEAR_SEARCH = 'CLEAR_SEARCH'
 
 export const submitSearch = (terms, recordTypes) => {
   return dispatch => {
+    // dispatch message to store that we are starting the search
     dispatch(startSearch(terms))
 
     let results = []
@@ -68,6 +48,8 @@ export const submitSearch = (terms, recordTypes) => {
     results.sort((r1, r2) => {
       return r2.hitCount - r1.hitCount
     })
+
+    // dispatch message that we found results and are done searching
     dispatch(returnResults(results))
   }
 }
