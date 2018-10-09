@@ -1,6 +1,6 @@
 import React from 'react'
 
-import DynamicContent from '../DynamicContent'
+import DynamicContent from '../Shared/DynamicContent'
 import CategoryList from './CategoryList'
 
 const Categories = (props) => {

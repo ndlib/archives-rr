@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import RecordTypesList from '../../../RecordTypesList'
+import RecordTypesList from '../../../Shared/RecordTypesList'
 import { filterRecordsByCategory } from '../../../../Functions/filter'
 import { recordTypesReady } from '../../../../Store/storeReady'
-import Loading from '../../../Loading'
+import Loading from '../../../Shared/Loading'
 import './style.css'
 
 class Category extends Component {

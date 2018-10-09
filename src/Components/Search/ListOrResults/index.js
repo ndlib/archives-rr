@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
 import DisplayCount from './DisplayCount'
-import RecordTypeList from '../../RecordTypesList'
+import RecordTypeList from '../../Shared/RecordTypesList'
 import SearchResultsList from './SearchResultsList'
 import { allReady } from '../../../Store/storeReady'
 import { hasSearch } from '../../../Functions/search'
-import Loading from '../../Loading'
+import Loading from '../../Shared/Loading'
 
 const ListOrResults = ({recordTypes, ...props}) => {
   if(allReady(props)) {
@@ -16,7 +16,8 @@ const ListOrResults = ({recordTypes, ...props}) => {
     return (
       <React.Fragment>
         <DisplayCount count={count} />
-        { hasSearch(props) ?
+        {
+          hasSearch(props) ?
           <SearchResultsList
             recordTypes={recordTypes}
             results={props.searchReducer.results}

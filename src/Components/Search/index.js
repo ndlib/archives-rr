@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { contentStoreReady } from '../../Store/storeReady'
-import Loading from '../Loading'
+import Loading from '../Shared/Loading'
 import SearchTools from './SearchTools'
 import FilterDisclaimer from './FilterDisclaimer'
 import ListOrResults from './ListOrResults'

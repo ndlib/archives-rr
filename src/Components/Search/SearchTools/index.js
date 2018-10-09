@@ -35,8 +35,9 @@ class SearchTools extends Component {
     this.props.dispatch(clearSearch())
   }
 
+  // function called when search button pressed
   searchSubmit() {
-    let base = 'recordTypes'
+    let base = 'search'
     if(this.props.match.params && this.props.match.params.category) {
       base = `records-by-category/${this.props.match.params.category}`
     }
@@ -48,10 +49,12 @@ class SearchTools extends Component {
     this.props.history.push(`/${base}/q=${this.state.searchValue}`)
   }
 
+  // watch searchbox for changes, does not submit new value
   searchFieldOnChange(event) {
     this.setState({searchValue: removeQueryOperator(event.target.value)})
   }
 
+  // lets user submit new search with enter key
   submitOnEnter(event) {
     // keycode 13 is the ENTER key
     if(event.keyCode === 13) {
@@ -85,6 +88,8 @@ class SearchTools extends Component {
 const mapStateToProps = (state) => { return { ...state } }
 const mapDispatchToProps = (dispatch) => ({ dispatch })
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  // normally dispatch should be called in mapDispatchToProps, but we need to
+  // know the current route, which is unavailable until we merge props
   const search = (terms, recordTypes, dispatch) => {
     dispatch(submitSearch(terms, recordTypes))
   }

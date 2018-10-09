@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { categoriesReady } from '../../../Store/storeReady'
 
 import Category from './Category'
-import Loading from '../../Loading'
+import Loading from '../../Shared/Loading'
 
 const CategoryList = (props) => {
   if(categoriesReady(props)) {

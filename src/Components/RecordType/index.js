@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import Loading from '../Loading'
+import Loading from '../Shared/Loading'
 import { recordTypesReady } from '../../Store/storeReady'
 import { searchTerms } from '../../Functions/search'
 import RecordField from './RecordField'

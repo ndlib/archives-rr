@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { pagesReady } from '../../Store/storeReady'
+import { pagesReady } from '../../../Store/storeReady'
 import Loading from '../Loading'
 
 // This component connects to the 'page' content type on Contentful and will
