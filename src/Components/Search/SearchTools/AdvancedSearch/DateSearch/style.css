@@ -1,0 +1,23 @@
+.react-datepicker__year-dropdown--scrollable {
+  height: 300px !important;
+}
+
+.react-datepicker__input-container input {
+  font-size: 1em;
+  line-height: 1.5em;
+  padding: .2em;
+}
+
+.dateField {
+  display: inline-block;
+  padding: 1em;
+}
+
+#dateFieldOptions > div {
+  min-width: 260px;
+}
+
+.dateWarning {
+  color: #aa272f;
+  font-size: smaller;
+}

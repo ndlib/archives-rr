@@ -29,7 +29,10 @@ class Toggle extends Component {
 
 Toggle.propTypes = {
   label: PropTypes.object.isRequired,
-  children: PropTypes.object.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array
+  ]).isRequired,
   labelExpandedContent: PropTypes.object,
   defaultOpen: PropTypes.bool
 }
