@@ -10,7 +10,7 @@ import Toggle from '../../../Shared/Toggle'
 import './style.css'
 
 const Category = (props) => {
-  if(recordTypesReady(props)) {
+  if (recordTypesReady(props)) {
     return (
       <Toggle
         label={
@@ -26,16 +26,17 @@ const Category = (props) => {
           <Link
             className='lastLink'
             to={`/records-by-category/${props.category.sys.id}`
-          }>
+            }>
             <div>View all record types for {props.category.fields.name}.</div>
           </Link>
         </div>
       </Toggle>
     )
   }
-  return <Loading/>
-
+  return <Loading />
 }
 
-const mapStateToProps = (state) => { return { ...state } }
+const mapStateToProps = (state) => {
+  return { ...state }
+}
 export default connect(mapStateToProps)(Category)

@@ -10,10 +10,10 @@ import Navigation from '../Navigation'
 import './style.css'
 
 // actions
-import  { fetchContentType } from '../../../Store/actions/contentActions'
+import { fetchContentType } from '../../../Store/actions/contentActions'
 
-class Page extends Component{
-  componentDidMount() {
+class Page extends Component {
+  componentDidMount () {
     // populate the store
     const { dispatch } = this.props
     dispatch(fetchContentType('page', 'fields.name'))
@@ -21,14 +21,14 @@ class Page extends Component{
     dispatch(fetchContentType('recordType', 'fields.recordType'))
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     // reset page to top after navigation
-    if(this.props.location !== prevProps.loction) {
+    if (this.props.location !== prevProps.loction) {
       window.scrollTo(0, 0)
     }
   }
 
-  render() {
+  render () {
     return (
       <div className='page'>
         <Header />
@@ -40,9 +40,10 @@ class Page extends Component{
       </div>
     )
   }
-
 }
 
-const mapStateToProps = (state) => { return { ...state } }
+const mapStateToProps = (state) => {
+  return { ...state }
+}
 
 export default withRouter(connect(mapStateToProps)(Page))

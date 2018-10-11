@@ -21,7 +21,7 @@ export const displayFields = [
 
   // date fields
   'dateApprovedByGeneralCounsel',
-  'dateRevised'
+  'dateRevised',
 ]
 
 export const searchableFields = [
@@ -36,7 +36,7 @@ export const searchableFields = [
   // restricted fields
   'systemOfRecord',
   'archivesNotes',
-  'generalCounselNotes'
+  'generalCounselNotes',
 ]
 
 // these fields are symbols with specific predefined validations in Contentful
@@ -47,10 +47,10 @@ export const predefinedFields = [
   'dispositionMethod',
   'referenceCopy',
   'referenceCopyDisposition',
-  'referenceCopyDispositionMethod'
+  'referenceCopyDispositionMethod',
 ]
 
 export const dateFields = [
   'dateApprovedByGeneralCounsel',
-  'dateRevised'
+  'dateRevised',
 ]

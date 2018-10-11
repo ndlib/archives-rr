@@ -7,8 +7,8 @@ import './style.css'
 const AdvancedSearch = (props) => {
     return (
       <Toggle
-        label={<div className='x'>Advanced Search</div>}
-        labelExpandedContent={<div>Hide Advanced Search</div>}
+        label={<div className='advancedLabel'>Show Advanced Search</div>}
+        labelExpandedContent={<div className='advancedLabel'>Hide Advanced Search</div>}
         defaultOpen // REMOVE
       >
         <DateSearch/>

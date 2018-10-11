@@ -4,22 +4,24 @@ import PropTypes from 'prop-types'
 import './style.css'
 
 class Toggle extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = { open: this.props.defaultOpen }
   }
 
-  render() {
+  render () {
     return (
       <React.Fragment>
         <span
-          className={ this.state.open ? 'less' : 'more' }
-          onClick={() => { this.setState({open: !this.state.open}) }}
-        >{ this.state.open && this.props.labelExpandedContent ?
-          this.props.labelExpandedContent :
-          this.props.label
+          className={this.state.open ? 'less' : 'more'}
+          onClick={() => {
+            this.setState({ open: !this.state.open })
+          }}
+        >{ this.state.open && this.props.labelExpandedContent
+            ? this.props.labelExpandedContent
+            : this.props.label
           }</span>
-        <div className={ this.state.open ? 'open' : 'closed' }>
+        <div className={this.state.open ? 'open' : 'closed'}>
           { this.props.children }
         </div>
       </React.Fragment>
@@ -31,13 +33,13 @@ Toggle.propTypes = {
   label: PropTypes.object.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.object,
-    PropTypes.array
+    PropTypes.array,
   ]).isRequired,
   labelExpandedContent: PropTypes.object,
-  defaultOpen: PropTypes.bool
+  defaultOpen: PropTypes.bool,
 }
 
 Toggle.defaultProps = {
-  defaultOpen: false
+  defaultOpen: false,
 }
 export default Toggle

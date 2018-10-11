@@ -9,28 +9,30 @@ import { allReady } from '../../../Store/storeReady'
 import { hasSearch } from '../../../Functions/searchHelpers'
 import Loading from '../../Shared/Loading'
 
-const ListOrResults = ({recordTypes, ...props}) => {
-  if(allReady(props)) {
+const ListOrResults = ({ recordTypes, ...props }) => {
+  if (allReady(props)) {
     // if has search set count and branch display
     const count = hasSearch(props) ? props.searchReducer.results.length : recordTypes.length
     return (
       <React.Fragment>
         <DisplayCount count={count} />
         {
-          hasSearch(props) ?
-          <SearchResultsList
-            recordTypes={recordTypes}
-            results={props.searchReducer.results}
-          /> :
-          <RecordTypeList
-            recordTypes={recordTypes}
-          />
+          hasSearch(props)
+            ? <SearchResultsList
+              recordTypes={recordTypes}
+              results={props.searchReducer.results}
+            />
+            : <RecordTypeList
+              recordTypes={recordTypes}
+            />
         }
       </React.Fragment>
     )
   }
-  return <Loading/>
+  return <Loading />
 }
 
-const mapStateToProps = (state) => { return { ...state } }
+const mapStateToProps = (state) => {
+  return { ...state }
+}
 export default withRouter(connect(mapStateToProps)(ListOrResults))

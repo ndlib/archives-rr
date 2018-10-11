@@ -8,7 +8,7 @@ export const RECEIVE_PAGES = 'RECEIVE_PAGES'
 const receiveContent = (actionType, json) => {
   return {
     type: actionType,
-    payload: json
+    payload: json,
   }
 }
 
@@ -32,14 +32,14 @@ export const fetchContentType = (type, orderField) => {
         // headers: {
         //   'Authorization': token,
         // },
-    }).then(response => {
+      }).then(response => {
       if (response.status >= 200 && response.status < 400) {
         return response.json()
       } else {
         throw new Error(response.statusText)
       }
     }).then(json => {
-      switch(type) {
+      switch (type) {
         case 'category':
           dispatch(receiveContent(RECEIVE_CATEGORYS, json))
           break
@@ -53,8 +53,8 @@ export const fetchContentType = (type, orderField) => {
           console.log('no type for content fetch')
       }
     })
-    .catch(e =>{
-      console.log(e)
-    })
+      .catch(e => {
+        console.log(e)
+      })
   }
 }

@@ -7,27 +7,29 @@ import Category from './Category'
 import Loading from '../../Shared/Loading'
 
 const CategoryList = (props) => {
-  if(categoriesReady(props)) {
+  if (categoriesReady(props)) {
     // filter out categories with different categoryal leader
     let categories = props.contentReducer.categories
 
     return (
       <React.Fragment>
-          { categories.map(
-            category => {
-              return (
-                <Category
-                  key={category.sys.id}
-                  category={category}
-                />
-              )
-            })
-          }
+        { categories.map(
+          category => {
+            return (
+              <Category
+                key={category.sys.id}
+                category={category}
+              />
+            )
+          })
+        }
       </React.Fragment>
     )
   }
-  return <Loading/>
+  return <Loading />
 }
 
-const mapStateToProps = (state) => { return { ...state } }
+const mapStateToProps = (state) => {
+  return { ...state }
+}
 export default connect(mapStateToProps)(CategoryList)

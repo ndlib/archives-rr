@@ -12,7 +12,7 @@ export const isFiltered = (props) => {
 export const findCategory = (props) => {
   let category
   // check if there is an category id in the url
-  if(isFiltered(props)) {
+  if (isFiltered(props)) {
     // find category with matching id from url
     category = props.contentReducer.categories.filter(
       c => {
@@ -26,7 +26,7 @@ export const findCategory = (props) => {
 // filter recordTypes by category or return them all if no category
 export const filterRecordsByCategory = (props, category) => {
   let recordTypes = props.contentReducer.recordTypes
-  if(category) {
+  if (category) {
     recordTypes = recordTypes.filter(
       recordType => {
         return recordType.fields.category.sys.id === category.sys.id

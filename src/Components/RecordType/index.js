@@ -5,10 +5,10 @@ import Loading from '../Shared/Loading'
 import { recordTypesReady } from '../../Store/storeReady'
 import { searchTerms } from '../../Functions/searchHelpers'
 import RecordField from './RecordField'
-import { displayFields }  from '../../Constants/fields'
+import { displayFields } from '../../Constants/fields'
 
 const RecordType = (props) => {
-  if(recordTypesReady(props)) {
+  if (recordTypesReady(props)) {
     // get the first (and only) matching recordType from the store
     const recordType = props.contentReducer.recordTypes.filter(s => {
       return s.sys.id === props.match.params.id
@@ -16,9 +16,8 @@ const RecordType = (props) => {
 
     const terms = searchTerms(props)
 
-
     // render if it exists
-    if(recordType) {
+    if (recordType) {
       return (
         <React.Fragment>
           <h1>{recordType.fields.category.fields.name}</h1>
@@ -29,8 +28,10 @@ const RecordType = (props) => {
                   key={field}
                   label={
                     field
-                    .replace(/([A-Z])/g, ' $1')
-                    .replace(/^./, (str) => { return str.toUpperCase() })
+                      .replace(/([A-Z])/g, ' $1')
+                      .replace(/^./, (str) => {
+                        return str.toUpperCase()
+                      })
                   }
                   field={field}
                   recordType={recordType}
@@ -50,10 +51,11 @@ const RecordType = (props) => {
       </React.Fragment>
     )
   }
-  return <Loading/>
-
+  return <Loading />
 }
 
-const mapStateToProps = (state) => { return { ...state } }
+const mapStateToProps = (state) => {
+  return { ...state }
+}
 
 export default withRouter(connect(mapStateToProps)(RecordType))

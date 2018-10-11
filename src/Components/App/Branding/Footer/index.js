@@ -5,8 +5,8 @@ import './style.css'
 const Footer = () => {
   return (
     <div className='footer no-print'>
-      <FooterLinks/>
-      <FooterInfo/>
+      <FooterLinks />
+      <FooterInfo />
     </div>
   )
 }

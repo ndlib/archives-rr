@@ -1,10 +1,12 @@
 import React from 'react'
 import './style.css'
-const SubmitSearch = ({onSubmit, ...props}) => {
+const SubmitSearch = ({ onSubmit, ...props }) => {
   return (
     <button
       className='submitSearch'
-      onClick={(e) =>{ onSubmit() }}
+      onClick={(e) => {
+        onSubmit()
+      }}
     >Search</button>
   )
 }

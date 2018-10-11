@@ -9,7 +9,7 @@ import ListOrResults from './ListOrResults'
 import {
   isFiltered,
   findCategory,
-  filterRecordsByCategory
+  filterRecordsByCategory,
 } from '../../Functions/filterHelpers'
 
 const Search = (props) => {
@@ -22,14 +22,16 @@ const Search = (props) => {
           isFiltered={isFiltered(props)}
           category={category}
         />
-        <SearchTools category={category}/>
-        <ListOrResults recordTypes={recordTypes}/>
+        <SearchTools category={category} />
+        <ListOrResults recordTypes={recordTypes} />
       </React.Fragment>
     )
   }
-  return <Loading/>
+  return <Loading />
 }
 
-const mapStateToProps = (state) => { return { ...state } }
+const mapStateToProps = (state) => {
+  return { ...state }
+}
 
 export default connect(mapStateToProps)(Search)

@@ -4,5 +4,5 @@ import searchReducer from './searchReducer'
 
 export default combineReducers({
   contentReducer,
-  searchReducer
+  searchReducer,
 })

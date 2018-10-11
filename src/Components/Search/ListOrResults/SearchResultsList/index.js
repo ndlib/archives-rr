@@ -2,7 +2,7 @@ import React from 'react'
 
 import SearchResult from './SearchResult'
 
-const SearchResultsList = ({recordTypes, results}) => {
+const SearchResultsList = ({ recordTypes, results }) => {
   return (
     <div className='searchResults'>
       {

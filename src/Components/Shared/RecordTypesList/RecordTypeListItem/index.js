@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-const RecordTypeListItem = ({recordType}) => {
+const RecordTypeListItem = ({ recordType }) => {
   return (
     <div className='recordTypeRow'>
       <Link to={`/recordType/${recordType.sys.id}`}
@@ -13,8 +13,10 @@ const RecordTypeListItem = ({recordType}) => {
 }
 
 RecordTypeListItem.propTypes = {
-  recordType: PropTypes.object.isRequired
+  recordType: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = (state) => { return { ...state } }
+const mapStateToProps = (state) => {
+  return { ...state }
+}
 export default connect(mapStateToProps)(RecordTypeListItem)

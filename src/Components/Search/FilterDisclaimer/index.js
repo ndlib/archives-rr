@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom'
 
 import './style.css'
 
-const FilterDisclaimer = ({isFiltered, category}) => {
-  if(isFiltered && category) {
+const FilterDisclaimer = ({ isFiltered, category }) => {
+  if (isFiltered && category) {
     // let user know results are filtered by category
     return (
       <div className='filteredBy'>Only showing record types for <span className='filter'>{category.fields.name}</span>. <Link to='/search'> (Show all record types)</Link></div>
     )
-  } else if (isFiltered && !category){
+  } else if (isFiltered && !category) {
     // tried to filter, but invalid category - warn user
     return (
       <div className='filteredBy'><span className='filter'>Could not find a matching category, showing all available record types.</span></div>
@@ -23,7 +23,7 @@ const FilterDisclaimer = ({isFiltered, category}) => {
 
 FilterDisclaimer.propTypes = {
   isFiltered: PropTypes.bool.isRequired,
-  category: PropTypes.object
+  category: PropTypes.object,
 }
 
 export default FilterDisclaimer

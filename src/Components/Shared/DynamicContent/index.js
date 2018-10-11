@@ -7,8 +7,8 @@ import Loading from '../Loading'
 
 // This component connects to the 'page' content type on Contentful and will
 // add the title and text entered there onto specific pages based on the slug
-const DynamicContent = ({slug, children, ...props}) => {
-  if(pagesReady(props)) {
+const DynamicContent = ({ slug, children, ...props }) => {
+  if (pagesReady(props)) {
     // find the page with matching slug or return a (mostly) empty page object
     let page = props.contentReducer.pages.filter(
       page => {
@@ -21,20 +21,22 @@ const DynamicContent = ({slug, children, ...props}) => {
         <h1>{page.fields.name}</h1>
         <div className='text-content'>{page.fields.mainText}</div>
         { children }
-        { page.fields.afterText ?
-          <div className='text-content'>{page.fields.afterText}</div> :
-          null
+        { page.fields.afterText
+          ? <div className='text-content'>{page.fields.afterText}</div>
+          : null
         }
       </React.Fragment>
     )
   }
-  return <Loading/>
+  return <Loading />
 }
 
 DynamicContent.propTypes = {
-  slug: PropTypes.string.isRequired
+  slug: PropTypes.string.isRequired,
 }
 
-const mapStateToProps = (state) => { return { ...state } }
+const mapStateToProps = (state) => {
+  return { ...state }
+}
 
 export default connect(mapStateToProps)(DynamicContent)

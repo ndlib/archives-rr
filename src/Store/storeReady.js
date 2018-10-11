@@ -23,7 +23,7 @@ export const searchStoreExists = (props) => {
 }
 
 export const searchStoreReady = (props) => {
-  return searchStoreExists(props) && props.searchReducer.searching === false 
+  return searchStoreExists(props) && props.searchReducer.searching === false
 }
 
 export const allReady = (props) => {

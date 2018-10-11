@@ -6,29 +6,29 @@ import { withRouter } from 'react-router'
 
 import './style.css'
 
-const SearchResult = ({result, recordTypes, ...props}) => {
+const SearchResult = ({ result, recordTypes, ...props }) => {
   let searchWords = []
-  if(props && props.searchReducer && props.searchReducer.terms) {
+  if (props && props.searchReducer && props.searchReducer.terms) {
     searchWords = props.searchReducer.terms
   }
   const recordFromResult = recordTypes.filter(
     record => {
       return record.sys.id === result.id
     }
-  ).shift() || { id: '', fieldsWithTerm: []}
-  return(
+  ).shift() || { id: '', fieldsWithTerm: [] }
+  return (
     <div className='result'>
       <Link to={`/recordType/${result.id}/${props.match.params.search}`}>
-      <Highligter
-        highlightClassName="term-match"
-        searchWords={searchWords}
-        autoEscape={true}
-        textToHighlight={recordFromResult.fields.recordType}
-      />
-    </Link>
+        <Highligter
+          highlightClassName='term-match'
+          searchWords={searchWords}
+          autoEscape
+          textToHighlight={recordFromResult.fields.recordType}
+        />
+      </Link>
       { result.fieldsWithTerm.map(field => {
         // don't repeat the recordType field because that's the "name"
-        if(field === 'recordType') {
+        if (field === 'recordType') {
           return null
         }
         return (
@@ -37,9 +37,9 @@ const SearchResult = ({result, recordTypes, ...props}) => {
             className='resultField'
           >
             <Highligter
-              highlightClassName="term-match"
+              highlightClassName='term-match'
               searchWords={searchWords}
-              autoEscape={true}
+              autoEscape
               textToHighlight={recordFromResult.fields[field]}
             />
           </div>
@@ -49,5 +49,7 @@ const SearchResult = ({result, recordTypes, ...props}) => {
   )
 }
 
-const mapStateToProps = (state) => { return { ...state } }
+const mapStateToProps = (state) => {
+  return { ...state }
+}
 export default withRouter(connect(mapStateToProps)(SearchResult))

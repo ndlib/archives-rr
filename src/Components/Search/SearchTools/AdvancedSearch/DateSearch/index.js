@@ -6,24 +6,24 @@ import 'react-datepicker/dist/react-datepicker.css'
 import './style.css'
 
 class DateSearch extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.fieldOptions = [
-      { value: 'dateApprovedByGeneralCounsel', label: 'Approved'},
-      { value: 'dateRevised', label: 'Revised'},
-      { value: 'dateApprovedByGeneralCounsel&&dateRevised', label: 'Approved AND Revised'},
-      { value: 'dateApprovedByGeneralCounsel||dateRevised', label: 'Approved OR Revised'}
+      { value: 'dateApprovedByGeneralCounsel', label: 'Approved' },
+      { value: 'dateRevised', label: 'Revised' },
+      { value: 'dateApprovedByGeneralCounsel&&dateRevised', label: 'Approved AND Revised' },
+      { value: 'dateApprovedByGeneralCounsel||dateRevised', label: 'Approved OR Revised' },
     ]
     this.state = {
       startDate: null,
       endDate: null,
-      fields: null
+      fields: null,
     }
     this.onChange = this.onChange.bind(this)
   }
 
-  onChange(type, value) {
-    switch(type) {
+  onChange (type, value) {
+    switch (type) {
       case 'start':
         console.log(moment(value).format('YYYY-MM-DD'))
         this.setState({ startDate: value })
@@ -38,21 +38,18 @@ class DateSearch extends Component {
         break
       default:
         console.log(`type: ${type} with value: ${value} cannot be set`)
-
     }
   }
-  render() {
-    const fieldOptions = [
-      { value: 'dateApprovedByGeneralCounsel', label: 'Approved'},
-      { value: 'dateRevised', label: 'Revised'}
-    ]
+  render () {
     return (
       <div className='dateSearch'>
         <span id='startDate' className='dateField'>
           <label>Start Date</label>
           <DatePicker
             selected={this.state.startDate}
-            onChange={(date) => { this.onChange('start', date) }}
+            onChange={(date) => {
+              this.onChange('start', date)
+            }}
             isClearable
             showYearDropdown
             scrollableYearDropdown
@@ -64,7 +61,9 @@ class DateSearch extends Component {
           <label>End Date</label>
           <DatePicker
             selected={this.state.endDate}
-            onChange={(date) => { this.onChange('end', date) }}
+            onChange={(date) => {
+              this.onChange('end', date)
+            }}
             isClearable
             showYearDropdown
             scrollableYearDropdown
@@ -76,20 +75,22 @@ class DateSearch extends Component {
           <label>Date Field Type</label>
           <Select
             defaultValue={this.state.fields}
-            onChange={ (field) => { this.onChange('fields', field) }}
+            onChange={(field) => {
+              this.onChange('fields', field)
+            }}
             options={this.fieldOptions}
             isClearable
           />
         </span>
         {
-          (this.state.startDate || this.state.endDate) && !this.state.fields ?
-          <div className='dateWarning'>*You must select a date field type to perform a date search.</div> :
-          null
+          (this.state.startDate || this.state.endDate) && !this.state.fields
+            ? <div className='dateWarning'>*You must select a date field type to perform a date search.</div>
+            : null
         }
         {
-          (!this.state.startDate && !this.state.endDate) && this.state.fields ?
-          <div className='dateWarning'>*You must specify at least a start or an end date.</div> :
-          null
+          (!this.state.startDate && !this.state.endDate) && this.state.fields
+            ? <div className='dateWarning'>*You must specify at least a start or an end date.</div>
+            : null
         }
       </div>
     )
