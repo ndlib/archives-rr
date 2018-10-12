@@ -54,15 +54,20 @@ class DateSearch extends Component {
   render () {
     if (this.props.searchReducer) {
       let startDate, endDate, fields
-      if (this.props.searchReducer && this.props.searchReducer.advancedSearch && this.props.searchReducer.advancedSearch.dateSearch) {
-        startDate = moment(this.props.searchReducer.advancedSearch.dateSearch.startDate, 'YYYY-MM-DD').isValid()
-          ? moment(this.props.searchReducer.advancedSearch.dateSearch.startDate, 'YYYY-MM-DD')
+      if (this.props.searchReducer &&
+        this.props.searchReducer.advancedSearch &&
+        this.props.searchReducer.advancedSearch.dateSearch
+      ) {
+        const dateSearch = this.props.searchReducer.advancedSearch.dateSearch
+
+        startDate = moment(dateSearch.startDate, 'YYYY-MM-DD').isValid()
+          ? moment(dateSearch.startDate, 'YYYY-MM-DD')
           : null
-        endDate = moment(this.props.searchReducer.advancedSearch.dateSearch.endDate, 'YYYY-MM-DD').isValid()
-          ? moment(this.props.searchReducer.advancedSearch.dateSearch.endDate, 'YYYY-MM-DD')
+        endDate = moment(dateSearch.endDate, 'YYYY-MM-DD').isValid()
+          ? moment(dateSearch.endDate, 'YYYY-MM-DD')
           : null
         fields = dateFieldOptions.filter(option => {
-          return option.value === this.props.searchReducer.advancedSearch.dateSearch.type
+          return option.value === dateSearch.type
         }).shift()
       }
       return (
