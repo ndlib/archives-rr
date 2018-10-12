@@ -1,3 +1,5 @@
+const QUERYSEPARATOR = '&a='
+
 // return true if there's a search query
 export const hasSearch = (props) => {
   // has search params
@@ -11,13 +13,68 @@ export const hasSearch = (props) => {
   return false
 }
 
-export const removeQueryOperator = (string) => {
+export const getRawQueryTerms = (string) => {
   if (string) {
+    if (string.indexOf(QUERYSEPARATOR) > -1) {
+      string = string.split(QUERYSEPARATOR).shift()
+    }
     return decodeURI(string.replace('q=', ''))
   }
   return ''
 }
 
+export const hasAdvancedSearch = (string) => {
+  if (string && string.indexOf(QUERYSEPARATOR) > -1) {
+    return true
+  }
+  return false
+}
+
+export const getAdvancedSearchFromUrl = (string) => {
+  let advancedSearches = {}
+  if (string) {
+    const advancedFields = string.split(QUERYSEPARATOR)
+    if (advancedFields.length > 1) {
+      advancedFields.slice(1).forEach(advancedField => {
+        const values = advancedField.split(',')
+        if (values[0] === 'dateSearch') {
+          if (values.length === 4) {
+            advancedSearches[values[0]] = {
+              type: values[1],
+              startDate: values[2],
+              endDate: values[3],
+            }
+          }
+        } else {
+          if (values.length === 2) {
+            advancedSearches[values[0]] = {
+              query: values[1],
+            }
+          }
+        }
+      })
+    }
+
+    // field,type,start,end
+  }
+  return advancedSearches
+}
+
+export const buildAdvancedSearchQuery = (advancedSearchObject) => {
+  let string = ''
+  Object.keys(advancedSearchObject).forEach(key => {
+    string += `${QUERYSEPARATOR}${key}`
+    if (key === 'dateSearch') {
+      const values = advancedSearchObject[key]
+      Object.keys(values).forEach(fieldKey => {
+        string += `,${values[fieldKey]}`
+      })
+    } else {
+      string += `,${advancedSearchObject[key]}`
+    }
+  })
+  return string
+}
 export const splitTerms = (searchString) => {
   // split terms on space in string, but keep terms inside double quotes as
   // a single term
@@ -40,7 +97,7 @@ export const splitTerms = (searchString) => {
 export const searchTerms = (props) => {
   let terms = []
   if (hasSearch(props)) {
-    const searchString = removeQueryOperator(props.match.params.search)
+    const searchString = getRawQueryTerms(props.match.params.search)
     terms = splitTerms(searchString)
   }
   return terms

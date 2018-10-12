@@ -7,8 +7,10 @@ import SubmitSearch from './SubmitSearch'
 import AdvancedSearch from './AdvancedSearch'
 import {
   hasSearch,
-  removeQueryOperator,
+  getRawQueryTerms,
   splitTerms,
+  getAdvancedSearchFromUrl,
+  buildAdvancedSearchQuery,
 } from '../../../Functions/searchHelpers'
 import { filterRecordsByCategory } from '../../../Functions/filterHelpers'
 import './style.css'
@@ -17,7 +19,7 @@ class SearchTools extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      searchValue: hasSearch(props) ? removeQueryOperator(this.props.match.params.search) : '',
+      searchValue: hasSearch(props) ? getRawQueryTerms(this.props.match.params.search) : '',
     }
     this.searchFieldOnChange = this.searchFieldOnChange.bind(this)
     this.searchSubmit = this.searchSubmit.bind(this)
@@ -28,6 +30,7 @@ class SearchTools extends Component {
     this.props.search(
       splitTerms(this.state.searchValue),
       filterRecordsByCategory(this.props, this.props.category),
+      getAdvancedSearchFromUrl(this.props.match.params.search),
       this.props.dispatch
     )
   }
@@ -42,17 +45,19 @@ class SearchTools extends Component {
     if (this.props.match.params && this.props.match.params.category) {
       base = `records-by-category/${this.props.match.params.category}`
     }
+    const advancedSearchQuery = buildAdvancedSearchQuery(this.props.searchReducer.advancedSearch)
     this.props.search(
       splitTerms(this.state.searchValue),
       filterRecordsByCategory(this.props, this.props.category),
+      getAdvancedSearchFromUrl(advancedSearchQuery),
       this.props.dispatch
     )
-    this.props.history.push(`/${base}/q=${this.state.searchValue}`)
+    this.props.history.push(`/${base}/q=${this.state.searchValue}${advancedSearchQuery}`)
   }
 
   // watch searchbox for changes, does not submit new value
   searchFieldOnChange (event) {
-    this.setState({ searchValue: removeQueryOperator(event.target.value) })
+    this.setState({ searchValue: getRawQueryTerms(event.target.value) })
   }
 
   // lets user submit new search with enter key
@@ -84,7 +89,7 @@ class SearchTools extends Component {
           props={this.props}
           onSubmit={this.searchSubmit}
         />
-        <AdvancedSearch />
+        {this.props.searchReducer && this.props.searchReducer.advancedSearch ? <AdvancedSearch /> : null}
       </div>
     )
   }
@@ -97,8 +102,8 @@ const mapDispatchToProps = (dispatch) => ({ dispatch })
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   // normally dispatch should be called in mapDispatchToProps, but we need to
   // know the current route, which is unavailable until we merge props
-  const search = (terms, recordTypes, dispatch) => {
-    dispatch(submitSearch(terms, recordTypes))
+  const search = (terms, recordTypes, advancedSearch, dispatch) => {
+    dispatch(submitSearch(terms, recordTypes, advancedSearch))
   }
   return { ...stateProps, ...dispatchProps, ...ownProps, search }
 }

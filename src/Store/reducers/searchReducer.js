@@ -2,6 +2,7 @@ import {
   SUBMIT_SEARCH,
   RESULTS_READY,
   CLEAR_SEARCH,
+  SETADANCEDSEARCH,
 } from '../actions/searchActions'
 
 export default(state = {}, action) => {
@@ -9,6 +10,7 @@ export default(state = {}, action) => {
     case SUBMIT_SEARCH:
       return {
         ...state,
+        advancedSearch: action.advancedSearch,
         terms: action.terms,
         searching: true,
         results: [],
@@ -22,9 +24,18 @@ export default(state = {}, action) => {
     case CLEAR_SEARCH:
       return {
         ...state,
+        advancedSearch: {},
         terms: [],
         searching: false,
         results: [],
+      }
+    case SETADANCEDSEARCH:
+      return {
+        ...state,
+        advancedSearch: {
+          ...state.advancedSearch,
+          [action.field]: action.data,
+        },
       }
     default:
       return state

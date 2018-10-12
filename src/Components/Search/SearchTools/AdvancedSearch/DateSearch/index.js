@@ -1,100 +1,109 @@
 import React, { Component } from 'react'
-import DatePicker from 'react-datepicker'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import Select from 'react-select'
 import moment from 'moment'
-import 'react-datepicker/dist/react-datepicker.css'
+
+import DateField from './DateField'
+import Loading from '../../../../Shared/Loading'
+import DateWarning from './DateWarning'
+import { setAdvancedSearch } from '../../../../../Store/actions/searchActions'
+import { dateFieldOptions } from '../../../../../Constants/dateFieldOptions'
 import './style.css'
 
 class DateSearch extends Component {
   constructor (props) {
     super(props)
-    this.fieldOptions = [
-      { value: 'dateApprovedByGeneralCounsel', label: 'Approved' },
-      { value: 'dateRevised', label: 'Revised' },
-      { value: 'dateApprovedByGeneralCounsel&&dateRevised', label: 'Approved AND Revised' },
-      { value: 'dateApprovedByGeneralCounsel||dateRevised', label: 'Approved OR Revised' },
-    ]
-    this.state = {
-      startDate: null,
-      endDate: null,
-      fields: null,
-    }
     this.onChange = this.onChange.bind(this)
   }
 
   onChange (type, value) {
+    const { dispatch } = this.props
+
+    const dateSearch = this.props.searchReducer.advancedSearch.dateSearch
+    const currentDateSearch = {
+      type: dateSearch.type ? dateSearch.type : null,
+      startDate: moment(dateSearch.startDate).isValid() ? moment(dateSearch.startDate).format('YYYY-MM-DD') : null,
+      endDate: moment(dateSearch.endDate).isValid() ? moment(dateSearch.endDate).format('YYYY-MM-DD') : null,
+    }
+
     switch (type) {
       case 'start':
-        console.log(moment(value).format('YYYY-MM-DD'))
-        this.setState({ startDate: value })
+        dispatch(setAdvancedSearch('dateSearch', {
+          ...currentDateSearch,
+          startDate: moment(value).isValid() ? moment(value).format('YYYY-MM-DD') : null,
+        }))
         break
       case 'end':
-        console.log(moment(value).format('YYYY-MM-DD'))
-        this.setState({ endDate: value })
+        dispatch(setAdvancedSearch('dateSearch', {
+          ...currentDateSearch,
+          endDate: moment(value).isValid() ? moment(value).format('YYYY-MM-DD') : null,
+        }))
         break
       case 'fields':
-        console.log(type, value)
-        this.setState({ fields: value })
+        dispatch(setAdvancedSearch('dateSearch', {
+          ...currentDateSearch,
+          type: value ? value.value : null,
+        }))
         break
       default:
         console.log(`type: ${type} with value: ${value} cannot be set`)
     }
   }
+
   render () {
-    return (
-      <div className='dateSearch'>
-        <span id='startDate' className='dateField'>
-          <label>Start Date</label>
-          <DatePicker
-            selected={this.state.startDate}
+    if (this.props.searchReducer) {
+      let startDate, endDate, fields
+      if (this.props.searchReducer && this.props.searchReducer.advancedSearch && this.props.searchReducer.advancedSearch.dateSearch) {
+        startDate = moment(this.props.searchReducer.advancedSearch.dateSearch.startDate, 'YYYY-MM-DD').isValid()
+          ? moment(this.props.searchReducer.advancedSearch.dateSearch.startDate, 'YYYY-MM-DD')
+          : null
+        endDate = moment(this.props.searchReducer.advancedSearch.dateSearch.endDate, 'YYYY-MM-DD').isValid()
+          ? moment(this.props.searchReducer.advancedSearch.dateSearch.endDate, 'YYYY-MM-DD')
+          : null
+        fields = dateFieldOptions.filter(option => {
+          return option.value === this.props.searchReducer.advancedSearch.dateSearch.type
+        }).shift()
+      }
+      return (
+        <div className='dateSearch'>
+          <DateField
+            label='Start Date'
+            selectedDate={startDate}
             onChange={(date) => {
               this.onChange('start', date)
             }}
-            isClearable
-            showYearDropdown
-            scrollableYearDropdown
-            yearDropdownItemNumber={100}
-            maxDate={moment().add('years', 1)}
           />
-        </span>
-        <span id='endDate' className='dateField'>
-          <label>End Date</label>
-          <DatePicker
-            selected={this.state.endDate}
+          <DateField
+            label='End Date'
+            selectedDate={endDate}
             onChange={(date) => {
               this.onChange('end', date)
             }}
-            isClearable
-            showYearDropdown
-            scrollableYearDropdown
-            yearDropdownItemNumber={100}
-            maxDate={moment().add('years', 1)}
           />
-        </span>
-        <span id='dateFieldOptions' className='dateField'>
-          <label>Date Field Type</label>
-          <Select
-            defaultValue={this.state.fields}
-            onChange={(field) => {
-              this.onChange('fields', field)
-            }}
-            options={this.fieldOptions}
-            isClearable
+          <span id='dateFieldOptions' className='dateField'>
+            <label>Date Field Type</label>
+            <Select
+              defaultValue={fields}
+              onChange={(field) => {
+                this.onChange('fields', field)
+              }}
+              options={dateFieldOptions}
+              isClearable
+            />
+          </span>
+          <DateWarning
+            startDate={startDate}
+            endDate={endDate}
+            fields={fields}
           />
-        </span>
-        {
-          (this.state.startDate || this.state.endDate) && !this.state.fields
-            ? <div className='dateWarning'>*You must select a date field type to perform a date search.</div>
-            : null
-        }
-        {
-          (!this.state.startDate && !this.state.endDate) && this.state.fields
-            ? <div className='dateWarning'>*You must specify at least a start or an end date.</div>
-            : null
-        }
-      </div>
-    )
+        </div>
+      )
+    } return <Loading />
   }
 }
+const mapStateToProps = (state) => {
+  return { ...state }
+}
 
-export default DateSearch
+export default withRouter(connect(mapStateToProps)(DateSearch))
