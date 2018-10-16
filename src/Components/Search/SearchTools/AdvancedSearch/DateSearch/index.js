@@ -22,9 +22,9 @@ class DateSearch extends Component {
 
     const dateSearch = this.props.searchReducer.advancedSearch.dateSearch
     const currentDateSearch = {
-      type: dateSearch.type ? dateSearch.type : null,
-      startDate: moment(dateSearch.startDate).isValid() ? moment(dateSearch.startDate).format('YYYY-MM-DD') : null,
-      endDate: moment(dateSearch.endDate).isValid() ? moment(dateSearch.endDate).format('YYYY-MM-DD') : null,
+      type: dateSearch && dateSearch.type ? dateSearch.type : null,
+      startDate: dateSearch && moment(dateSearch.startDate, 'YYYY-MM-DD').isValid() ? moment(dateSearch.startDate).format('YYYY-MM-DD') : null,
+      endDate: dateSearch && moment(dateSearch.endDate, 'YYYY-MM-DD').isValid() ? moment(dateSearch.endDate).format('YYYY-MM-DD') : null,
     }
 
     switch (type) {
@@ -89,7 +89,7 @@ class DateSearch extends Component {
           <span id='dateFieldOptions' className='dateField'>
             <label>Date Field Type</label>
             <Select
-              defaultValue={fields}
+              value={fields}
               onChange={(field) => {
                 this.onChange('fields', field)
               }}

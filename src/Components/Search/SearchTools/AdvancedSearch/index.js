@@ -17,8 +17,5 @@ const AdvancedSearch = (props) => {
     </Toggle>
   )
 }
-const mapStateToProps = (state) => {
-  return { ...state }
-}
 
 export default withRouter(AdvancedSearch)

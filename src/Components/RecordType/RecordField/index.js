@@ -11,7 +11,10 @@ const RecordField = ({
   let text = recordType.fields[field]
 
   // if field name starts with date and the actual value is not empty
-  if (field.indexOf('date') === 0 && recordType.fields[field]) {
+  if (field.indexOf('date') === 0 &&
+   recordType.fields[field] &&
+   moment(recordType.fields[field]).isValid()
+  ) {
     text = moment(recordType.fields[field]).format('MMMM D, YYYY')
   }
 
@@ -22,7 +25,7 @@ const RecordField = ({
         highlightClassName='term-match'
         searchWords={terms}
         autoEscape
-        textToHighlight={text}
+        textToHighlight={text || ''}
       />
     </div>
   )
