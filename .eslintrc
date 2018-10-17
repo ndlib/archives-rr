@@ -26,11 +26,11 @@
     "jsx-a11y/href-no-hash" : "off",
     "jsx-quotes"            : [2, "prefer-single"],
     "key-spacing"           : 0,
-    "max-len"               : [2, 120, 2],
-    "no-unused-vars"        : [2, { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],
+    "max-len"               : [0, 120, 2],
+    "no-unused-vars"        : [1, { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],
     "no-var"              : 1,
     "object-curly-spacing"  : [2, "always"],
-    "react/prop-types"      : 1,
+    "react/prop-types"      : 0,
     "semi"                  : [2, "never"],
     "space-in-parens"       : ["error", "never"]
   }
