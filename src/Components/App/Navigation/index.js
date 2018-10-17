@@ -17,7 +17,7 @@ const Navigation = () => {
           to='/search'
           activeClassName='active'
         >Search</NavLink>
-        <span className='right'><a href='/'>Login</a></span>
+        <span className='right'><a href='/'>Log Out</a></span>
       </div>
     </nav>
   )
