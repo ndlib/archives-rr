@@ -35,6 +35,18 @@ class SearchTools extends Component {
     )
   }
 
+  componentWillReceiveProps (nextProps) {
+    // if the url changes we need to update the search store
+    if (nextProps.match.params.search !== this.props.match.params.search) {
+      nextProps.search(
+        splitTerms(this.state.searchValue),
+        filterRecordsByCategory(nextProps, nextProps.category),
+        getAdvancedSearchFromUrl(nextProps.match.params.search),
+        nextProps.dispatch
+      )
+    }
+  }
+
   componentWillUnmount () {
     this.props.dispatch(clearSearch())
   }

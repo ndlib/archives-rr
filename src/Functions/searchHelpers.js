@@ -48,15 +48,10 @@ export const getAdvancedSearchFromUrl = (string) => {
         } else {
           if (values.length === 2) {
             advancedSearches[values[0]] = values[1]
-            // advancedSearches[values[0]] = {
-            //   query: values[1],
-            // }
           }
         }
       })
     }
-
-    // field,type,start,end
   }
   return advancedSearches
 }
@@ -64,17 +59,19 @@ export const getAdvancedSearchFromUrl = (string) => {
 export const buildAdvancedSearchQuery = (advancedSearchObject) => {
   let string = ''
   Object.keys(advancedSearchObject).forEach(key => {
-    string += `${QUERYSEPARATOR}${key}`
     if (key === 'dateSearch') {
-      const values = advancedSearchObject[key]
-      Object.keys(values).forEach(fieldKey => {
-        string += `${VALUESEPARATOR}${values[fieldKey]}`
-      })
+      if ((advancedSearchObject[key].startDate || advancedSearchObject[key].endDate) && advancedSearchObject[key].type) {
+        string += `${QUERYSEPARATOR}${key}`
+        const values = advancedSearchObject[key]
+        Object.keys(values).forEach(fieldKey => {
+          string += `${VALUESEPARATOR}${values[fieldKey]}`
+        })
+      }
     } else {
+      string += `${QUERYSEPARATOR}${key}`
       string += `${VALUESEPARATOR}${advancedSearchObject[key]}`
     }
   })
-  console.log(string)
   return string
 }
 export const splitTerms = (searchString) => {

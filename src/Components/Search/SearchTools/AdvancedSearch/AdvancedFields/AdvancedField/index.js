@@ -29,14 +29,12 @@ const AdvancedField = ({ field, options, ...props }) => {
   }
 
   const { dispatch } = props
-  console.log(defaultValue)
   return (
     <div className={`advancedField ${field}`}>
       <label>{activeField.label}</label>
       <Select
         value={defaultValue}
         onChange={(option) => {
-          console.log('option', option)
           onChange(field, option, dispatch)
         }}
         options={options}
