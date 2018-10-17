@@ -1,21 +1,42 @@
-import basicSearch from './search/basic'
-import dateSearch from './search/date'
+import basicSearchResults from './search/basic'
+import dateSearchResults from './search/date'
+import advancedSearchResults from './search/advanced'
 
 export const SUBMIT_SEARCH = 'SUBMIT_SEARCH'
 export const RESULTS_READY = 'RESULTS_READY'
 export const CLEAR_SEARCH = 'CLEAR_SEARCH'
 export const SETADANCEDSEARCH = 'SETADANCEDSEARCH'
+export const REMOVEADANCEDSEARCH = 'REMOVEADANCEDSEARCH'
 
 export const submitSearch = (terms, recordTypes, advancedSearch) => {
   return dispatch => {
     // dispatch message to store that we are starting the search
     dispatch(startSearch(terms, advancedSearch))
 
-    let results = basicSearch(terms, recordTypes)
-    if (advancedSearch && advancedSearch.dateSearch) {
-      results = dateSearch(terms, recordTypes, advancedSearch.dateSearch, results)
+    let results = basicSearchResults(terms, recordTypes)
+    if (advancedSearch) {
+      // if we don't have any terms basic search gave us no results.
+      // start with all records as potential results and filter
+      if (terms.length < 1) {
+        results = recordTypes.map(record => {
+          return {
+            id: record.sys.id,
+            fieldsWithTerm: [],
+            fieldCount: 0,
+          }
+        })
+      }
+      // date search is special because we're looking at 3 fields & values
+      if (advancedSearch.dateSearch) {
+        results = dateSearchResults(results, recordTypes, advancedSearch.dateSearch)
+      }
+      results = advancedSearchResults(results, recordTypes, advancedSearch)
     }
 
+    // order results by most hits
+    results.sort((r1, r2) => {
+      return r2.hitCount - r1.hitCount
+    })
     // dispatch message that we found results and are done searching
     dispatch(returnResults(results))
   }
@@ -47,5 +68,12 @@ export const setAdvancedSearch = (field, data) => {
     type: SETADANCEDSEARCH,
     field: field,
     data: data,
+  }
+}
+
+export const removeAdvancedSearch = (field) => {
+  return {
+    type:REMOVEADANCEDSEARCH,
+    field: field,
   }
 }

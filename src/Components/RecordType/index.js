@@ -10,9 +10,9 @@ import { displayFields } from '../../Constants/fields'
 const RecordType = (props) => {
   if (recordTypesReady(props)) {
     // get the first (and only) matching recordType from the store
-    const recordType = props.contentReducer.recordTypes.filter(s => {
+    const recordType = props.contentReducer.recordTypes.find(s => {
       return s.sys.id === props.match.params.id
-    }).shift()
+    })
 
     const terms = searchTerms(props)
 

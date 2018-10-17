@@ -1,5 +1,5 @@
 const QUERYSEPARATOR = '&a='
-
+const VALUESEPARATOR = '&v='
 // return true if there's a search query
 export const hasSearch = (props) => {
   // has search params
@@ -36,7 +36,7 @@ export const getAdvancedSearchFromUrl = (string) => {
     const advancedFields = string.split(QUERYSEPARATOR)
     if (advancedFields.length > 1) {
       advancedFields.slice(1).forEach(advancedField => {
-        const values = advancedField.split(',')
+        const values = advancedField.split(VALUESEPARATOR)
         if (values[0] === 'dateSearch') {
           if (values.length === 4) {
             advancedSearches[values[0]] = {
@@ -47,9 +47,10 @@ export const getAdvancedSearchFromUrl = (string) => {
           }
         } else {
           if (values.length === 2) {
-            advancedSearches[values[0]] = {
-              query: values[1],
-            }
+            advancedSearches[values[0]] = values[1]
+            // advancedSearches[values[0]] = {
+            //   query: values[1],
+            // }
           }
         }
       })
@@ -67,12 +68,13 @@ export const buildAdvancedSearchQuery = (advancedSearchObject) => {
     if (key === 'dateSearch') {
       const values = advancedSearchObject[key]
       Object.keys(values).forEach(fieldKey => {
-        string += `,${values[fieldKey]}`
+        string += `${VALUESEPARATOR}${values[fieldKey]}`
       })
     } else {
-      string += `,${advancedSearchObject[key]}`
+      string += `${VALUESEPARATOR}${advancedSearchObject[key]}`
     }
   })
+  console.log(string)
   return string
 }
 export const splitTerms = (searchString) => {

@@ -11,11 +11,11 @@ const SearchResult = ({ result, recordTypes, ...props }) => {
   if (props && props.searchReducer && props.searchReducer.terms) {
     searchWords = props.searchReducer.terms
   }
-  const recordFromResult = recordTypes.filter(
+  const recordFromResult = recordTypes.find(
     record => {
       return record.sys.id === result.id
     }
-  ).shift() || { id: '', fieldsWithTerm: [] }
+  ) || { id: '', fieldsWithTerm: [], hitCount: 0 }
   return (
     <div className='result'>
       <Link to={`/recordType/${result.id}/${props.match.params.search}`}>

@@ -14,11 +14,11 @@ export const findCategory = (props) => {
   // check if there is an category id in the url
   if (isFiltered(props)) {
     // find category with matching id from url
-    category = props.contentReducer.categories.filter(
+    category = props.contentReducer.categories.find(
       c => {
         return c.sys.id === props.match.params.category
       }
-    ).shift()
+    )
   }
   return category
 }

@@ -10,11 +10,11 @@ import Loading from '../Loading'
 const DynamicContent = ({ slug, children, ...props }) => {
   if (pagesReady(props)) {
     // find the page with matching slug or return a (mostly) empty page object
-    let page = props.contentReducer.pages.filter(
+    let page = props.contentReducer.pages.find(
       page => {
         return page.fields.slug === slug
       }
-    ).shift() || { fields: {} }
+    ) || { fields: {} }
 
     return (
       <React.Fragment>

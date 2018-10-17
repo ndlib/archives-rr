@@ -3,6 +3,7 @@ import { withRouter } from 'react-router'
 
 import Toggle from '../../../Shared/Toggle'
 import DateSearch from './DateSearch'
+import AdvancedFields from './AdvancedFields'
 import { hasAdvancedSearch } from '../../../../Functions/searchHelpers'
 import './style.css'
 
@@ -14,6 +15,7 @@ const AdvancedSearch = (props) => {
       defaultOpen={hasAdvancedSearch(props.match.params.search)}
     >
       <DateSearch />
+      <AdvancedFields />
     </Toggle>
   )
 }

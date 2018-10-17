@@ -3,6 +3,7 @@ import {
   RESULTS_READY,
   CLEAR_SEARCH,
   SETADANCEDSEARCH,
+  REMOVEADANCEDSEARCH,
 } from '../actions/searchActions'
 
 export default(state = {}, action) => {
@@ -36,6 +37,13 @@ export default(state = {}, action) => {
           ...state.advancedSearch,
           [action.field]: action.data,
         },
+      }
+    case REMOVEADANCEDSEARCH:
+      let { advancedSearch } = state
+      delete advancedSearch[action.field]
+      return {
+        ...state,
+        advancedSearch: advancedSearch,
       }
     default:
       return state

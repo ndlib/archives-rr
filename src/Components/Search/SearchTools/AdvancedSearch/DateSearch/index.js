@@ -66,9 +66,9 @@ class DateSearch extends Component {
         endDate = moment(dateSearch.endDate, 'YYYY-MM-DD').isValid()
           ? moment(dateSearch.endDate, 'YYYY-MM-DD')
           : null
-        fields = dateFieldOptions.filter(option => {
+        fields = dateFieldOptions.find(option => {
           return option.value === dateSearch.type
-        }).shift()
+        })
       }
       return (
         <div className='dateSearch'>

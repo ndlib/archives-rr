@@ -1,6 +1,6 @@
 import { searchableFields } from '../../../Constants/fields'
 
-const basicSearch = (terms, recordTypes) => {
+const basicSearchResults = (terms, recordTypes) => {
   let results = []
   // loop through all the searchable field type using each search term
   recordTypes.forEach(recordType => {
@@ -34,11 +34,7 @@ const basicSearch = (terms, recordTypes) => {
       })
     })
   })
-  // order results by most hits
-  results.sort((r1, r2) => {
-    return r2.hitCount - r1.hitCount
-  })
   return results
 }
 
-export default basicSearch
+export default basicSearchResults

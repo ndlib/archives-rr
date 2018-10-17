@@ -29,6 +29,7 @@ export const searchableFields = [
   'recordTypeId',
   'recordTypeDescription',
   'officialCopy',
+  'retention',
   'storageRequirements',
   'legalReference',
   'notes',

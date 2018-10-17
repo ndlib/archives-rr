@@ -1,21 +1,11 @@
 import moment from 'moment'
-const dateSearch = (terms, recordTypes, dateSearch, results) => {
-  if (terms.length < 1) {
-    // we haven't done a basic search and don't have any results to work with
-    results = recordTypes.map(record => {
-      return {
-        id: record.sys.id,
-        fieldsWithTerm: [],
-        fieldCount: 0,
-      }
-    })
-  }
+const dateSearchResults = (results, recordTypes, dateSearch) => {
   // filter results
   results = results.filter(result => {
     // find the original record
-    let record = recordTypes.filter(r => {
+    let record = recordTypes.find(r => {
       return r.sys.id === result.id
-    }).shift()
+    })
     // try and update the record based on the dateSearch
     result = filterOnDateSearch(result, record, dateSearch)
     // the record has been updated if it includes one or both datefields now
@@ -99,4 +89,4 @@ const updateResult = (result, field) => {
   result.fieldsWithTerm.push(field)
   return result
 }
-export default dateSearch
+export default dateSearchResults

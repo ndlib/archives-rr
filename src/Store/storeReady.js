@@ -22,10 +22,14 @@ export const searchStoreExists = (props) => {
   return props && props.searchReducer
 }
 
-export const searchStoreReady = (props) => {
+export const basicSearchStoreReady = (props) => {
   return searchStoreExists(props) && props.searchReducer.searching === false
 }
 
+export const advancedSearchStoreReady = (props) => {
+  return basicSearchStoreReady && props.searchReducer.advancedSearch
+}
+
 export const allReady = (props) => {
-  return searchStoreReady(props) && contentStoreReady(props)
+  return basicSearchStoreReady(props) && contentStoreReady(props)
 }
