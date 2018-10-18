@@ -20,7 +20,7 @@
 }
 
 .nddotedu{
-  background-image: url(https://www.nd.edu/assets/images/brandbar/dept-nd-white@2x.png) !important;
+  background-image: url('./dept-nd-white@2x.png') !important;
   background-repeat: no-repeat;
   background-size: cover;
   height: 50px !important;
@@ -29,7 +29,7 @@
 }
 
 .ndoffice {
-  background-image: url(https://www.nd.edu/brandbar/images/dept-prov@2x.png);
+  background-image: url('./dept-prov-white@2x.png');
   background-position: 0px 0px;
   background-repeat: no-repeat;
   background-size: cover;
