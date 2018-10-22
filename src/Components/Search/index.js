@@ -1,28 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
 import { contentStoreReady } from 'Store/storeReady'
 import Loading from 'Components/Shared/Loading'
 import SearchTools from './SearchTools'
-import FilterDisclaimer from './FilterDisclaimer'
 import ListOrResults from './ListOrResults'
-import {
-  isFiltered,
-  findCategory,
-  filterRecordsByCategory,
-} from 'Functions/filterHelpers'
 
 const Search = (props) => {
   if (contentStoreReady(props)) {
-    const category = findCategory(props)
-    const recordTypes = filterRecordsByCategory(props, category) || []
+    const recordTypes = props.contentReducer.recordTypes || []
     return (
       <React.Fragment>
-        <FilterDisclaimer
-          isFiltered={isFiltered(props)}
-          category={category}
-        />
-        <SearchTools category={category} />
+        <SearchTools />
         <ListOrResults recordTypes={recordTypes} />
       </React.Fragment>
     )

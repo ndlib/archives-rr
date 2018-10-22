@@ -30,7 +30,6 @@ const App = () => {
             <Route exact path='/' component={Home} />
             <Route exact path='/categories' component={Categories} />
             <Route exact path='/search/:search?' component={Search} />
-            <Route exact path='/records-by-category/:category/:search?' component={Search} />
             <Route exact path='/recordType/:id/:search?' component={RecordType} />
           </Switch>
         </Page>

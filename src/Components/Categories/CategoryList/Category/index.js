@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import RecordTypesList from 'Components/Shared/RecordTypesList'
-import { filterRecordsByCategory } from 'Functions/filterHelpers'
 import { recordTypesReady } from 'Store/storeReady'
 import Loading from 'Components/Shared/Loading'
 import Toggle from 'Components/Shared/Toggle'
@@ -25,7 +24,7 @@ const Category = (props) => {
           />
           <Link
             className='lastLink'
-            to={`/records-by-category/${props.category.sys.id}`
+            to={`/search/q=&a=category&v=${props.category.sys.id}`
             }>
             <div>View all record types for {props.category.fields.name}.</div>
           </Link>
@@ -34,6 +33,18 @@ const Category = (props) => {
     )
   }
   return <Loading />
+}
+
+const filterRecordsByCategory = (props, category) => {
+  let recordTypes = props.contentReducer.recordTypes
+  if (category) {
+    recordTypes = recordTypes.filter(
+      recordType => {
+        return recordType.fields.category.sys.id === category.sys.id
+      }
+    )
+  }
+  return recordTypes
 }
 
 const mapStateToProps = (state) => {

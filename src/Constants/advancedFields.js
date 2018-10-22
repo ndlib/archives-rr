@@ -1,10 +1,12 @@
 export const advancedFieldOptions = [
+  { value: 'category', label: 'Functional Category' },
   { value: 'triggerEvent', label: 'Trigger Event' },
   { value: 'disposition', label: 'Disposition' },
   { value: 'dispositionMethod', label: 'Disposition Method' },
   { value: 'referenceCopy', label: 'Reference Copy' },
   { value: 'referenceCopyDisposition', label: 'Reference Copy Disposition' },
   { value: 'referenceCopyDispositionMethod', label: 'Reference Copy Disposition Method' },
+  { value: 'dateSearch', label: 'Approved or Revised Date' },
 ]
 
 const returnOptions = (type) => {
