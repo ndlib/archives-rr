@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
 import DisplayCount from './DisplayCount'
-import RecordTypeList from '../../Shared/RecordTypesList'
+import RecordTypeList from 'Components/Shared/RecordTypesList'
 import SearchResultsList from './SearchResultsList'
-import { allReady } from '../../../Store/storeReady'
-import { hasSearch } from '../../../Functions/searchHelpers'
-import Loading from '../../Shared/Loading'
+import { allReady } from 'Store/storeReady'
+import { hasSearch } from 'Functions/searchHelpers'
+import Loading from 'Components/Shared/Loading'
 
 const ListOrResults = ({ recordTypes, ...props }) => {
   if (allReady(props)) {

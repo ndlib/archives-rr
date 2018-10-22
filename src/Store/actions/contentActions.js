@@ -1,4 +1,4 @@
-import { contentfulBaseUrl } from '../../Constants/contentfulBaseUrl'
+import { contentfulBaseUrl } from 'Constants/contentfulBaseUrl'
 
 // action types
 export const RECEIVE_CATEGORYS = 'RECEIVE_CATEGORYS'

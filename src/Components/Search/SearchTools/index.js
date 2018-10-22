@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
-import { submitSearch, clearSearch } from '../../../Store/actions/searchActions'
+import { submitSearch, clearSearch } from 'Store/actions/searchActions'
 import SubmitSearch from './SubmitSearch'
 import AdvancedSearch from './AdvancedSearch'
 import {
@@ -11,8 +11,8 @@ import {
   splitTerms,
   getAdvancedSearchFromUrl,
   buildAdvancedSearchQuery,
-} from '../../../Functions/searchHelpers'
-import { filterRecordsByCategory } from '../../../Functions/filterHelpers'
+} from 'Functions/searchHelpers'
+import { filterRecordsByCategory } from 'Functions/filterHelpers'
 import './style.css'
 
 class SearchTools extends Component {

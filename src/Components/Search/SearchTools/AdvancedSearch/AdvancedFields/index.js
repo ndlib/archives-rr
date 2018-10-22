@@ -8,10 +8,11 @@ import {
   referenceCopyOptions,
   referenceCopyDispositionOptions,
   referenceCopyDispositionMethodOptions,
-} from '../../../../../Constants/advancedFields'
+} from 'Constants/advancedFields'
 import Select from 'react-select'
 
 import AdvancedField from './AdvancedField'
+import CategorySearch from './CategorySearch'
 
 class AdvancedFields extends Component {
   constructor (props) {
@@ -66,6 +67,7 @@ class AdvancedFields extends Component {
             placeholder='Select a field to search...'
           />
         </span>
+        {/* <CategorySearch /> */}
         {
           this.state.activeFields.find(f => {
             return f.value === 'triggerEvent'

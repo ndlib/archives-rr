@@ -5,10 +5,10 @@ import Select from 'react-select'
 import moment from 'moment'
 
 import DateField from './DateField'
-import Loading from '../../../../Shared/Loading'
+import Loading from 'Components/Shared/Loading'
 import DateWarning from './DateWarning'
-import { setAdvancedSearch } from '../../../../../Store/actions/searchActions'
-import { dateFieldOptions } from '../../../../../Constants/dateFieldOptions'
+import { setAdvancedSearch } from 'Store/actions/searchActions'
+import { dateFieldOptions } from 'Constants/dateFieldOptions'
 import './style.css'
 
 class DateSearch extends Component {

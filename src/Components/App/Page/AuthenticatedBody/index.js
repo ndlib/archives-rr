@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
 import Navigation from '../../Navigation'
-import { fetchContentType } from '../../../../Store/actions/contentActions'
+import { fetchContentType } from 'Store/actions/contentActions'
 import './style.css'
 
 class AuthenticatedBody extends Component {

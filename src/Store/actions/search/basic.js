@@ -1,4 +1,4 @@
-import { searchableFields } from '../../../Constants/fields'
+import { searchableFields } from 'Constants/fields'
 
 const basicSearchResults = (terms, recordTypes) => {
   let results = []

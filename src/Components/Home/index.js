@@ -1,5 +1,5 @@
 import React from 'react'
-import DynamicContent from '../Shared/DynamicContent'
+import DynamicContent from 'Components/Shared/DynamicContent'
 
 const Home = () => {
   return (

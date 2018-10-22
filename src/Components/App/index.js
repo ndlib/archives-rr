@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router'
 
 // redux store
 import { Provider } from 'react-redux'
-import configureStore from '../../Store/configureStore'
+import configureStore from 'Store/configureStore'
 
 // page wrapper
 // Page provides basic shared ui components and layout

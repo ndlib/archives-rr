@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { contentStoreReady } from '../../Store/storeReady'
-import Loading from '../Shared/Loading'
+import { contentStoreReady } from 'Store/storeReady'
+import Loading from 'Components/Shared/Loading'
 import SearchTools from './SearchTools'
 import FilterDisclaimer from './FilterDisclaimer'
 import ListOrResults from './ListOrResults'
@@ -10,7 +10,7 @@ import {
   isFiltered,
   findCategory,
   filterRecordsByCategory,
-} from '../../Functions/filterHelpers'
+} from 'Functions/filterHelpers'
 
 const Search = (props) => {
   if (contentStoreReady(props)) {
