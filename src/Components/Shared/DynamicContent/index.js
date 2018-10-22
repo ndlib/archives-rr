@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { pagesReady } from '../../../Store/storeReady'
-import Loading from '../Loading'
+import { pagesReady } from 'Store/storeReady'
+import Loading from 'Components/Shared/Loading'
 
 // This component connects to the 'page' content type on Contentful and will
 // add the title and text entered there onto specific pages based on the slug

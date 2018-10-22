@@ -2,12 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import Select from 'react-select'
-import { advancedFieldOptions } from '../../../../../../Constants/advancedFields'
+import { advancedFieldOptions } from 'Constants/advancedFields'
 import {
   setAdvancedSearch,
   removeAdvancedSearch,
-} from '../../../../../../Store/actions/searchActions'
-import { advancedSearchStoreReady } from '../../../../../../Store/storeReady'
+} from 'Store/actions/searchActions'
+import { advancedSearchStoreReady } from 'Store/storeReady'
 import './style.css'
 
 const AdvancedField = ({ field, options, ...props }) => {

@@ -2,11 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import RecordTypesList from '../../../Shared/RecordTypesList'
-import { filterRecordsByCategory } from '../../../../Functions/filterHelpers'
-import { recordTypesReady } from '../../../../Store/storeReady'
-import Loading from '../../../Shared/Loading'
-import Toggle from '../../../Shared/Toggle'
+import RecordTypesList from 'Components/Shared/RecordTypesList'
+import { filterRecordsByCategory } from 'Functions/filterHelpers'
+import { recordTypesReady } from 'Store/storeReady'
+import Loading from 'Components/Shared/Loading'
+import Toggle from 'Components/Shared/Toggle'
 import './style.css'
 
 const Category = (props) => {

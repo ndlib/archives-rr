@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import Loading from '../Shared/Loading'
-import { recordTypesReady } from '../../Store/storeReady'
-import { searchTerms } from '../../Functions/searchHelpers'
+import Loading from 'Components/Shared/Loading'
+import { recordTypesReady } from 'Store/storeReady'
+import { searchTerms } from 'Functions/searchHelpers'
 import RecordField from './RecordField'
-import { displayFields } from '../../Constants/fields'
+import { displayFields } from 'Constants/fields'
 
 const RecordType = (props) => {
   if (recordTypesReady(props)) {
