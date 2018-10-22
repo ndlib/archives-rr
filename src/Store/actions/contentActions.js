@@ -15,7 +15,7 @@ const receiveContent = (actionType, json) => {
 export const fetchContentType = (type, orderField) => {
   // setup url
   // This part is for contentful_direct. It should not encode URI components
-  const query = `query?locale=en-US&query=`
+  const query = `archiveSecure?locale=en-US&query=`
   // This is passed to Contentful and needs components encoded. (e.g. '&', '=')
   // Get a specific content type
   // Do the ordering here so we don't have to later
@@ -25,36 +25,42 @@ export const fetchContentType = (type, orderField) => {
   const url = encodeURI(`${contentfulBaseUrl}${query}${queryValue}`)
 
   // dispatch and fetch data
-  return dispatch => {
-    return fetch(
-      url, {
-        method: 'get',
-        // headers: {
-        //   'Authorization': token,
-        // },
-      }).then(response => {
-      if (response.status >= 200 && response.status < 400) {
-        return response.json()
-      } else {
-        throw new Error(response.statusText)
-      }
-    }).then(json => {
-      switch (type) {
-        case 'category':
-          dispatch(receiveContent(RECEIVE_CATEGORYS, json))
-          break
-        case 'recordType':
-          dispatch(receiveContent(RECEIVE_RECORDTYPES, json))
-          break
-        case 'page':
-          dispatch(receiveContent(RECEIVE_PAGES, json))
-          break
-        default:
-          console.log('no type for content fetch')
-      }
-    })
-      .catch(e => {
-        console.log(e)
+  return (dispatch, getState) => {
+    const state = getState().personal
+    if (state !== undefined && state.login !== undefined && state.login.token !== undefined) {
+      return fetch(
+        url, {
+          method: 'get',
+          headers: {
+            'Authorization': state.login.token,
+          },
+        }).then(response => {
+        if (response.status >= 200 && response.status < 400) {
+          return response.json()
+        } else {
+          throw new Error(response.statusText)
+        }
+      }).then(json => {
+        switch (type) {
+          case 'category':
+            dispatch(receiveContent(RECEIVE_CATEGORYS, json))
+            break
+          case 'recordType':
+            dispatch(receiveContent(RECEIVE_RECORDTYPES, json))
+            break
+          case 'page':
+            dispatch(receiveContent(RECEIVE_PAGES, json))
+            break
+          default:
+            console.log('no type for content fetch')
+        }
       })
+        .catch(e => {
+          console.log('Error fetching content: ' + e)
+        })
+    } else {
+      console.log('NOT SET IN CONTENT ACTIONS')
+      return null
+    }
   }
 }
