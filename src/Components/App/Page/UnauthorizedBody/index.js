@@ -1,19 +1,27 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import getToken from 'Store/actions/personal'
+import { viceroyAPI } from 'Constants/endpoints'
 
-const UnauthorizedBody = (props) => {
-  return (
-    <div className='container-fluid'>
-      <div className='mainContent'>
-        <div>Unauthorized</div>
-        <div>Please log in to continue</div>
-        <button
-          onClick={() => props.dispatch(getToken())}>Log in</button>
+import { getToken } from 'Store/actions/personalActions'
+
+class UnauthorizedBody extends Component {
+  componentDidMount () {
+    const dispatch = this.props.dispatch
+    dispatch(getToken())
+  }
+  render () {
+    return (
+      <div className='container-fluid'>
+        <div className='mainContent'>
+          <div>Unauthorized</div>
+          <div>Please log in to continue</div>
+          <a href={`${viceroyAPI}/login`}><button>Log in</button></a>
+          <a href={`${viceroyAPI}/logout`}><button>Log out</button></a>
+        </div>
+
       </div>
-    </div>
-
-  )
+    )
+  }
 }
 const mapStateToProps = (state) => {
   return { ...state }
