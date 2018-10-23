@@ -28,9 +28,11 @@ const SearchResult = ({ result, recordTypes, ...props }) => {
       </Link>
       { result.fieldsWithTerm.map(field => {
         // don't repeat the recordType field because that's the "name"
-        if (field === 'recordType') {
+        // don't display functional category because it's different
+        if (field === 'recordType' || field === 'category') {
           return null
         }
+        console.log('problem', recordFromResult.fields[field])
         return (
           <div
             key={field}
