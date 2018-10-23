@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
+
+import { viceroyAPI } from 'Constants/endpoints'
 import './style.css'
 
 const Navigation = () => {
@@ -17,7 +19,7 @@ const Navigation = () => {
           to='/search'
           activeClassName='active'
         >Search</NavLink>
-        <span className='right'><a href='/'>Log Out</a></span>
+        <span className='right'><a href={`${viceroyAPI}/logout`}>Log Out</a></span>
       </div>
     </nav>
   )

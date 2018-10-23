@@ -20,11 +20,9 @@ class Page extends Component {
       <div className='page'>
         <Header />
         {
-          // Do check here to see if authenticated
-          // Return AuthenticatedBody if logged in
-          <AuthenticatedBody>{this.props.children}</AuthenticatedBody>
-          // else return UnauthorizedBody
-          // <UnauthorizedBody />
+          this.props.personalReducer && this.props.personalReducer.token
+            ? <AuthenticatedBody>{this.props.children}</AuthenticatedBody>
+            : <UnauthorizedBody />
         }
         <Footer />
       </div>
