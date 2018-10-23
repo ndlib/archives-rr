@@ -9,10 +9,10 @@ import './style.css'
 class AuthenticatedBody extends Component {
   componentDidMount () {
     // populate the store
-    const { dispatch } = this.props
-    dispatch(fetchContentType('page', 'fields.name'))
-    dispatch(fetchContentType('category', 'fields.name'))
-    dispatch(fetchContentType('recordType', 'fields.recordType'))
+    const { dispatch, personalReducer } = this.props
+    dispatch(fetchContentType('page', 'fields.name', personalReducer))
+    dispatch(fetchContentType('category', 'fields.name', personalReducer))
+    dispatch(fetchContentType('recordType', 'fields.recordType', personalReducer))
   }
 
   render () {

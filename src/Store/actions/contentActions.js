@@ -12,10 +12,11 @@ const receiveContent = (actionType, json) => {
   }
 }
 
-export const fetchContentType = (type, orderField) => {
+export const fetchContentType = (type, orderField, token) => {
   // setup url
   // This part is for contentful_direct. It should not encode URI components
-  const query = `archiveSecure?locale=en-US&query=`
+  // const query = `archiveSecure?locale=en-US&query=`
+  const query = `query?locale=en-US&query=`
   // This is passed to Contentful and needs components encoded. (e.g. '&', '=')
   // Get a specific content type
   // Do the ordering here so we don't have to later
@@ -25,15 +26,14 @@ export const fetchContentType = (type, orderField) => {
   const url = encodeURI(`${contentfulBaseUrl}${query}${queryValue}`)
 
   // dispatch and fetch data
-  return (dispatch, getState) => {
-    const state = getState().personal
-    if (state !== undefined && state.login !== undefined && state.login.token !== undefined) {
+  return (dispatch) => {
+    if (token !== undefined) {
       return fetch(
         url, {
           method: 'get',
-          headers: {
-            'Authorization': state.login.token,
-          },
+          // headers: {
+          //   'Authorization': personal.token,
+          // },
         }).then(response => {
         if (response.status >= 200 && response.status < 400) {
           return response.json()
