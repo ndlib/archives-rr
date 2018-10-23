@@ -32,7 +32,6 @@ const SearchResult = ({ result, recordTypes, ...props }) => {
         if (field === 'recordType' || field === 'category') {
           return null
         }
-        console.log('problem', recordFromResult.fields[field])
         return (
           <div
             key={field}
