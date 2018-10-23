@@ -2,7 +2,6 @@ import React from 'react'
 import { withRouter } from 'react-router'
 
 import Toggle from 'Components/Shared/Toggle'
-import DateSearch from './DateSearch'
 import AdvancedFields from './AdvancedFields'
 import { hasAdvancedSearch } from 'Functions/searchHelpers'
 import './style.css'
@@ -14,7 +13,6 @@ const AdvancedSearch = (props) => {
       labelExpandedContent={<div className='advancedLabel'>Hide Advanced Search</div>}
       defaultOpen={hasAdvancedSearch(props.match.params.search)}
     >
-      <DateSearch />
       <AdvancedFields />
     </Toggle>
   )

@@ -13,6 +13,7 @@ import Select from 'react-select'
 
 import AdvancedField from './AdvancedField'
 import CategorySearch from './CategorySearch'
+import DateSearch from './DateSearch'
 
 class AdvancedFields extends Component {
   constructor (props) {
@@ -56,8 +57,8 @@ class AdvancedFields extends Component {
   render () {
     return (
       <React.Fragment>
-        <span>
-          <label>Field Search</label>
+
+        <div>
           <Select
             value={null}
             onChange={(activeField) => {
@@ -66,8 +67,13 @@ class AdvancedFields extends Component {
             options={this.state.availableFields}
             placeholder='Select a field to search...'
           />
-        </span>
-        {/* <CategorySearch /> */}
+        </div>
+        {
+          this.state.activeFields.find(f => {
+            return f.value === 'category'
+          })
+            ? <CategorySearch /> : null
+        }
         {
           this.state.activeFields.find(f => {
             return f.value === 'triggerEvent'
@@ -121,6 +127,12 @@ class AdvancedFields extends Component {
               field={'referenceCopyDispositionMethod'}
               options={referenceCopyDispositionMethodOptions}
             /> : null
+        }
+        {
+          this.state.activeFields.find(f => {
+            return f.value === 'dateSearch'
+          })
+            ? <DateSearch /> : null
         }
       </React.Fragment>
     )

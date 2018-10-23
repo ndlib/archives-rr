@@ -12,7 +12,6 @@ import {
   getAdvancedSearchFromUrl,
   buildAdvancedSearchQuery,
 } from 'Functions/searchHelpers'
-import { filterRecordsByCategory } from 'Functions/filterHelpers'
 import './style.css'
 
 class SearchTools extends Component {
@@ -29,7 +28,7 @@ class SearchTools extends Component {
   componentDidMount () {
     this.props.search(
       splitTerms(this.state.searchValue),
-      filterRecordsByCategory(this.props, this.props.category),
+      this.props.contentReducer.recordTypes,
       getAdvancedSearchFromUrl(this.props.match.params.search),
       this.props.dispatch
     )
@@ -40,7 +39,7 @@ class SearchTools extends Component {
     if (nextProps.match.params.search !== this.props.match.params.search) {
       nextProps.search(
         splitTerms(this.state.searchValue),
-        filterRecordsByCategory(nextProps, nextProps.category),
+        nextProps.contentReducer.recordTypes,
         getAdvancedSearchFromUrl(nextProps.match.params.search),
         nextProps.dispatch
       )
@@ -60,7 +59,7 @@ class SearchTools extends Component {
     const advancedSearchQuery = buildAdvancedSearchQuery(this.props.searchReducer.advancedSearch)
     this.props.search(
       splitTerms(this.state.searchValue),
-      filterRecordsByCategory(this.props, this.props.category),
+      this.props.contentReducer.recordTypes,
       getAdvancedSearchFromUrl(advancedSearchQuery),
       this.props.dispatch
     )
