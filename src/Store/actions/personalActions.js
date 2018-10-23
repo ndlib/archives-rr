@@ -65,10 +65,9 @@ export const getToken = () => {
       credentials: 'include',
     }).then(response => {
       if (response.status >= 200 && response.status < 400) {
-        console.log('getToken 200 returned')
         return response.json()
       } else {
-        console.log('getToken error thrown')
+        console.log('Response error: ', response.statusText)
         throw new Error(response.statusText)
       }
     })
