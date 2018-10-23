@@ -1,8 +1,6 @@
 import fetch from 'isomorphic-fetch'
-import { viceroyAPI } from '../../../Constants/endpoints'
-import * as statuses from '../../../Constants/apiStatuses'
-import * as states from './constants'
-import fetch from 'isomorphic-fetch'
+import { viceroyAPI } from 'Constants/endpoints'
+import * as statuses from 'Constants/apiStatuses'
 
 const loginUrl = viceroyAPI + '/token'
 
@@ -55,7 +53,7 @@ const handleToken = (dispatch, data) => {
   if (data.redirect) {
     console.log('redirected')
     dispatch(
-      states.recievePersonal(
+      recievePersonal(
         'login',
         statuses.SUCCESS,
         { redirectUrl: data.redirect }
@@ -63,7 +61,7 @@ const handleToken = (dispatch, data) => {
     )
     window.location = data.redirect
     return dispatch(
-      states.recievePersonal(
+      recievePersonal(
         'login',
         statuses.SUCCESS,
         { token: data.jwt, redirectUrl: null }
@@ -72,7 +70,7 @@ const handleToken = (dispatch, data) => {
   } else if (data.jwt) {
     console.log('jwt recieved')
     dispatch(
-      states.recievePersonal(
+      recievePersonal(
         'login',
         statuses.SUCCESS,
         { token: data.jwt, redirectUrl: null }
@@ -85,7 +83,7 @@ const handleToken = (dispatch, data) => {
 const getToken = () => {
   console.log('in getToken starting dispatch')
   return dispatch => {
-    dispatch(states.requestPersonal('login', statuses.FETCHING))
+    dispatch(requestPersonal('login', statuses.FETCHING))
 
     return fetch(loginUrl, {
       credentials: 'include',
@@ -101,7 +99,7 @@ const getToken = () => {
     })
       .then(json => handleToken(dispatch, json))
       .catch(e => {
-        dispatch(states.recievePersonal('login', statuses.ERROR, e.message))
+        dispatch(recievePersonal('login', statuses.ERROR, e.message))
       })
   }
 }

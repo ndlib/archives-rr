@@ -2,7 +2,7 @@ import {
   RECEIVE_PERSONAL,
   CLEAR_PERSONAL,
   REQUEST_PERSONAL,
-} from '../actions/personal/constants'
+} from '../actions/personal'
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -12,8 +12,10 @@ export default (state = {}, action) => {
         status: 'FETCHING',
       }
     case RECEIVE_PERSONAL:
+      // console.log(action)
       return {
         ...state,
+
       }
     case CLEAR_PERSONAL:
       return {
