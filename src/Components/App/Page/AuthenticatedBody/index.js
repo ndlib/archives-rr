@@ -10,9 +10,9 @@ class AuthenticatedBody extends Component {
   componentDidMount () {
     // populate the store
     const { dispatch, personalReducer } = this.props
-    dispatch(fetchContentType('page', 'fields.name', personalReducer))
-    dispatch(fetchContentType('category', 'fields.name', personalReducer))
-    dispatch(fetchContentType('recordType', 'fields.recordType', personalReducer))
+    dispatch(fetchContentType('page', 'fields.name', personalReducer.token))
+    dispatch(fetchContentType('category', 'fields.name', personalReducer.token))
+    dispatch(fetchContentType('recordType', 'fields.recordType', personalReducer.token))
   }
 
   render () {

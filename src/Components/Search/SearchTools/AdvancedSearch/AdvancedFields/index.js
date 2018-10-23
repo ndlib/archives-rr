@@ -13,6 +13,7 @@ import Select from 'react-select'
 
 import AdvancedField from './AdvancedField'
 import CategorySearch from './CategorySearch'
+import DateSearch from './DateSearch'
 
 class AdvancedFields extends Component {
   constructor (props) {
