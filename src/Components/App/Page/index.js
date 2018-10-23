@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
+import getToken from '../../../Store/actions/personal/token'
 import Header from '../Branding/Header'
 import Footer from '../Branding/Footer'
 import AuthenticatedBody from './AuthenticatedBody'
@@ -24,9 +25,12 @@ class Page extends Component {
         <Header />
         {
           <div>
-
-            <UnauthorizedBody />
-            {/* <AuthenticatedBody>{this.props.children}</AuthenticatedBody> */}
+            {/* // Do check here to see if authenticated
+            // Return AuthenticatedBody if logged in
+            <AuthenticatedBody>{this.props.children}</AuthenticatedBody>
+            // else return UnauthorizedBody
+            // <UnauthorizedBody /> */}
+            <AuthenticatedBody>{this.props.children}</AuthenticatedBody>
           </div>
         }
         <Footer />
