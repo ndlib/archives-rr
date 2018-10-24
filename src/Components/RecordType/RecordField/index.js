@@ -2,6 +2,8 @@ import React from 'react'
 import Highlighter from 'react-highlight-words'
 import moment from 'moment'
 
+import './style.css'
+
 const RecordField = ({
   label,
   field,
@@ -19,14 +21,17 @@ const RecordField = ({
   }
 
   return (
-    <div className={field}>
-      <h2>{label}</h2>
-      <Highlighter
-        highlightClassName='term-match'
-        searchWords={terms}
-        autoEscape
-        textToHighlight={text || ''}
-      />
+    <div className={`recordTypeField ${field}`}>
+      <label htmlFor={field}>{label}</label>
+      <div id={field}>
+        <Highlighter
+          highlightClassName='term-match'
+          searchWords={terms}
+          autoEscape
+          textToHighlight={text || ''}
+
+        />
+      </div>
     </div>
   )
 }

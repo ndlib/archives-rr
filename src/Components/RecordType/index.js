@@ -6,6 +6,7 @@ import { recordTypesReady } from 'Store/storeReady'
 import { searchTerms } from 'Functions/searchHelpers'
 import RecordField from './RecordField'
 import { displayFields } from 'Constants/fields'
+import './style.css'
 
 const RecordType = (props) => {
   if (recordTypesReady(props)) {
@@ -19,7 +20,7 @@ const RecordType = (props) => {
     // render if it exists
     if (recordType) {
       return (
-        <React.Fragment>
+        <div className='recordTypeDisplay'>
           <h1>{recordType.fields.category.fields.name}</h1>
           {
             displayFields.map(field => {
@@ -40,7 +41,7 @@ const RecordType = (props) => {
               )
             })
           }
-        </React.Fragment>
+        </div>
       )
     }
 
