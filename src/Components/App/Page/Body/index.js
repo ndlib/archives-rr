@@ -22,7 +22,7 @@ class Body extends Component {
         if (!personalReducer.token) {
           // User has not logged in yet and has no JWT
           return <UnauthenticatedBody />
-        } else if (isAuthorized(personalReducer)) {
+        } else if (isAuthorized(personalReducer.token)) {
           // User is logged in and authorized to see content
           return <AuthenticatedBody>{this.props.children}</AuthenticatedBody>
         }
