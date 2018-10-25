@@ -6,6 +6,7 @@ import { recordTypesReady } from 'Store/storeReady'
 import { searchTerms } from 'Functions/searchHelpers'
 import RecordField from './RecordField'
 import { displayFields } from 'Constants/fields'
+import NotFound from 'Components/Shared/NotFound'
 import './style.css'
 
 const RecordType = (props) => {
@@ -47,9 +48,7 @@ const RecordType = (props) => {
 
     // render message if not found
     return (
-      <React.Fragment>
-        <div className='text-content'>No matching recordType was found.</div>
-      </React.Fragment>
+      <NotFound />
     )
   }
   return <Loading />

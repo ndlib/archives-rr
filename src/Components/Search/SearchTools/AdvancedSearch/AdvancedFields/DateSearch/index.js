@@ -47,7 +47,7 @@ class DateSearch extends Component {
         }))
         break
       default:
-        console.log(`type: ${type} with value: ${value} cannot be set`)
+        console.warn(`type: ${type} with value: ${value} cannot be set`)
     }
   }
 

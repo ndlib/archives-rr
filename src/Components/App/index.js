@@ -13,10 +13,11 @@ import configureStore from 'Store/configureStore'
 import Page from './Page'
 
 // components for routes
-import Home from '../Home'
-import Categories from '../Categories'
-import Search from '../Search'
-import RecordType from '../RecordType'
+import Home from 'Components/Home'
+import Categories from 'Components/Categories'
+import Search from 'Components/Search'
+import RecordType from 'Components/RecordType'
+import NotFound from 'Components/Shared/NotFound'
 
 // create store
 const store = configureStore()
@@ -31,6 +32,7 @@ const App = () => {
             <Route exact path='/categories' component={Categories} />
             <Route exact path='/search/:search?' component={Search} />
             <Route exact path='/recordType/:id/:search?' component={RecordType} />
+            <Route component={NotFound} />
           </Switch>
         </Page>
       </Provider>

@@ -53,7 +53,6 @@ const handleToken = (dispatch, data) => {
     dispatch(
       recieveToken(data.jwt)
     )
-    console.log('JWT' + data.jwt)
   }
 }
 
@@ -67,7 +66,7 @@ export const getToken = () => {
       if (response.status >= 200 && response.status < 400) {
         return response.json()
       } else {
-        console.log('Response error: ', response.statusText)
+        console.warn('Response error: ', response.statusText)
         throw new Error(response.statusText)
       }
     })
