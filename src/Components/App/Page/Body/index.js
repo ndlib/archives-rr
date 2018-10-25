@@ -19,7 +19,7 @@ class Body extends Component {
     const { personalReducer } = this.props
     switch (personalReducer.status) {
       case SUCCESS:
-        if (!this.props.personalReducer.token) {
+        if (!personalReducer.token) {
           // User has not logged in yet and has no JWT
           return <UnauthenticatedBody />
         } else if (isAuthorized(personalReducer)) {
