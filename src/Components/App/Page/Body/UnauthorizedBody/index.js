@@ -7,7 +7,7 @@ const UnauthorizedBody = () => {
     <div className='container-fluid'>
       <div className='mainContent'>
         <h1>Unauthorized</h1>
-        <div>We were not able to verify your membership in the appropriate security groups.</div>
+        <div>We were not able to verify your membership in the appropriate security groups at this time.</div>
         <a href={`${viceroyAPI}/logout`}>
           <button className='logoutButton'>Log out</button>
         </a>

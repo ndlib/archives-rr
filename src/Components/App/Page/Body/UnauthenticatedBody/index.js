@@ -6,7 +6,7 @@ const UnauthenticatedBody = () => {
   return (
     <div className='container-fluid'>
       <div className='mainContent'>
-        <h1>Unauthorized</h1>
+        <h1>Unauthenticated</h1>
         <div>Please log in to continue.</div>
         <a href={`${viceroyAPI}/login`}>
           <button className='loginButton'>Log in</button>

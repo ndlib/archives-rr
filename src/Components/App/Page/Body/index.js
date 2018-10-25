@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
+
 import Loading from 'Components/Shared/Loading'
 import UnauthorizedBody from './UnauthorizedBody'
 import UnauthenticatedBody from './UnauthenticatedBody'
 import AuthenticatedBody from './AuthenticatedBody'
-import { getToken, NOT_FETCHED, FETCHING } from 'Store/actions/personalActions'
+import { getToken, SUCCESS, ERROR } from 'Store/actions/personalActions'
 import { isAuthorized } from 'Functions/personalHelpers'
 
 class Body extends Component {
@@ -15,22 +16,24 @@ class Body extends Component {
   }
 
   render () {
-    // Check to see if reducer is still loading and doing intital fetch
-    if (this.props && this.props.personalReducer &&
-       this.props.personalReducer.status !== NOT_FETCHED &&
-     this.props.personalReducer.status !== FETCHING) {
-      if (!this.props.personalReducer.token) {
-        // User has not logged in yet and has no JWT
-        return <UnauthenticatedBody />
-      } else if (isAuthorized(this.props.personalReducer)) {
-        // User is logged in and authorized to see content
-        return <AuthenticatedBody>{this.props.children}</AuthenticatedBody>
-      } else if (!isAuthorized(this.props.personalReducer)) {
-        // User is logged in but is unathorized to see content
+    const { personalReducer } = this.props
+    switch (personalReducer.status) {
+      case SUCCESS:
+        if (!this.props.personalReducer.token) {
+          // User has not logged in yet and has no JWT
+          return <UnauthenticatedBody />
+        } else if (isAuthorized(personalReducer)) {
+          // User is logged in and authorized to see content
+          return <AuthenticatedBody>{this.props.children}</AuthenticatedBody>
+        }
+        // User is logged in but is unauthorized to see content
         return <UnauthorizedBody />
-      }
+      case ERROR:
+        return <UnauthorizedBody />
+      default:
+        // API status of NOT_FETCHED or FETCHING
+        return <Loading />
     }
-    return <Loading />
   }
 }
 
