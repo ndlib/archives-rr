@@ -5,7 +5,7 @@ import Loading from 'Components/Shared/Loading'
 import UnauthorizedBody from './UnauthorizedBody'
 import UnauthenticatedBody from './UnauthenticatedBody'
 import AuthenticatedBody from './AuthenticatedBody'
-import { getToken } from 'Store/actions/personalActions'
+import { getToken, NOT_FETCHED, FETCHING } from 'Store/actions/personalActions'
 import { isAuthorized } from 'Functions/personalHelpers'
 
 class Body extends Component {
@@ -15,7 +15,10 @@ class Body extends Component {
   }
 
   render () {
-    if (this.props && this.props.personalReducer) {
+    // Check to see if reducer is still loading and doing intital fetch
+    if (this.props && this.props.personalReducer &&
+       this.props.personalReducer.status !== NOT_FETCHED &&
+     this.props.personalReducer.status !== FETCHING) {
       if (!this.props.personalReducer.token) {
         // User has not logged in yet and has no JWT
         return <UnauthenticatedBody />
