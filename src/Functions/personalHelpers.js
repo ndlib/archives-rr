@@ -10,6 +10,9 @@ export const isAuthorized = (personalReducer) => {
         return false
       } else if (decoded.payload.data.affiliation === 'Staff' || decoded.payload.data.affiliation === 'Faculty') {
         return true
+      } else {
+        console.warn('Invalid affiliation')
+        return false
       }
     }
   }
