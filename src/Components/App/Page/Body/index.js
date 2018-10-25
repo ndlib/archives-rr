@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
+import { withRouter } from 'react-router'
 import Loading from 'Components/Shared/Loading'
 import UnauthorizedBody from './UnauthorizedBody'
 import UnauthenticatedBody from './UnauthenticatedBody'
@@ -35,4 +35,4 @@ const mapStateToProps = (state) => {
   return { ...state }
 }
 
-export default connect(mapStateToProps)(Body)
+export default withRouter(connect(mapStateToProps)(Body))

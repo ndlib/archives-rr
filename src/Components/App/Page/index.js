@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router'
-
 import Header from '../Branding/Header'
 import Body from './Body/index.js'
 import Footer from '../Branding/Footer'
