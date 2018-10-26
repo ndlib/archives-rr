@@ -52,14 +52,14 @@ export const fetchContentType = (type, orderField, token) => {
             dispatch(receiveContent(RECEIVE_PAGES, json))
             break
           default:
-            console.log('no type for content fetch')
+            console.warn('no type for content fetch')
         }
       })
         .catch(e => {
-          console.log('Error fetching content: ' + e)
+          console.warn('Error fetching content: ' + e)
         })
     } else {
-      console.log('NOT SET IN CONTENT ACTIONS')
+      console.warn('NOT SET IN CONTENT ACTIONS')
       return null
     }
   }
