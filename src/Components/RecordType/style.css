@@ -1,3 +1,9 @@
 .recordTypeDisplay {
-
+	margin-bottom: 3em;
 }
+
+.recordTypeFields {
+	display: grid;
+	grid-template-columns: repeat(4, 25%) ;
+}
+

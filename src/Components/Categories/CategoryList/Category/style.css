@@ -26,5 +26,19 @@
 
 .lastLink {
   display: block;
-  margin: 1em 0 0;
+  margin: 1.5em 0 0;
+}
+
+.recordTypeRow a, .collapseList a, .result a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #333;
+}
+
+.recordTypeRow a:hover, .collapseList a:hover, .result a:hover {
+  text-decoration: underline;
+}
+
+.recordTypeRow {
+  padding: 5px 0;
 }

@@ -23,25 +23,27 @@ const RecordType = (props) => {
       return (
         <div className='recordTypeDisplay'>
           <h1>{recordType.fields.category.fields.name}</h1>
-          {
-            displayFields.map(field => {
-              return (
-                <RecordField
-                  key={field}
-                  label={
-                    field
-                      .replace(/([A-Z])/g, ' $1')
-                      .replace(/^./, (str) => {
-                        return str.toUpperCase()
-                      })
-                  }
-                  field={field}
-                  recordType={recordType}
-                  terms={terms}
-                />
-              )
-            })
-          }
+          <div className='recordTypeFields'>
+            {
+              displayFields.map(field => {
+                return (
+                  <RecordField
+                    key={field}
+                    label={
+                      field
+                        .replace(/([A-Z])/g, ' $1')
+                        .replace(/^./, (str) => {
+                          return str.toUpperCase()
+                        })
+                    }
+                    field={field}
+                    recordType={recordType}
+                    terms={terms}
+                  />
+                )
+              })
+            }
+          </div>
         </div>
       )
     }
