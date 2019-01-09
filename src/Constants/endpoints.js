@@ -1,2 +1,2 @@
-export const contentfulBaseUrl = 'https://zeyeow16s8.execute-api.us-east-1.amazonaws.com/devred/'
+export const contentfulBaseUrl = 'https://cdddliggr0.execute-api.us-east-1.amazonaws.com/archives/'
 export const viceroyAPI = 'https://viceroy-libnd-test.library.nd.edu'
