@@ -29,13 +29,7 @@ const RecordType = (props) => {
                 return (
                   <RecordField
                     key={field}
-                    label={
-                      field
-                        .replace(/([A-Z])/g, ' $1')
-                        .replace(/^./, (str) => {
-                          return str.toUpperCase()
-                        })
-                    }
+                    label={getLabel(field)}
                     field={field}
                     recordType={recordType}
                     terms={terms}
@@ -54,6 +48,17 @@ const RecordType = (props) => {
     )
   }
   return <Loading />
+}
+
+const getLabel = (field) => {
+  if (field === 'scheduleId') {
+    return 'Record Type Id'
+  }
+  return field
+    .replace(/([A-Z])/g, ' $1')
+    .replace(/^./, (str) => {
+      return str.toUpperCase()
+    })
 }
 
 const mapStateToProps = (state) => {
