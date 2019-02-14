@@ -1,6 +1,6 @@
 export const displayFields = [
   'recordType',
-  'recordTypeId',
+  'scheduleId',
   'recordTypeDescription',
   'officialCopy',
   'retention',
@@ -11,6 +11,7 @@ export const displayFields = [
   'referenceCopyDisposition',
   'referenceCopyDispositionMethod',
   'storageRequirements',
+  'dataClassification',
   'legalReference',
   'notes',
 
@@ -26,7 +27,7 @@ export const displayFields = [
 
 export const searchableFields = [
   'recordType',
-  'recordTypeId',
+  'schedulId',
   'recordTypeDescription',
   'officialCopy',
   'retention',

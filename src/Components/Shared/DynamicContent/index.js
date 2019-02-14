@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 
 import { pagesReady } from 'Store/storeReady'
@@ -19,10 +20,12 @@ const DynamicContent = ({ slug, children, ...props }) => {
     return (
       <React.Fragment>
         <h1>{page.fields.name}</h1>
-        <div className='text-content'>{page.fields.mainText}</div>
+        <div className='text-content'>
+          <ReactMarkdown source={page.fields.mainText} />
+        </div>
         { children }
         { page.fields.afterText
-          ? <div className='text-content'>{page.fields.afterText}</div>
+          ? <div className='text-content'><ReactMarkdown source={page.fields.afterText} /></div>
           : null
         }
       </React.Fragment>

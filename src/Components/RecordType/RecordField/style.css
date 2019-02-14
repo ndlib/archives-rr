@@ -34,7 +34,7 @@
 	grid-template-columns: 1fr 5fr;
 }
 
-.recordTypeId {
+.scheduleId {
 	grid-column-start: 4;
 	grid-column-end: 5;
 	grid-template-columns: 1fr 1fr;
@@ -57,8 +57,8 @@
 
 
 
-
-.legalReference, .notes, .systemOfRecord, .archivesNotes, 
+.dataClassification,
+.legalReference, .notes, .systemOfRecord, .archivesNotes,
 .generalCounselNotes, .recordTypeDescription, .officialCopy  {
 	grid-column-start: 0;
 	grid-column-end: span 4;
