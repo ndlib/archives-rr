@@ -10,8 +10,8 @@ export const displayFields = [
   'referenceCopy',
   'referenceCopyDisposition',
   'referenceCopyDispositionMethod',
-  'storageRequirements',
   'dataClassification',
+  'storageRequirements',
   'legalReference',
   'notes',
 

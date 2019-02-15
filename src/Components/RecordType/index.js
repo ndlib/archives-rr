@@ -51,9 +51,6 @@ const RecordType = (props) => {
 }
 
 const getLabel = (field) => {
-  if (field === 'scheduleId') {
-    return 'Record Type Id'
-  }
   return field
     .replace(/([A-Z])/g, ' $1')
     .replace(/^./, (str) => {
