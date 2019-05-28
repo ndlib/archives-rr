@@ -5,7 +5,7 @@ import Loading from 'Components/Shared/Loading'
 import { recordTypesReady } from 'Store/storeReady'
 import { searchTerms } from 'Functions/searchHelpers'
 import RecordField from './RecordField'
-import { displayFields } from 'Constants/fields'
+import { displayFields, hideableFields } from 'Constants/fields'
 import NotFound from 'Components/Shared/NotFound'
 import './style.css'
 
@@ -26,6 +26,10 @@ const RecordType = (props) => {
           <div className='recordTypeFields'>
             {
               displayFields.map(field => {
+                if (hideableFields.includes(field) && !recordType.fields[field]) {
+                  return null
+                }
+
                 return (
                   <RecordField
                     key={field}

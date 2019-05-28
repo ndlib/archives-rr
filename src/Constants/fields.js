@@ -56,3 +56,11 @@ export const dateFields = [
   'dateApprovedByGeneralCounsel',
   'dateRevised',
 ]
+
+// These fields can be hidden if they are empty
+export const hideableFields = [
+  'officialCopy',
+  'referenceCopy',
+  'referenceCopyDisposition',
+  'referenceCopyDispositionMethod',
+]
