@@ -1,0 +1,8 @@
+.categoryList {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.categoryListColumn {
+  flex-basis: 50%;
+}
