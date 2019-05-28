@@ -1,3 +1,10 @@
+.footer p {
+  margin-bottom: 14px;
+  line-height: 1.5em;
+  color: #fff;
+  font-size: 14px;
+}
+
 .footerLinks {
   background-color: #595959;
   width: 100%;
@@ -36,6 +43,10 @@
   position: absolute;
 }
 
+.footerLinks .box.right {
+  text-align: right;
+}
+
 .footerInfo {
   background-color: #041f44;
   color: white;
@@ -44,9 +55,8 @@
 
 .footerInfo a {
   color: white;
-  display: block;
   font-family: sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   font-stretch: 100%;
   font-weight: 400;
   position: relative;

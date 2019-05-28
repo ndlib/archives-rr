@@ -45,6 +45,10 @@ mark.term-match {
 
 /* print specific styles */
 @media print {
+  @page {
+    size: landscape;
+  }
+
   .no-print {
     display: none;
   }
