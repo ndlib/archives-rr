@@ -13,6 +13,10 @@ a:hover {
   color: #4a3651;
 }
 
+p {
+  margin: 0;
+}
+
 .container-fluid {
   margin: 0 auto;
   padding: 0 10px;
