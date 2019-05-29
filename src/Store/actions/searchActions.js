@@ -1,6 +1,7 @@
 import basicSearchResults from './search/basic'
 import dateSearchResults from './search/date'
 import advancedSearchResults from './search/advanced'
+import { applySearchResultsToContent } from './contentActions'
 
 export const SUBMIT_SEARCH = 'SUBMIT_SEARCH'
 export const RESULTS_READY = 'RESULTS_READY'
@@ -37,6 +38,8 @@ export const submitSearch = (terms, recordTypes, advancedSearch) => {
     results.sort((r1, r2) => {
       return r2.hitCount - r1.hitCount
     })
+    // Saves which record types have been hit so we can page through the results
+    dispatch(applySearchResultsToContent(results))
     // dispatch message that we found results and are done searching
     dispatch(returnResults(results))
   }

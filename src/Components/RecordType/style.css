@@ -2,6 +2,41 @@
 	margin-bottom: 3em;
 }
 
+.recordTypeDisplay h1 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.recordTypeDisplay nav {
+	display: inline-flex;
+	flex-flow: row nowrap;
+	align-items: flex-end;
+	justify-content: flex-end;
+}
+.recordTypeDisplay nav .prevButton,
+.recordTypeDisplay nav .nextButton {
+	display: inline-block;
+	font-size: 0.6em;
+	font-weight: normal;
+	margin-left: 1em;
+	position: relative;
+	white-space: nowrap;
+}
+.recordTypeDisplay nav .prevArrow,
+.recordTypeDisplay nav .nextArrow {
+	display: inline-block;
+	text-decoration: none;
+	font-size: 0.7em;
+}
+.recordTypeDisplay nav .prevArrow {
+	margin-right: 4px;
+}
+
+.recordTypeDisplay nav .nextArrow {
+	margin-left: 4px;
+}
+
 .recordTypeFields {
 	display: grid;
 	grid-template-columns: repeat(4, 25%) ;

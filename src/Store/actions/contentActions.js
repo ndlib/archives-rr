@@ -1,13 +1,21 @@
 import { contentfulBaseUrl } from 'Constants/endpoints'
 
 // action types
-export const RECEIVE_CATEGORYS = 'RECEIVE_CATEGORYS'
+export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 export const RECEIVE_RECORDTYPES = 'RECEIVE_RECORDTYPES'
 export const RECEIVE_PAGES = 'RECEIVE_PAGES'
+export const RECEIVE_SEARCH_RESULTS = 'RECEIVE_SEARCH_RESULTS'
 
 const receiveContent = (actionType, json) => {
   return {
     type: actionType,
+    payload: json,
+  }
+}
+
+export const applySearchResultsToContent = (json) => {
+  return {
+    type: RECEIVE_SEARCH_RESULTS,
     payload: json,
   }
 }
@@ -43,7 +51,7 @@ export const fetchContentType = (type, orderField, token) => {
       }).then(json => {
         switch (type) {
           case 'category':
-            dispatch(receiveContent(RECEIVE_CATEGORYS, json))
+            dispatch(receiveContent(RECEIVE_CATEGORIES, json))
             break
           case 'recordType':
             dispatch(receiveContent(RECEIVE_RECORDTYPES, json))
