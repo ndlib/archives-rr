@@ -19,8 +19,9 @@ p {
 
 .container-fluid {
   margin: 0 auto;
-  padding: 0 10px;
-  position: relative;
+  max-width: 1200px;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .text-content {
@@ -31,15 +32,28 @@ mark.term-match {
   background-color: #f6e7a1;
 }
 
-@media screen and (max-width: 1199px) {
-  .container-fluid {
-  width: calc(100% - 20px);
-  }
+.row {
+  box-sizing: border-box;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex: 0 1 auto;
+  -webkit-box-flex: 0;
+  flex: 0 1 auto;
+  -ms-flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: 0rem;
+  margin-left: 0rem;
+  clear: both;
 }
 
-@media screen and (min-width: 1200px) {
-  .container-fluid {
-    width: 1200px;
+@media screen and (max-width: 780px) {
+  .row {
+    margin: 0 !important;
   }
 }
 
