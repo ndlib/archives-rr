@@ -5,6 +5,7 @@ import Loading from 'Components/Shared/Loading'
 import { recordTypesReady } from 'Store/storeReady'
 import { searchTerms } from 'Functions/searchHelpers'
 import RecordField from './RecordField'
+import RecordTypeNav from './RecordTypeNav'
 import { displayFields, hideableFields } from 'Constants/fields'
 import NotFound from 'Components/Shared/NotFound'
 import './style.css'
@@ -15,40 +16,41 @@ const RecordType = (props) => {
     const recordType = props.contentReducer.recordTypes.find(s => {
       return s.sys.id === props.match.params.id
     })
-
     const terms = searchTerms(props)
 
-    // render if it exists
-    if (recordType) {
+    // render message if not found
+    if (!recordType) {
       return (
-        <div className='recordTypeDisplay'>
-          <h1>{recordType.fields.category.fields.name}</h1>
-          <div className='recordTypeFields'>
-            {
-              displayFields.map(field => {
-                if (hideableFields.includes(field) && !recordType.fields[field]) {
-                  return null
-                }
-
-                return (
-                  <RecordField
-                    key={field}
-                    label={getLabel(field)}
-                    field={field}
-                    recordType={recordType}
-                    terms={terms}
-                  />
-                )
-              })
-            }
-          </div>
-        </div>
+        <NotFound />
       )
     }
 
-    // render message if not found
     return (
-      <NotFound />
+      <div className='recordTypeDisplay'>
+        <h1>
+          {recordType.fields.category.fields.name}
+          <RecordTypeNav currentId={props.match.params.id} recordTypes={props.contentReducer.recordTypes} />
+        </h1>
+        <div className='recordTypeFields'>
+          {
+            displayFields.map(field => {
+              if (hideableFields.includes(field) && !recordType.fields[field]) {
+                return null
+              }
+
+              return (
+                <RecordField
+                  key={field}
+                  label={getLabel(field)}
+                  field={field}
+                  recordType={recordType}
+                  terms={terms}
+                />
+              )
+            })
+          }
+        </div>
+      </div>
     )
   }
   return <Loading />
