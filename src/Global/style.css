@@ -64,7 +64,7 @@ mark.term-match {
   }
 
   .no-print {
-    display: none;
+    display: none !important;
   }
 
   mark.term-match {
