@@ -4,6 +4,12 @@ body {
   font-family: sans-serif;
 }
 
+body.noScroll {
+  max-height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
 a,
 a:visited {
   color: #004da3;

@@ -1,0 +1,5 @@
+.recordTypeFields {
+	display: grid;
+	grid-template-columns: repeat(20, minmax(50px, 5%));
+	margin-bottom: 2em;
+}

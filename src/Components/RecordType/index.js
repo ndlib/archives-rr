@@ -1,79 +1,123 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import Loading from 'Components/Shared/Loading'
 import { recordTypesReady } from 'Store/storeReady'
-import { searchTerms } from 'Functions/searchHelpers'
-import RecordField from './RecordField'
 import RecordTypeNav from './RecordTypeNav'
-import { displayFields, hideableFields } from 'Constants/fields'
-import NotFound from 'Components/Shared/NotFound'
+import RecordTypeFields from 'Components/Shared/RecordTypeFields'
+import * as html2canvas from 'html2canvas'
+import * as jsPDF from 'jspdf'
+import LoadingOverlay from 'react-loading-overlay'
+
 import './style.css'
 
-const RecordType = (props) => {
-  if (recordTypesReady(props)) {
-    // get the first (and only) matching recordType from the store
-    const recordType = props.contentReducer.recordTypes.find(s => {
-      return s.sys.id === props.match.params.id
-    })
-    const terms = searchTerms(props)
+class RecordType extends Component {
+  constructor (props) {
+    super(props)
 
-    // render message if not found
-    if (!recordType) {
-      return (
-        <NotFound />
-      )
+    this.state = {
+      isPrinting: false,
     }
 
-    const hiddenFields = displayFields.filter(field => {
-      return hideableFields.find(setting => setting.field === field) && !recordType.fields[field]
+    this.print = this.print.bind(this)
+  }
+
+  print () {
+    const canvasOptions = {
+      width: 1210,
+      windowWidth: Math.max(window.innerWidth, 1210), // Allows all text to be visible even if browser has to scroll
+      windowHeight: Math.max(window.innerHeight, 900 * this.props.recordList.length),
+    }
+    const pdf = jsPDF({
+      orientation: 'landscape',
+      unit: 'in',
+      format: 'letter',
+      compress: true,
     })
+
+    this.setState({
+      isPrinting: true,
+    })
+    // Prevent scrolling by adding a special css class
+    document.body.classList.add('noScroll')
+    // Move to the top of screen. This is important so the canvas captures the right spot
+    window.scrollTo(0, 0)
+
+    // Add all of the pages to the pdf sequentially
+    this.props.recordList.reduce((promiseChain, currentRecord) => {
+      return promiseChain.then(() => {
+        const input = document.getElementById(currentRecord.sys.id)
+        return html2canvas(input, canvasOptions)
+          .then((canvas) => {
+            const imgData = canvas.toDataURL('image/png')
+            const heightFactor = canvas.height / canvas.width // Needed to maintain aspect ratio
+            // Add a new page for every record after the first one
+            if (currentRecord !== this.props.recordList[0]) {
+              pdf.addPage()
+            }
+            pdf.addImage(imgData, 'PNG', 0.2, 0.2, 10.6, 11 * heightFactor - 0.4)
+          })
+      })
+    }, Promise.resolve([])).then(() => {
+      // Save the pdf now that all pages have been added
+      pdf.save('download.pdf')
+
+      document.body.classList.remove('noScroll')
+      this.setState({
+        isPrinting: false,
+      })
+    })
+  }
+
+  render () {
+    if (this.props.isLoading) {
+      return <Loading />
+    }
 
     return (
       <div className='recordTypeDisplay'>
         <h1>
-          {recordType.fields.category.fields.name}
-          <RecordTypeNav currentId={props.match.params.id} recordTypes={props.contentReducer.recordTypes} />
+          {this.props.recordType.fields.category.fields.name}
+          { !this.state.isPrinting && (
+            <RecordTypeNav currentId={this.props.recordId} recordTypes={this.props.recordList} print={this.print} />
+          )}
         </h1>
-        <div className='recordTypeFields'>
-          {
-            displayFields.map(field => {
-              if (hiddenFields.includes(field)) {
-                return null
-              }
-
-              return (
-                <RecordField
-                  key={field}
-                  label={getLabel(field)}
-                  field={field}
-                  recordType={recordType}
-                  terms={terms}
-                  className={
-                    hideableFields.filter(x => x.fillers && x.fillers.includes(field))
-                      .find(y => hiddenFields.includes(y.field)) ? 'fillGap' : ''
-                  }
-                />
-              )
-            })
-          }
-        </div>
+        { (this.state.isPrinting ? this.props.recordList : [this.props.recordType]).map(record => (
+          <RecordTypeFields key={record.sys.id} recordType={record} />
+        ))}
+        <LoadingOverlay
+          active={this.state.isPrinting}
+          text='Saving to PDF...'
+          spinner={<Loading />}
+          className={'printingOverlay'}
+          styles={{
+            overlay: (base) => ({
+              ...base,
+              background: 'rgba(80, 80, 80, 0.5)',
+            }),
+          }}
+        />
       </div>
     )
   }
-  return <Loading />
 }
 
-const getLabel = (field) => {
-  return field
-    .replace(/([A-Z])/g, ' $1')
-    .replace(/^./, (str) => {
-      return str.toUpperCase()
-    })
-}
+const mapStateToProps = (state, ownProps) => {
+  const isLoading = !recordTypesReady(state)
+  const recordId = ownProps.match.params.id
+  const recordList = isLoading ? [] : state.contentReducer.recordTypes.filter((rec) => {
+    return rec.sys.id === recordId || rec.searchResults
+  })
+  const recordType = recordList.find(s => {
+    return s.sys.id === recordId
+  })
 
-const mapStateToProps = (state) => {
-  return { ...state }
+  return {
+    isLoading: isLoading,
+    recordId: recordId,
+    recordList: recordList,
+    recordType: recordType,
+  }
 }
 
 export default withRouter(connect(mapStateToProps)(RecordType))
