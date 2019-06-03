@@ -1,10 +1,10 @@
 .recordTypeDisplay {
-	margin-bottom: 3em;
+	margin-bottom: 2em;
 }
 
 .recordTypeFields {
 	display: grid;
-	grid-template-columns: repeat(4, 25%) ;
+	grid-template-columns: repeat(20, minmax(50px, 5%));
 }
 
 .recordTypeDisplay h1 {
