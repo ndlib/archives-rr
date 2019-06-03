@@ -9,7 +9,7 @@ const RecordTypeNav = (props) => {
   const filteredResults = props.recordTypes.filter((rec) => {
     return rec.sys.id === props.currentId || rec.searchResults
   })
-  const recordIndex = props.recordTypes.findIndex(s => {
+  const recordIndex = filteredResults.findIndex(s => {
     return s.sys.id === props.currentId
   })
   if (recordIndex >= 0) {
