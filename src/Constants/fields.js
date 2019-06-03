@@ -59,8 +59,25 @@ export const dateFields = [
 
 // These fields can be hidden if they are empty
 export const hideableFields = [
-  'officialCopy',
-  'referenceCopy',
-  'referenceCopyDisposition',
-  'referenceCopyDispositionMethod',
+  {
+    field: 'officialCopy',
+    fillers: [ // These columns are expanded if the "field" is hidden so they will fill the gap
+      'retention',
+      'triggerEvent',
+    ],
+  },
+  {
+    field: 'dispositionMethod',
+    fillers: [
+      'disposition',
+    ],
+  },
+  { field: 'referenceCopy' },
+  { field: 'referenceCopyDisposition' },
+  {
+    field: 'referenceCopyDispositionMethod',
+    fillers: [
+      'referenceCopyDisposition',
+    ],
+  },
 ]

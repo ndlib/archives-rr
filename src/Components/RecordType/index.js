@@ -20,13 +20,17 @@ const RecordType = (props) => {
 
     // render if it exists
     if (recordType) {
+      const hiddenFields = displayFields.filter(field => {
+        return hideableFields.find(setting => setting.field === field) && !recordType.fields[field]
+      })
+
       return (
         <div className='recordTypeDisplay'>
           <h1>{recordType.fields.category.fields.name}</h1>
           <div className='recordTypeFields'>
             {
               displayFields.map(field => {
-                if (hideableFields.includes(field) && !recordType.fields[field]) {
+                if (hiddenFields.includes(field)) {
                   return null
                 }
 
@@ -37,6 +41,10 @@ const RecordType = (props) => {
                     field={field}
                     recordType={recordType}
                     terms={terms}
+                    className={
+                      hideableFields.filter(x => x.fillers && x.fillers.includes(field))
+                        .find(y => hiddenFields.includes(y.field)) ? 'fillGap' : ''
+                    }
                   />
                 )
               })

@@ -9,6 +9,7 @@ const RecordField = ({
   label,
   field,
   recordType,
+  className,
   // terms,
 }) => {
   let text = recordType.fields[field]
@@ -22,7 +23,7 @@ const RecordField = ({
   }
 
   return (
-    <div className={`recordTypeField ${field}`}>
+    <div className={`recordTypeField ${field} ${className}`}>
       <label htmlFor={field}>{label}</label>
       <div id={field}>
         <ReactMarkdown source={text} />
