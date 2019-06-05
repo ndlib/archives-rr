@@ -1,14 +1,17 @@
-.recordTypeDisplay {
-	margin-bottom: 2em;
-}
-
-.recordTypeFields {
-	display: grid;
-	grid-template-columns: repeat(20, minmax(50px, 5%));
-}
-
 .recordTypeDisplay h1 {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+}
+
+.printingOverlay {
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100vh;
+	width: 100vw;
+}
+/* prevent overlay from interfering with interaction while not active */
+._loading_overlay_wrapper:not(._loading_overlay_wrapper--active) {
+	z-index: -99999;
 }

@@ -5,20 +5,16 @@ import './style.css'
 const RecordTypeNav = (props) => {
   let prevRecord, nextRecord
 
-  // Get only the record types with search results OR that match the id of the current page
-  const filteredResults = props.recordTypes.filter((rec) => {
-    return rec.sys.id === props.currentId || rec.searchResults
-  })
-  const recordIndex = filteredResults.findIndex(s => {
+  const recordIndex = props.recordTypes.findIndex(s => {
     return s.sys.id === props.currentId
   })
   if (recordIndex >= 0) {
-    prevRecord = filteredResults[recordIndex - 1]
-    nextRecord = filteredResults[recordIndex + 1]
+    prevRecord = props.recordTypes[recordIndex - 1]
+    nextRecord = props.recordTypes[recordIndex + 1]
   }
 
   return (
-    <nav className='no-print'>
+    <nav className='no-print' data-html2canvas-ignore>
       { prevRecord && (
         <Link to={`/recordType/${prevRecord.sys.id}`} className='prevButton'>
           <span className='prevArrow'>{`\u25C0`}</span>Previous
@@ -29,6 +25,10 @@ const RecordTypeNav = (props) => {
           Next<span className='nextArrow'>{`\u25B6`}</span>
         </Link>
       )}
+      <label className='printLabel' onClick={props.print}>
+        <span role='img' aria-label=''>&#128190;</span>
+        <span className='printButton'>{prevRecord || nextRecord ? 'Save All' : 'Save'}</span>
+      </label>
     </nav>
   )
 }
