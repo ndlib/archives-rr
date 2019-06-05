@@ -15,10 +15,25 @@ export const hasSearch = (props) => {
 
 export const getRawQueryTerms = (string) => {
   if (string) {
-    if (string.indexOf(QUERYSEPARATOR) > -1) {
-      string = string.split(QUERYSEPARATOR).shift()
+    if (string.indexOf('&') > -1) {
+      string = string.split('&').shift()
     }
     return decodeURI(string.replace('q=', ''))
+  }
+  return ''
+}
+
+export const getQueryParam = (string, key) => {
+  if (string) {
+    if (string.indexOf(key) === -1) {
+      return ''
+    }
+
+    string = string.split(`&${key}=`).pop()
+    if (string.indexOf('&') > -1) {
+      string = string.split('&').shift()
+    }
+    return decodeURI(string)
   }
   return ''
 }

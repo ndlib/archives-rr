@@ -1,4 +1,5 @@
 .submitSearch {
+  flex: 0 0 auto;
   line-height: 2em;
   padding: 4px 20px;
   vertical-align: top;
