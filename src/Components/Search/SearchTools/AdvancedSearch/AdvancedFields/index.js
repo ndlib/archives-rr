@@ -1,14 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {
-  advancedFieldOptions,
-  triggerEventOptions,
-  dispositionOptions,
-  dispositionMethodOptions,
-  referenceCopyOptions,
-  referenceCopyDispositionOptions,
-  referenceCopyDispositionMethodOptions,
-} from 'Constants/advancedFields'
+import advancedFields, { advancedFieldOptions } from 'Constants/advancedFields'
 import Select from 'react-select'
 
 import AdvancedField from './AdvancedField'
@@ -57,83 +49,23 @@ class AdvancedFields extends Component {
   render () {
     return (
       <React.Fragment>
-
-        <div>
-          <Select
-            value={null}
-            onChange={(activeField) => {
-              this.onChange(activeField)
-            }}
-            options={this.state.availableFields}
-            placeholder='Select a field to search...'
-          />
-        </div>
-        {
-          this.state.activeFields.find(f => {
-            return f.value === 'category'
-          })
-            ? <CategorySearch /> : null
+        <Select
+          value={null}
+          onChange={this.onChange}
+          options={advancedFields.map(field => ({
+            value: field.name,
+            label: field.label,
+          }))}
+          placeholder='Select a field to search...'
+        />
+        { this.state.activeFields.find(f => f.value === 'category') ? <CategorySearch /> : null }
+        { // Insert all (active) generic fields with predefined options in the constants
+          advancedFields.filter(field => field.options && this.state.activeFields.find(f => f.value === field.name))
+            .map(field => (
+              <AdvancedField key={field.name} field={field.name} options={field.options} />
+            ))
         }
-        {
-          this.state.activeFields.find(f => {
-            return f.value === 'triggerEvent'
-          })
-            ? <AdvancedField
-              field={'triggerEvent'}
-              options={triggerEventOptions}
-            /> : null
-        }
-        {
-          this.state.activeFields.find(f => {
-            return f.value === 'disposition'
-          })
-            ? <AdvancedField
-              field={'disposition'}
-              options={dispositionOptions}
-            /> : null
-        }
-        {
-          this.state.activeFields.find(f => {
-            return f.value === 'dispositionMethod'
-          })
-            ? <AdvancedField
-              field={'dispositionMethod'}
-              options={dispositionMethodOptions}
-            /> : null
-        }
-        {
-          this.state.activeFields.find(f => {
-            return f.value === 'referenceCopy'
-          })
-            ? <AdvancedField
-              field={'referenceCopy'}
-              options={referenceCopyOptions}
-            /> : null
-        }
-        {
-          this.state.activeFields.find(f => {
-            return f.value === 'referenceCopyDisposition'
-          })
-            ? <AdvancedField
-              field={'referenceCopyDisposition'}
-              options={referenceCopyDispositionOptions}
-            /> : null
-        }
-        {
-          this.state.activeFields.find(f => {
-            return f.value === 'referenceCopyDispositionMethod'
-          })
-            ? <AdvancedField
-              field={'referenceCopyDispositionMethod'}
-              options={referenceCopyDispositionMethodOptions}
-            /> : null
-        }
-        {
-          this.state.activeFields.find(f => {
-            return f.value === 'dateSearch'
-          })
-            ? <DateSearch /> : null
-        }
+        { this.state.activeFields.find(f => f.value === 'dateSearch') ? <DateSearch /> : null }
       </React.Fragment>
     )
   }

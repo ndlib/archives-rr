@@ -8,9 +8,22 @@
   width: calc(100% - 42px);
 }
 
+.searchBar {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
 .searchField {
+  flex: 1 0 auto;
+  width: 150px;
   font-size: larger;
-  width: calc(100% - 130px);
   line-height: 2em;
   padding: 0 10px;
+}
+
+.termMode {
+  flex: 0 1 auto;
+  width: 250px;
+  line-height: 1.8em;
+  vertical-align: top;
 }

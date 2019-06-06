@@ -1,14 +1,3 @@
-export const advancedFieldOptions = [
-  { value: 'category', label: 'Functional Category' },
-  { value: 'triggerEvent', label: 'Trigger Event' },
-  { value: 'disposition', label: 'Disposition' },
-  { value: 'dispositionMethod', label: 'Disposition Method' },
-  { value: 'referenceCopy', label: 'Reference Copy' },
-  { value: 'referenceCopyDisposition', label: 'Reference Copy Disposition' },
-  { value: 'referenceCopyDispositionMethod', label: 'Reference Copy Disposition Method' },
-  { value: 'dateSearch', label: 'Approved or Revised Date' },
-]
-
 const returnOptions = (type) => {
   return type.map(option => {
     return { value: option, label: option }
@@ -54,7 +43,6 @@ const triggerEventValues = [
   'Maintain in office until no longer needed for reference',
   'Maintain until superseded or obsolete',
 ]
-export const triggerEventOptions = returnOptions(triggerEventValues)
 
 const dispositionValues = [
   'Destroy',
@@ -62,28 +50,38 @@ const dispositionValues = [
   'Transfer to the University Archives for appraisal',
   'Deposit into CurateND',
 ]
-export const dispositionOptions = returnOptions(dispositionValues)
 
 const dispositionMethodValues = [
   'Recycle',
   'Shred',
   'Secure Shred',
 ]
-export const dispositionMethodOptions = returnOptions(dispositionMethodValues)
 
 const referenceCopyValues = [
   'Maintain in office until no longer needed for reference',
 ]
-export const referenceCopyOptions = returnOptions(referenceCopyValues)
 
 const referenceCopyDispositionValues = [
   'Destroy',
 ]
-export const referenceCopyDispositionOptions = returnOptions(referenceCopyDispositionValues)
 
 const referenceCopyDispositionMethodValues = [
   'Recycle',
   'Shred',
   'Secure Shred',
 ]
-export const referenceCopyDispositionMethodOptions = returnOptions(referenceCopyDispositionMethodValues)
+
+const advancedFields = [
+  { name: 'category', label: 'Functional Category' },
+  { name: 'triggerEvent', label: 'Trigger Event', options: returnOptions(triggerEventValues) },
+  { name: 'disposition', label: 'Disposition', options: returnOptions(dispositionValues) },
+  { name: 'dispositionMethod', label: 'Disposition Method', options: returnOptions(dispositionMethodValues) },
+  { name: 'referenceCopy', label: 'Reference Copy', options: returnOptions(referenceCopyValues) },
+  { name: 'referenceCopyDisposition', label: 'Reference Copy Disposition', options: returnOptions(referenceCopyDispositionValues) },
+  { name: 'referenceCopyDispositionMethod', label: 'Reference Copy Disposition Method', options: returnOptions(referenceCopyDispositionMethodValues) },
+  { name: 'dateSearch', label: 'Approved or Revised Date' },
+]
+
+export const advancedFieldOptions = advancedFields.map(entry => ({ value: entry.name, label: entry.label }))
+
+export default advancedFields
