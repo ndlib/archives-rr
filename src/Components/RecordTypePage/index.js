@@ -4,14 +4,14 @@ import { withRouter } from 'react-router'
 import Loading from 'Components/Shared/Loading'
 import { recordTypesReady } from 'Store/storeReady'
 import RecordTypeNav from './RecordTypeNav'
-import RecordTypeFields from 'Components/Shared/RecordTypeFields'
+import RecordType from 'Components/Shared/RecordType'
 import * as html2canvas from 'html2canvas'
 import * as jsPDF from 'jspdf'
 import LoadingOverlay from 'react-loading-overlay'
 
 import './style.css'
 
-class RecordType extends Component {
+class RecordTypePage extends Component {
   constructor (props) {
     super(props)
 
@@ -75,15 +75,12 @@ class RecordType extends Component {
     }
 
     return (
-      <div className='recordTypeDisplay'>
-        <h1>
-          {this.props.recordType.fields.category.fields.name}
-          { !this.state.isPrinting && (
-            <RecordTypeNav currentId={this.props.recordId} recordTypes={this.props.recordList} print={this.print} />
-          )}
-        </h1>
+      <div className='recordTypePage'>
+        { !this.state.isPrinting && (
+          <RecordTypeNav currentId={this.props.recordId} recordTypes={this.props.recordList} print={this.print} />
+        )}
         { (this.state.isPrinting ? this.props.recordList : [this.props.recordType]).map(record => (
-          <RecordTypeFields key={record.sys.id} recordType={record} />
+          <RecordType key={record.sys.id} recordType={record} />
         ))}
         <LoadingOverlay
           active={this.state.isPrinting}
@@ -120,4 +117,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(RecordType))
+export default withRouter(connect(mapStateToProps)(RecordTypePage))

@@ -16,7 +16,7 @@ import Page from './Page'
 import Home from 'Components/Home'
 import Categories from 'Components/Categories'
 import Search from 'Components/Search'
-import RecordType from 'Components/RecordType'
+import RecordTypePage from 'Components/RecordTypePage'
 import NotFound from 'Components/Shared/NotFound'
 
 // create store
@@ -31,7 +31,7 @@ const App = () => {
             <Route exact path='/' component={Home} />
             <Route exact path='/categories' component={Categories} />
             <Route exact path='/search/:search?' component={Search} />
-            <Route exact path='/recordType/:id/:search?' component={RecordType} />
+            <Route exact path='/recordType/:id/:search?' component={RecordTypePage} />
             <Route component={NotFound} />
           </Switch>
         </Page>
