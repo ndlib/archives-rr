@@ -1,3 +1,9 @@
+.recordType h1 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
 .recordTypeFields {
 	display: grid;
 	grid-template-columns: repeat(20, minmax(50px, 5%));

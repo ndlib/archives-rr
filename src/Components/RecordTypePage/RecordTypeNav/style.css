@@ -1,11 +1,13 @@
-.recordTypeDisplay nav {
+.recordTypePage nav {
 	display: inline-flex;
 	flex-flow: row nowrap;
 	align-items: flex-end;
 	justify-content: flex-end;
+	font-size: 2em;
+	float: right;
 }
-.recordTypeDisplay nav .prevButton,
-.recordTypeDisplay nav .nextButton {
+.recordTypePage nav .prevButton,
+.recordTypePage nav .nextButton {
 	display: inline-block;
 	font-size: 0.6em;
 	font-weight: normal;
@@ -13,17 +15,17 @@
 	position: relative;
 	white-space: nowrap;
 }
-.recordTypeDisplay nav .prevArrow,
-.recordTypeDisplay nav .nextArrow {
+.recordTypePage nav .prevArrow,
+.recordTypePage nav .nextArrow {
 	display: inline-block;
 	text-decoration: none;
 	font-size: 0.7em;
 }
-.recordTypeDisplay nav .prevArrow {
+.recordTypePage nav .prevArrow {
 	margin-right: 4px;
 }
 
-.recordTypeDisplay nav .nextArrow {
+.recordTypePage nav .nextArrow {
 	margin-left: 4px;
 }
 
