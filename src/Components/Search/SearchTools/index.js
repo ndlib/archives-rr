@@ -19,6 +19,7 @@ import './style.css'
 const termModeOptions = [
   { value: 'and', label: 'Match ALL terms (AND)' },
   { value: 'or', label: 'Match ANY term (OR)' },
+  { value: 'near', label: 'Terms NEAR each other' },
 ]
 
 class SearchTools extends Component {

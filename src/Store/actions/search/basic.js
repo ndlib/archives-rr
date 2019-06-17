@@ -37,9 +37,32 @@ const basicSearchResults = (terms, termMode, recordTypes) => {
         }
       })
     })
-    // If the termMode is "and", we only want to include results that match all terms
-    if (termMode.toLowerCase() === 'and' && termsFound.length !== terms.length) {
-      results = results.filter(r => r.id !== recordType.sys.id)
+    const searchResult = results.find(r => r.id === recordType.sys.id)
+    if (searchResult && ['and', 'near'].includes(termMode.toLowerCase())) {
+      // If the termMode is "and" or "near", we only want to include results that match all terms
+      if (termsFound.length !== terms.length) {
+        results = results.filter(r => r !== searchResult)
+      }
+      // For near search, use regex to make sure terms are within a limited distance from each other
+      if (termMode.toLowerCase() === 'near') {
+        let termsString = '('
+        terms.forEach((term, index) => {
+          if (index > 0) {
+            termsString += '|'
+          }
+          termsString += term
+        })
+        termsString += ')'
+        const regexString = termsString + ('\\W+(?:\\w+\\W+){0,5}?' + termsString).repeat(terms.length - 1)
+        const rgx = new RegExp(regexString, 'gmi')
+
+        searchResult.fieldsWithTerm = searchResult.fieldsWithTerm.filter(fieldName => {
+          return rgx.test(recordType.fields[fieldName].toLowerCase())
+        })
+        if (!searchResult.fieldsWithTerm.length) {
+          results = results.filter(r => r !== searchResult)
+        }
+      }
     }
   })
   return results
