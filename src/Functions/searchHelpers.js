@@ -63,6 +63,8 @@ export const getAdvancedSearchFromUrl = (string) => {
         } else {
           if (values.length === 2) {
             advancedSearches[values[0]] = values[1]
+          } else if (values.length > 2) {
+            advancedSearches[values[0]] = [...values.splice(1)]
           }
         }
       })
@@ -84,7 +86,10 @@ export const buildAdvancedSearchQuery = (advancedSearchObject) => {
       }
     } else {
       string += `${QUERYSEPARATOR}${key}`
-      string += `${VALUESEPARATOR}${advancedSearchObject[key]}`
+      const valueArr = Array.isArray(advancedSearchObject[key]) ? advancedSearchObject[key] : [ advancedSearchObject[key] ]
+      valueArr.forEach(value => {
+        string += `${VALUESEPARATOR}${value}`
+      })
     }
   })
   return string

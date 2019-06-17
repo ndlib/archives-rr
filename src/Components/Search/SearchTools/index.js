@@ -64,10 +64,6 @@ class SearchTools extends Component {
 
   // function called when search button pressed
   searchSubmit () {
-    let base = 'search'
-    if (this.props.match.params && this.props.match.params.category) {
-      base = `records-by-category/${this.props.match.params.category}`
-    }
     const advancedSearchQuery = buildAdvancedSearchQuery(this.props.searchReducer.advancedSearch)
     const termModeString = `&termMode=${this.state.termMode.value}`
     this.props.search(
@@ -77,7 +73,7 @@ class SearchTools extends Component {
       getAdvancedSearchFromUrl(advancedSearchQuery),
       this.props.dispatch
     )
-    this.props.history.push(`/${base}/q=${this.state.searchValue}${termModeString}${advancedSearchQuery}`)
+    this.props.history.push(`/search/q=${this.state.searchValue}${termModeString}${advancedSearchQuery}`)
   }
 
   // watch searchbox for changes, does not submit new value
