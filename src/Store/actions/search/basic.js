@@ -53,6 +53,7 @@ const basicSearchResults = (terms, termMode, recordTypes) => {
           termsString += term
         })
         termsString += ')'
+        // Formula is basically: (any term) + up to 5 words + (any term), etc for however many terms there are.
         const regexString = termsString + ('\\w*?\\W+(?:\\w+\\W+){0,5}?\\w*?' + termsString).repeat(terms.length - 1)
         const rgx = new RegExp(regexString, 'gmi')
 
