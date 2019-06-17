@@ -53,7 +53,7 @@ const basicSearchResults = (terms, termMode, recordTypes) => {
           termsString += term
         })
         termsString += ')'
-        const regexString = termsString + ('\\W+(?:\\w+\\W+){0,5}?' + termsString).repeat(terms.length - 1)
+        const regexString = termsString + ('\\w*?\\W+(?:\\w+\\W+){0,5}?\\w*?' + termsString).repeat(terms.length - 1)
         const rgx = new RegExp(regexString, 'gmi')
 
         searchResult.fieldsWithTerm = searchResult.fieldsWithTerm.filter(fieldName => {
