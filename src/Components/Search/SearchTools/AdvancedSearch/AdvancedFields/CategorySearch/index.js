@@ -15,7 +15,7 @@ const CategorySearch = (props) => {
   if (!categoriesReady(props)) {
     return null
   }
-  let categories = props.contentReducer.categories.map(category => {
+  let categoryOptions = props.contentReducer.categories.map(category => {
     return {
       value: category.sys.id,
       label: category.fields.name,
@@ -23,17 +23,14 @@ const CategorySearch = (props) => {
   })
 
   // try to set default value
-  let defaultValue = null
+  let categories = []
   if (advancedSearchStoreReady && props.searchReducer.advancedSearch['category']) {
-    const category = props.contentReducer.categories.find(category => {
-      return category.sys.id === props.searchReducer.advancedSearch['category']
+    categories = props.contentReducer.categories.filter(category => {
+      const searchArray = Array.isArray(props.searchReducer.advancedSearch['category'])
+        ? props.searchReducer.advancedSearch['category']
+        : [ props.searchReducer.advancedSearch['category'] ]
+      return searchArray.some(searchCat => searchCat === category.sys.id)
     })
-    if (category) {
-      defaultValue = {
-        label: category.fields.name,
-        value: category.sys.id,
-      }
-    }
   }
 
   const { dispatch } = props
@@ -41,20 +38,24 @@ const CategorySearch = (props) => {
     <div className={`advancedField category`}>
       <label>Functional Category</label>
       <Select
-        value={defaultValue}
-        onChange={(option) => {
-          onChange(option, dispatch)
+        value={categories.map(category => ({
+          label: category.fields.name,
+          value: category.sys.id,
+        }))}
+        onChange={(options) => {
+          onChange(options, dispatch)
         }}
-        options={categories}
+        options={categoryOptions}
         isClearable
+        isMulti
       />
     </div>
   )
 }
 
-const onChange = (option, dispatch) => {
-  if (option) {
-    dispatch(setAdvancedSearch('category', option.value))
+const onChange = (options, dispatch) => {
+  if (Array.isArray(options) && options.length) {
+    dispatch(setAdvancedSearch('category', options.map(opt => opt.value)))
   } else {
     dispatch(removeAdvancedSearch('category'))
   }

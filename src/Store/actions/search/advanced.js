@@ -16,7 +16,8 @@ const advancedSearchResults = (results, recordTypes, advancedSearch) => {
       })
       // category is special because it is a Link field in Contentful
       if (field === 'category') {
-        if (record.fields[field] && record.fields[field].sys.id === advancedSearch[field]) {
+        const categories = Array.isArray(advancedSearch[field]) ? advancedSearch[field] : [ advancedSearch[field] ]
+        if (record.fields[field] && categories.includes(record.fields[field].sys.id)) {
           result.hitCount += 1
           result.fieldsWithTerm.push(field)
           return true
