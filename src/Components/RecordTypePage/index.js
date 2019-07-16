@@ -22,7 +22,7 @@ class RecordTypePage extends Component {
     this.print = this.print.bind(this)
   }
 
-  print () {
+  print (saveAll) {
     const canvasOptions = {
       width: 1210,
       windowWidth: Math.max(window.innerWidth, 1210), // Allows all text to be visible even if browser has to scroll
@@ -43,8 +43,9 @@ class RecordTypePage extends Component {
     // Move to the top of screen. This is important so the canvas captures the right spot
     window.scrollTo(0, 0)
 
+    const list = saveAll ? this.props.recordList : [this.props.recordType]
     // Add all of the pages to the pdf sequentially
-    this.props.recordList.reduce((promiseChain, currentRecord) => {
+    list.reduce((promiseChain, currentRecord) => {
       return promiseChain.then(() => {
         const input = document.getElementById(currentRecord.sys.id)
         return html2canvas(input, canvasOptions)
@@ -52,7 +53,7 @@ class RecordTypePage extends Component {
             const imgData = canvas.toDataURL('image/png')
             const heightFactor = canvas.height / canvas.width // Needed to maintain aspect ratio
             // Add a new page for every record after the first one
-            if (currentRecord !== this.props.recordList[0]) {
+            if (currentRecord !== list[0]) {
               pdf.addPage()
             }
             pdf.addImage(imgData, 'PNG', 0.2, 0.2, 10.6, 11 * heightFactor - 0.4)

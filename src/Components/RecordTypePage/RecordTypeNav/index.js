@@ -25,10 +25,16 @@ const RecordTypeNav = (props) => {
           Next<span className='nextArrow'>{`\u25B6`}</span>
         </Link>
       )}
-      <label className='printLabel' onClick={props.print}>
+      <label className='printLabel' onClick={() => props.print(false)}>
         <span role='img' aria-label=''>&#128190;</span>
-        <span className='printButton'>{prevRecord || nextRecord ? 'Save All' : 'Save'}</span>
+        <span className='printButton'>Save</span>
       </label>
+      { (prevRecord || nextRecord) && (
+        <label className='printLabel' onClick={() => props.print(true)}>
+          <span role='img' aria-label=''>&#128190;</span>
+          <span className='printButton'>Save All</span>
+        </label>
+      )}
     </nav>
   )
 }
