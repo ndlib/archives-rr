@@ -8,6 +8,7 @@ import RecordType from 'Components/Shared/RecordType'
 import * as html2canvas from 'html2canvas'
 import * as jsPDF from 'jspdf'
 import LoadingOverlay from 'react-loading-overlay'
+import PrintFooter from './PrintFooter'
 
 import './style.css'
 
@@ -47,15 +48,21 @@ class RecordTypePage extends Component {
     this.props.recordList.reduce((promiseChain, currentRecord) => {
       return promiseChain.then(() => {
         const input = document.getElementById(currentRecord.sys.id)
-        return html2canvas(input, canvasOptions)
-          .then((canvas) => {
-            const imgData = canvas.toDataURL('image/png')
-            const heightFactor = canvas.height / canvas.width // Needed to maintain aspect ratio
+        const footer = document.getElementById(`printFooter_${currentRecord.sys.id}`)
+        return Promise.all([html2canvas(input, canvasOptions), html2canvas(footer, canvasOptions)])
+          .then((results) => {
+            const [recordCanvas, footerCanvas] = results
+            // Add the record to the pdf
+            const imgData = recordCanvas.toDataURL('image/png')
+            const heightFactor = recordCanvas.height / recordCanvas.width // Needed to maintain aspect ratio
             // Add a new page for every record after the first one
             if (currentRecord !== this.props.recordList[0]) {
               pdf.addPage()
             }
             pdf.addImage(imgData, 'PNG', 0.2, 0.2, 10.6, 11 * heightFactor - 0.4)
+            // Now append the footer
+            const footerImgData = footerCanvas.toDataURL('image/png')
+            pdf.addImage(footerImgData, 'PNG', 0.2, 11 * heightFactor, 10.6, 1)
           })
       })
     }, Promise.resolve([])).then(() => {
@@ -80,7 +87,10 @@ class RecordTypePage extends Component {
           <RecordTypeNav currentId={this.props.recordId} recordTypes={this.props.recordList} print={this.print} />
         )}
         { (this.state.isPrinting ? this.props.recordList : [this.props.recordType]).map(record => (
-          <RecordType key={record.sys.id} recordType={record} />
+          <React.Fragment key={record.sys.id}>
+            <RecordType recordType={record} />
+            <PrintFooter isSaving={this.state.isPrinting} recordId={record.sys.id} />
+          </React.Fragment>
         ))}
         <LoadingOverlay
           active={this.state.isPrinting}

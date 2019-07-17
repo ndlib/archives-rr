@@ -79,6 +79,6 @@ mark.term-match {
 }
 @media screen {
   .print-only {
-    display: none;
+    display: none !important;
   }
 }
