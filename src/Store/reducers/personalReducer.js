@@ -1,7 +1,7 @@
 import {
   REQUEST_TOKEN,
   RECEIVE_TOKEN,
-  RECEIVE_REDIRECT,
+  RECEIVE_NO_LOGIN,
   RECEIVE_VALIDATION_ERROR,
   NOT_FETCHED,
   FETCHING,
@@ -9,7 +9,7 @@ import {
   ERROR,
 } from '../actions/personalActions'
 
-export default (state = { status: NOT_FETCHED, token: null, redirect: null, error: null }, action) => {
+export default (state = { status: NOT_FETCHED, token: null, error: null }, action) => {
   switch (action.type) {
     case REQUEST_TOKEN:
       return {
@@ -23,11 +23,10 @@ export default (state = { status: NOT_FETCHED, token: null, redirect: null, erro
         status: SUCCESS,
         token: action.token,
       }
-    case RECEIVE_REDIRECT:
+    case RECEIVE_NO_LOGIN:
       return {
         ...state,
         status: SUCCESS,
-        redirect: action.redirect,
       }
     case RECEIVE_VALIDATION_ERROR:
       return {
