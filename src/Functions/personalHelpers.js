@@ -2,9 +2,9 @@ import jwt from 'jsonwebtoken'
 
 export const isAuthorized = (token) => {
   const decoded = jwt.decode(token, { complete: false })
-  if (decoded) {
+  if (decoded && decoded.primary_affiliation) {
     // no students allowed
-    if (decoded.affiliation.toLowerCase() === 'staff' || decoded.affiliation.toLowerCase() === 'faculty') {
+    if (decoded.primary_affiliation.toLowerCase() === 'staff' || decoded.primary_affiliation.toLowerCase() === 'faculty') {
       return true
     } else {
       console.warn('Invalid affiliation')

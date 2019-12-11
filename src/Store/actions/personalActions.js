@@ -11,12 +11,10 @@ export const SUCCESS = 'API_STATUS_SUCCESS'
 export const ERROR = 'API_STATUS_ERROR'
 
 export const oktaConfig = {
-  // url: 'https://okta.nd.edu',
-  url: 'https://dev-283656.okta.com/', // dan test
-  // clientId: '', // awaiting real clientId
-  clientId: '0oa1sbw9faQ6lsnTf357', // dan test
+  url: 'https://okta.nd.edu',
+  clientId: '0oa26m9h7s4JPRPFm357', // awaiting real clientId
   redirectUri: `${window.location.origin}/`,
-  // issuer: 'https://okta.nd.edu/oauth2/ausxosq06SDdaFNMB356',
+  issuer: 'https://okta.nd.edu/oauth2/ausxosq06SDdaFNMB356',
   ignoreSignature: true,
   tokenManager: {
     storage: 'sessionStorage',
@@ -32,8 +30,8 @@ export const initLogin = () => {
       'openid',
       'profile',
       'email',
-      // 'netid',
-      // some custom scope to get dept and affiliation???
+      'netid',
+      'directory',
     ],
   })
 }
