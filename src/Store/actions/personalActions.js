@@ -14,7 +14,7 @@ export const oktaConfig = {
   url: 'https://okta.nd.edu',
   clientId: '0oatruwtsGRNzhsKN356',
   // clientId: '0oa26m9h7s4JPRPFm357',
-  redirectUri: `${window.location.origin}/`,
+  redirectUri: `${window.location.origin}/users/auth/oktaoauth/callback`,
   issuer: 'https://okta.nd.edu/oauth2/ausxosq06SDdaFNMB356',
   ignoreSignature: true,
   tokenManager: {
