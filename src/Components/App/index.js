@@ -32,7 +32,6 @@ const App = () => {
             <Route exact path='/categories' component={Categories} />
             <Route exact path='/search/:search?' component={Search} />
             <Route exact path='/recordType/:id/:search?' component={RecordTypePage} />
-            <Route exact path='/users/auth/oktaoauth/callback' component={Home} />
             <Route component={NotFound} />
           </Switch>
         </Page>
