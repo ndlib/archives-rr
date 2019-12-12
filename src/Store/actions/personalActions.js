@@ -13,7 +13,7 @@ export const ERROR = 'API_STATUS_ERROR'
 export const oktaConfig = {
   url: 'https://okta.nd.edu',
   clientId: '0oa26m9h7s4JPRPFm357', // awaiting real clientId
-  redirectUri: `${window.location.origin}/`,
+  redirectUri: `https://archives-retention-test.library.nd.edu`,
   issuer: 'https://okta.nd.edu/oauth2/ausxosq06SDdaFNMB356',
   ignoreSignature: true,
   tokenManager: {
@@ -23,6 +23,7 @@ export const oktaConfig = {
 }
 
 export const initLogin = () => {
+  console.log(oktaConfig.redirectUri)
   const authClient = new OktaAuth(oktaConfig)
   authClient.token.getWithRedirect({
     responseType: 'id_token',
