@@ -12,7 +12,8 @@ export const ERROR = 'API_STATUS_ERROR'
 
 export const oktaConfig = {
   url: 'https://okta.nd.edu',
-  clientId: '0oa26m9h7s4JPRPFm357',
+  clientId: '0oatruwtsGRNzhsKN356',
+  // clientId: '0oa26m9h7s4JPRPFm357',
   redirectUri: `${window.location.origin}/`,
   issuer: 'https://okta.nd.edu/oauth2/ausxosq06SDdaFNMB356',
   ignoreSignature: true,
