@@ -1,6 +1,6 @@
 import React from 'react'
-import { viceroyAPI } from 'Constants/endpoints'
 import './style.css'
+import { initLogin } from 'Store/actions/personalActions'
 
 const UnauthenticatedBody = () => {
   return (
@@ -8,9 +8,10 @@ const UnauthenticatedBody = () => {
       <div className='mainContent'>
         <h1>Unauthenticated</h1>
         <div>Please log in to continue.</div>
-        <a href={`${viceroyAPI}/login`}>
-          <button className='loginButton'>Log in</button>
-        </a>
+        <button
+          className='loginButton'
+          onClick={() => initLogin()}
+        >Log in</button>
       </div>
 
     </div>
