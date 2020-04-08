@@ -23,7 +23,7 @@ export const oktaConfig = {
 }
 
 export const initLogin = () => {
-  console.log(oktaConfig.redirectUri)
+  // console.log(oktaConfig.redirectUri)
   const authClient = new OktaAuth(oktaConfig)
   authClient.token.getWithRedirect({
     responseType: 'id_token',
