@@ -12,7 +12,11 @@ import Loading from 'Components/Shared/Loading'
 const ListOrResults = ({ recordTypes, ...props }) => {
   if (allReady(props)) {
     // if has search set count and branch display
-    const count = hasSearch(props) ? props.searchReducer.results.length : recordTypes.length
+    const searching = hasSearch(props)
+    if (!searching) {
+      return null
+    }
+    const count = props.searchReducer.results.length
     return (
       <>
         <DisplayCount count={count} />

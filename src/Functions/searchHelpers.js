@@ -6,7 +6,8 @@ export const hasSearch = (props) => {
   if (props.match && props.match.params && props.match.params.search) {
     // starts with query operator, but isn't ONLY query operator
     if (props.match.params.search.indexOf('q=') === 0 &&
-     props.match.params.search !== 'q=') {
+      (getQueryParam(props.match.params.search, 'q') !== 'q=' || getQueryParam(props.match.params.search, 'a'))) {
+      console.log('it here')
       return true
     }
   }
@@ -25,7 +26,7 @@ export const getRawQueryTerms = (string) => {
 
 export const getQueryParam = (string, key) => {
   if (string) {
-    if (string.indexOf(key) === -1) {
+    if (string.indexOf(`${key}=`) === -1) {
       return ''
     }
 

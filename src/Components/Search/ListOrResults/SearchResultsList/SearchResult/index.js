@@ -63,11 +63,13 @@ const SearchResult = ({ result, recordTypes, ...props }) => {
           snippetText = (leftText && rightText) ? `${leftText} ... ${rightText}` : `${leftText}...${rightText}`
         }
       }
-      output.push(createElement(el.type, {
-        ...el.props,
-        children: snippetText,
-        key: el.key,
-      }))
+      if (snippetText !== '...') {
+        output.push(createElement(el.type, {
+          ...el.props,
+          children: snippetText,
+          key: el.key,
+        }))
+      }
     })
     return createElement('span', { children: output })
   }
