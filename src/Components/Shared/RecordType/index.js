@@ -22,7 +22,7 @@ const RecordType = (props) => {
 
   return (
     <div className='recordType' id={props.recordType.sys.id}>
-      <h1>{props.recordType.fields.category.fields.name}</h1>
+      <h1 className='recordTypeBanner'>{props.recordType.fields.category.fields.name}</h1>
       <div className='recordTypeFields'>
         {
           displayFields.map(field => {
@@ -46,6 +46,7 @@ const RecordType = (props) => {
           })
         }
       </div>
+      <div className='recordTypeTrailer' />
     </div>
   )
 }
