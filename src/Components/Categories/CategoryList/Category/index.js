@@ -23,13 +23,13 @@ const Category = (props) => {
           <RecordTypesList
             recordTypes={filterRecordsByCategory(props, props.category)}
           />
-          <Link
-            className='lastLink'
-            to={`/search/q=&a=category&v=${props.category.sys.id}`}
-          >
-            <div>View all record types for {props.category.fields.name}.</div>
-          </Link>
         </div>
+        <Link
+          className='lastLink'
+          to={`/search/q=&a=category&v=${props.category.sys.id}`}
+        >
+          <div>View all record types for {props.category.fields.name}.</div>
+        </Link>
       </Toggle>
     )
   }
