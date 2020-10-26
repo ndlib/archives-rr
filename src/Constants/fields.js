@@ -27,7 +27,7 @@ export const displayFields = [
 
 export const searchableFields = [
   'recordType',
-  'schedulId',
+  'scheduleId',
   'recordTypeDescription',
   'officialCopy',
   'retention',
