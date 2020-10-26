@@ -72,11 +72,11 @@ export const recieveValidationFailure = (error) => {
 const handleToken = (dispatch, data) => {
   if (data.idToken) {
     dispatch(
-      recieveToken(data.idToken)
+      recieveToken(data.idToken),
     )
   } else {
     dispatch(
-      recieveNoLogin()
+      recieveNoLogin(),
     )
   }
 }

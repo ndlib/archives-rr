@@ -9,7 +9,7 @@ import {
   ERROR,
 } from '../actions/personalActions'
 
-export default (state = { status: NOT_FETCHED, token: null, error: null }, action) => {
+const reducer = (state = { status: NOT_FETCHED, token: null, error: null }, action) => {
   switch (action.type) {
     case REQUEST_TOKEN:
       return {
@@ -38,3 +38,5 @@ export default (state = { status: NOT_FETCHED, token: null, error: null }, actio
       return state
   }
 }
+
+export default reducer

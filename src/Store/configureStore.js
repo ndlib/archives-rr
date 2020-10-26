@@ -11,8 +11,8 @@ export default function configureStore () {
     rootReducer,
     composeEnhancers(
       applyMiddleware(
-        thunkMiddleware
-      )
-    )
+        thunkMiddleware,
+      ),
+    ),
   )
 }

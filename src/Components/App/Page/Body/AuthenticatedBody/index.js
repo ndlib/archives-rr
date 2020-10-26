@@ -17,12 +17,12 @@ class AuthenticatedBody extends Component {
 
   render () {
     return (
-      <React.Fragment>
+      <>
         <Navigation />
         <div className='container-fluid'>
           <div className='mainContent'>{this.props.children}</div>
         </div>
-      </React.Fragment>
+      </>
     )
   }
 }

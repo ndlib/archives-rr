@@ -11,20 +11,20 @@ class Toggle extends Component {
 
   render () {
     return (
-      <React.Fragment>
+      <>
         <span
           className={this.state.open ? 'less' : 'more'}
           onClick={() => {
             this.setState({ open: !this.state.open })
           }}
-        >{ this.state.open && this.props.labelExpandedContent
+        >{this.state.open && this.props.labelExpandedContent
             ? this.props.labelExpandedContent
-            : this.props.label
-          }</span>
+            : this.props.label}
+        </span>
         <div className={this.state.open ? 'open' : 'closed'}>
-          { this.props.children }
+          {this.props.children}
         </div>
-      </React.Fragment>
+      </>
     )
   }
 }

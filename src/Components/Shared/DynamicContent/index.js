@@ -11,24 +11,23 @@ import Loading from 'Components/Shared/Loading'
 const DynamicContent = ({ slug, children, ...props }) => {
   if (pagesReady(props)) {
     // find the page with matching slug or return a (mostly) empty page object
-    let page = props.contentReducer.pages.find(
+    const page = props.contentReducer.pages.find(
       page => {
         return page.fields.slug === slug
-      }
+      },
     ) || { fields: {} }
 
     return (
-      <React.Fragment>
+      <>
         <h1>{page.fields.name}</h1>
         <div className='text-content'>
           <ReactMarkdown source={page.fields.mainText} />
         </div>
-        { children }
-        { page.fields.afterText
+        {children}
+        {page.fields.afterText
           ? <div className='text-content'><ReactMarkdown source={page.fields.afterText} /></div>
-          : null
-        }
-      </React.Fragment>
+          : null}
+      </>
     )
   }
   return <Loading />

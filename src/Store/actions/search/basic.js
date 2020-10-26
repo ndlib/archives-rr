@@ -4,7 +4,7 @@ const basicSearchResults = (terms, termMode, recordTypes) => {
   let results = []
   // loop through all the searchable field type using each search term
   recordTypes.forEach(recordType => {
-    let termsFound = []
+    const termsFound = []
     terms.forEach(term => {
       searchableFields.forEach(field => {
         // check if the field exists and contains the search term
@@ -12,7 +12,7 @@ const basicSearchResults = (terms, termMode, recordTypes) => {
           if (!termsFound.includes(term)) {
             termsFound.push(term)
           }
-          let result = results.find((r) => {
+          const result = results.find((r) => {
             return r.id === recordType.sys.id
           })
           // if we have a new result add sys.id, field name and set hits to 1
@@ -20,7 +20,8 @@ const basicSearchResults = (terms, termMode, recordTypes) => {
             results.push({
               id: recordType.sys.id,
               fieldsWithTerm: [field],
-              hitCount: 1 })
+              hitCount: 1,
+            })
           } else {
             // if the results exists check to see if we're already found this
             // field (with another term), add field if necessary

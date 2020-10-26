@@ -14,19 +14,21 @@ const ListOrResults = ({ recordTypes, ...props }) => {
     // if has search set count and branch display
     const count = hasSearch(props) ? props.searchReducer.results.length : recordTypes.length
     return (
-      <React.Fragment>
+      <>
         <DisplayCount count={count} />
         {
-          hasSearch(props)
-            ? <SearchResultsList
+          hasSearch(props) ? (
+            <SearchResultsList
               recordTypes={recordTypes}
               results={props.searchReducer.results}
             />
-            : <RecordTypeList
+          ) : (
+            <RecordTypeList
               recordTypes={recordTypes}
             />
+          )
         }
-      </React.Fragment>
+      </>
     )
   }
   return <Loading />

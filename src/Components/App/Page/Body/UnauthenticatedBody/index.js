@@ -11,7 +11,8 @@ const UnauthenticatedBody = () => {
         <button
           className='loginButton'
           onClick={() => initLogin()}
-        >Log in</button>
+        >Log in
+        </button>
       </div>
 
     </div>

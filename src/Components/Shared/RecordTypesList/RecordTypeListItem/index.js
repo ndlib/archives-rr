@@ -6,8 +6,8 @@ import { connect } from 'react-redux'
 const RecordTypeListItem = ({ recordType }) => {
   return (
     <div className='recordTypeRow'>
-      <Link to={`/recordType/${recordType.sys.id}`}
-      >{recordType.fields.recordType}</Link>
+      <Link to={`/recordType/${recordType.sys.id}`}>{recordType.fields.recordType}
+      </Link>
     </div>
   )
 }

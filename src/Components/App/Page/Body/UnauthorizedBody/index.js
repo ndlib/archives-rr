@@ -11,7 +11,8 @@ const UnauthorizedBody = () => {
         <button
           className='logoutButton'
           onClick={() => logOut()}
-        >Log out</button>
+        >Log out
+        </button>
       </div>
 
     </div>

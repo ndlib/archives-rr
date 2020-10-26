@@ -24,7 +24,7 @@ export const fetchContentType = (type, orderField, token) => {
   // setup url
   // This part is for contentful_direct. It should not encode URI components
   // const query = `archiveSecure?locale=en-US&query=`
-  const query = `archiveSecure?locale=en-US&query=`
+  const query = 'archiveSecure?locale=en-US&query='
   // This is passed to Contentful and needs components encoded. (e.g. '&', '=')
   // Get a specific content type
   // Do the ordering here so we don't have to later
@@ -40,7 +40,7 @@ export const fetchContentType = (type, orderField, token) => {
         url, {
           method: 'get',
           headers: {
-            'Authorization': token,
+            Authorization: token,
           },
         }).then(response => {
         if (response.status >= 200 && response.status < 400) {

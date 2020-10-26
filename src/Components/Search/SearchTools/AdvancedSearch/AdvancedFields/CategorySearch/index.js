@@ -15,7 +15,7 @@ const CategorySearch = (props) => {
   if (!categoriesReady(props)) {
     return null
   }
-  let categoryOptions = props.contentReducer.categories.map(category => {
+  const categoryOptions = props.contentReducer.categories.map(category => {
     return {
       value: category.sys.id,
       label: category.fields.name,
@@ -24,18 +24,18 @@ const CategorySearch = (props) => {
 
   // try to set default value
   let categories = []
-  if (advancedSearchStoreReady && props.searchReducer.advancedSearch['category']) {
+  if (advancedSearchStoreReady && props.searchReducer.advancedSearch.category) {
     categories = props.contentReducer.categories.filter(category => {
-      const searchArray = Array.isArray(props.searchReducer.advancedSearch['category'])
-        ? props.searchReducer.advancedSearch['category']
-        : [ props.searchReducer.advancedSearch['category'] ]
+      const searchArray = Array.isArray(props.searchReducer.advancedSearch.category)
+        ? props.searchReducer.advancedSearch.category
+        : [props.searchReducer.advancedSearch.category]
       return searchArray.some(searchCat => searchCat === category.sys.id)
     })
   }
 
   const { dispatch } = props
   return (
-    <div className={`advancedField category`}>
+    <div className='advancedField category'>
       <label>Functional Category</label>
       <Select
         value={categories.map(category => ({
