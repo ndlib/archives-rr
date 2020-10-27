@@ -37,6 +37,7 @@ class AdvancedFields extends Component {
       }),
     })
   }
+
   onChange (activeField) {
     this.setState({
       availableFields: this.state.availableFields.filter((field) => {
@@ -48,7 +49,7 @@ class AdvancedFields extends Component {
 
   render () {
     return (
-      <React.Fragment>
+      <>
         <Select
           value={null}
           onChange={this.onChange}
@@ -58,15 +59,15 @@ class AdvancedFields extends Component {
           }))}
           placeholder='Select a field to search...'
         />
-        { this.state.activeFields.find(f => f.value === 'category') ? <CategorySearch /> : null }
-        { // Insert all (active) generic fields with predefined options in the constants
+        {this.state.activeFields.find(f => f.value === 'category') ? <CategorySearch /> : null}
+        {// Insert all (active) generic fields with predefined options in the constants
           advancedFields.filter(field => field.options && this.state.activeFields.find(f => f.value === field.name))
             .map(field => (
               <AdvancedField key={field.name} field={field.name} options={field.options} />
             ))
         }
-        { this.state.activeFields.find(f => f.value === 'dateSearch') ? <DateSearch /> : null }
-      </React.Fragment>
+        {this.state.activeFields.find(f => f.value === 'dateSearch') ? <DateSearch /> : null}
+      </>
     )
   }
 }

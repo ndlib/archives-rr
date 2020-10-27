@@ -7,7 +7,7 @@ import {
 } from '../actions/contentActions'
 
 // populate the store based on they type of content received in the action
-export default (state = {}, action) => {
+const reducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_CATEGORIES:
       return {
@@ -38,3 +38,5 @@ export default (state = {}, action) => {
       return state
   }
 }
+
+export default reducer

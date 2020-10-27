@@ -9,10 +9,10 @@ const Search = (props) => {
   if (contentStoreReady(props)) {
     const recordTypes = props.contentReducer.recordTypes || []
     return (
-      <React.Fragment>
+      <>
         <SearchTools />
         <ListOrResults recordTypes={recordTypes} />
-      </React.Fragment>
+      </>
     )
   }
   return <Loading />

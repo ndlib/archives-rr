@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import printStamp from './images/printStamp.png'
-import 'Global/style.css'
 import './style.css'
 
 const SITE_HOME = `${window.location.protocol}//${window.location.host}`

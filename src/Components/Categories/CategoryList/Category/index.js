@@ -15,7 +15,8 @@ const Category = (props) => {
         label={
           <h2
             className='functionalCategory'
-          >{props.category.fields.name}</h2>
+          >{props.category.fields.name}
+          </h2>
         }
       >
         <div className='collapseList'>
@@ -24,8 +25,8 @@ const Category = (props) => {
           />
           <Link
             className='lastLink'
-            to={`/search/q=&a=category&v=${props.category.sys.id}`
-            }>
+            to={`/search/q=&a=category&v=${props.category.sys.id}`}
+          >
             <div>View all record types for {props.category.fields.name}.</div>
           </Link>
         </div>
@@ -41,7 +42,7 @@ const filterRecordsByCategory = (props, category) => {
     recordTypes = recordTypes.filter(
       recordType => {
         return recordType.fields.category.sys.id === category.sys.id
-      }
+      },
     )
   }
   return recordTypes

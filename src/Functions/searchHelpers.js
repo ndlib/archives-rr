@@ -46,7 +46,7 @@ export const hasAdvancedSearch = (string) => {
 }
 
 export const getAdvancedSearchFromUrl = (string) => {
-  let advancedSearches = {}
+  const advancedSearches = {}
   if (string) {
     const advancedFields = string.split(QUERYSEPARATOR)
     if (advancedFields.length > 1) {
@@ -86,7 +86,7 @@ export const buildAdvancedSearchQuery = (advancedSearchObject) => {
       }
     } else {
       string += `${QUERYSEPARATOR}${key}`
-      const valueArr = Array.isArray(advancedSearchObject[key]) ? advancedSearchObject[key] : [ advancedSearchObject[key] ]
+      const valueArr = Array.isArray(advancedSearchObject[key]) ? advancedSearchObject[key] : [advancedSearchObject[key]]
       valueArr.forEach(value => {
         string += `${VALUESEPARATOR}${value}`
       })
@@ -98,7 +98,7 @@ export const splitTerms = (searchString) => {
   // split terms on space in string, but keep terms inside double quotes as
   // a single term
   const myRegexp = /[^\s"]+|"([^"]*)"/gi
-  let terms = []
+  const terms = []
   // Each call to exec returns the next regex match as an array
   let match
   do {

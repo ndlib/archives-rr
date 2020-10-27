@@ -17,12 +17,16 @@ const FooterLinks = () => {
           </div>
           <div className='box rightLinks'>
             <ul>
-              <li><a href='http://twitter.com/ndlibraries' target='_blank' rel='noopener noreferrer'>
-                <img src='https://resources.library.nd.edu/frame/images/twitter.png' alt='Twitter' /> NDLibraries
-              </a></li>
-              <li><a href='https://www.facebook.com/ndlibraries/' target='_blank' rel='noopener noreferrer'>
-                <img src='https://resources.library.nd.edu/frame/images/facebook.png' alt='Facebook' /> NDLibraries
-              </a></li>
+              <li>
+                <a href='http://twitter.com/ndlibraries' target='_blank' rel='noopener noreferrer'>
+                  <img src='https://resources.library.nd.edu/frame/images/twitter.png' alt='Twitter' /> NDLibraries
+                </a>
+              </li>
+              <li>
+                <a href='https://www.facebook.com/ndlibraries/' target='_blank' rel='noopener noreferrer'>
+                  <img src='https://resources.library.nd.edu/frame/images/facebook.png' alt='Facebook' /> NDLibraries
+                </a>
+              </li>
             </ul>
           </div>
         </div>

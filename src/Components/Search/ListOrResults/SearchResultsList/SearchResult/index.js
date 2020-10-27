@@ -14,7 +14,7 @@ const SearchResult = ({ result, recordTypes, ...props }) => {
   const recordFromResult = recordTypes.find(
     record => {
       return record.sys.id === result.id
-    }
+    },
   ) || { id: '', fieldsWithTerm: [], hitCount: 0 }
 
   const makeSnippets = (textElements) => {
@@ -82,7 +82,7 @@ const SearchResult = ({ result, recordTypes, ...props }) => {
           textToHighlight={recordFromResult.fields.recordType}
         />
       </Link>
-      { result.fieldsWithTerm.map(field => {
+      {result.fieldsWithTerm.map(field => {
         // don't repeat the recordType field because that's the "name"
         // don't display functional category because it's different
         if (field === 'recordType' || field === 'category') {

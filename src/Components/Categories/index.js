@@ -5,11 +5,11 @@ import CategoryList from './CategoryList'
 
 const Categories = () => {
   return (
-    <React.Fragment>
-      <DynamicContent slug={'categories'}>
+    <>
+      <DynamicContent slug='categories'>
         <CategoryList />
       </DynamicContent>
-    </React.Fragment>
+    </>
   )
 }
 

@@ -9,20 +9,25 @@ const Navigation = () => {
       <div className='container-fluid'>
         <Link
           to='/'
-        >Home</Link>
+        >Home
+        </Link>
         <NavLink
           to='/categories'
           activeClassName='active'
-        >Categories</NavLink>
+        >Categories
+        </NavLink>
         <NavLink
           to='/search'
           activeClassName='active'
-        >Search</NavLink>
+        >Search
+        </NavLink>
         <span className='right'>
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a
-            href={`#`}
+            href='#'
             onClick={() => logOut()}
-          >Log Out</a>
+          >Log Out
+          </a>
         </span>
       </div>
     </nav>

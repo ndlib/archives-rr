@@ -41,7 +41,7 @@ class SearchTools extends Component {
       this.state.termMode.value,
       this.props.contentReducer.recordTypes,
       getAdvancedSearchFromUrl(this.props.match.params.search),
-      this.props.dispatch
+      this.props.dispatch,
     )
   }
 
@@ -53,7 +53,7 @@ class SearchTools extends Component {
         this.state.termMode.value,
         nextProps.contentReducer.recordTypes,
         getAdvancedSearchFromUrl(nextProps.match.params.search),
-        nextProps.dispatch
+        nextProps.dispatch,
       )
     }
   }
@@ -71,7 +71,7 @@ class SearchTools extends Component {
       this.state.termMode.value,
       this.props.contentReducer.recordTypes,
       getAdvancedSearchFromUrl(advancedSearchQuery),
-      this.props.dispatch
+      this.props.dispatch,
     )
     this.props.history.push(`/search/q=${this.state.searchValue}${termModeString}${advancedSearchQuery}`)
   }
@@ -136,5 +136,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps,
-    mergeProps
+    mergeProps,
   )(SearchTools))

@@ -5,7 +5,8 @@ const SubmitSearch = ({ onSubmit }) => {
     <button
       className='submitSearch'
       onClick={onSubmit}
-    >Search</button>
+    >Search
+    </button>
   )
 }
 

@@ -3,7 +3,7 @@ const dateSearchResults = (results, recordTypes, dateSearch) => {
   // filter results
   results = results.filter(result => {
     // find the original record
-    let record = recordTypes.find(r => {
+    const record = recordTypes.find(r => {
       return r.sys.id === result.id
     })
     // try and update the record based on the dateSearch

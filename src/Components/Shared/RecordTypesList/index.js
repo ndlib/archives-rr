@@ -10,7 +10,7 @@ import { recordTypesReady } from 'Store/storeReady'
 const RecordTypeList = (props) => {
   if (recordTypesReady(props)) {
     return (
-      <React.Fragment>
+      <>
         {
           props.recordTypes.map(
             recordType => {
@@ -20,10 +20,10 @@ const RecordTypeList = (props) => {
                   recordType={recordType}
                 />
               )
-            }
+            },
           )
         }
-      </React.Fragment>
+      </>
     )
   }
   return <Loading />

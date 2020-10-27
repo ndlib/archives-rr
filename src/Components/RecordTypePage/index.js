@@ -84,10 +84,10 @@ class RecordTypePage extends Component {
 
     return (
       <div className='recordTypePage'>
-        { !this.state.isPrinting && (
+        {!this.state.isPrinting && (
           <RecordTypeNav currentId={this.props.recordId} recordTypes={this.props.recordList} print={this.print} />
         )}
-        { (this.state.isPrinting ? this.props.recordList : [this.props.recordType]).map(record => (
+        {(this.state.isPrinting ? this.props.recordList : [this.props.recordType]).map(record => (
           <React.Fragment key={record.sys.id}>
             <RecordType recordType={record} />
             <PrintFooter isSaving={this.state.isPrinting} recordId={record.sys.id} />
@@ -97,7 +97,7 @@ class RecordTypePage extends Component {
           active={this.state.isPrinting}
           text='Saving to PDF...'
           spinner={<Loading />}
-          className={'printingOverlay'}
+          className='printingOverlay'
           styles={{
             overlay: (base) => ({
               ...base,

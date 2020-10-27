@@ -16,12 +16,12 @@ const CategoryList = (props) => {
     return (
       <div className='categoryList'>
         <div className='categoryListColumn'>
-          { categories.slice(0, maxPerColumn).map((category) => (
+          {categories.slice(0, maxPerColumn).map((category) => (
             <Category key={category.sys.id} category={category} />
           ))}
         </div>
         <div className='categoryListColumn'>
-          { categories.slice(maxPerColumn, maxPerColumn * 2).map((category) => (
+          {categories.slice(maxPerColumn, maxPerColumn * 2).map((category) => (
             <Category key={category.sys.id} category={category} />
           ))}
         </div>

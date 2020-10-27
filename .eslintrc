@@ -3,12 +3,17 @@
   "extends": [
     "standard",
     "standard-react",
-    "react-app"
+    "react-app",
+    "plugin:import/errors",
+    "plugin:import/warnings"
   ],
   "plugins": [
     "babel",
     "react",
-    "promise"
+    "react-hooks",
+    "promise",
+    "jsx-a11y",
+    "import"
   ],
   "env": {
     "browser" : true
@@ -30,8 +35,26 @@
     "no-unused-vars"        : [1, { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],
     "no-var"              : 1,
     "object-curly-spacing"  : [2, "always"],
+    "prefer-const"                : [1, {
+      "destructuring"               : "any",
+      "ignoreReadBeforeAssign"      : true
+    }],
     "react/prop-types"      : 0,
+    "react/jsx-fragments"         : 0,
+    "react/jsx-handler-names"     : 0,
+    "react-hooks/rules-of-hooks"  : "error",
     "semi"                  : [2, "never"],
-    "space-in-parens"       : ["error", "never"]
+    "space-in-parens"       : ["error", "never"],
+    "space-before-function-paren" : 0,
+    "import/no-unresolved"        : 0, # It doesn't always get it right by default, and resolution is complicated
+    "import/extensions"           : [2, {
+      "js"    : "never",
+      "jsx"   : "never",
+      "png"   : "always",
+      "jpeg"  : "always",
+      "jpg"   : "always",
+      "gif"   : "always",
+      "svg"   : "always"
+    }]
   }
 }
