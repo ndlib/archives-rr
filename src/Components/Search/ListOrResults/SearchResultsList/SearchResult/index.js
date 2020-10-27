@@ -76,7 +76,7 @@ const SearchResult = ({ result, recordTypes, ...props }) => {
 
   return (
     <div className='result'>
-      <Link to={`/recordType/${result.id}/${props.match.params.search}`}>
+      <Link to={`/recordType/${result.id}?${props.match.params.search}`}>
         <Highligter
           highlightClassName='term-match'
           searchWords={searchWords}

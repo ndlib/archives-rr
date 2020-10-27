@@ -3,13 +3,19 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
 import DisplayCount from './DisplayCount'
-import RecordTypeList from 'Components/Shared/RecordTypesList'
 import SearchResultsList from './SearchResultsList'
+import DownloadAll from 'Components/RecordTypePage/RecordTypeNav/DownloadAll'
 import { allReady } from 'Store/storeReady'
 import { hasSearch } from 'Functions/searchHelpers'
 import Loading from 'Components/Shared/Loading'
+import './style.css'
 
 const ListOrResults = ({ recordTypes, ...props }) => {
+  const download = () => {
+    const url = `/recordType/${props.searchReducer.results[0].id}?download=true&${props.match.params.search}`
+    props.history.push(url)
+  }
+
   if (allReady(props)) {
     // if has search set count and branch display
     const searching = hasSearch(props)
@@ -19,19 +25,16 @@ const ListOrResults = ({ recordTypes, ...props }) => {
     const count = props.searchReducer.results.length
     return (
       <>
-        <DisplayCount count={count} />
-        {
-          hasSearch(props) ? (
-            <SearchResultsList
-              recordTypes={recordTypes}
-              results={props.searchReducer.results}
-            />
-          ) : (
-            <RecordTypeList
-              recordTypes={recordTypes}
-            />
-          )
-        }
+        <div className='searchResultsInfoBar'>
+          <DisplayCount count={count} />
+          {count > 0 && (
+            <DownloadAll onClick={download} />
+          )}
+        </div>
+        <SearchResultsList
+          recordTypes={recordTypes}
+          results={props.searchReducer.results}
+        />
       </>
     )
   }

@@ -7,7 +7,6 @@ export const hasSearch = (props) => {
     // starts with query operator, but isn't ONLY query operator
     if (props.match.params.search.indexOf('q=') === 0 &&
       (getQueryParam(props.match.params.search, 'q') !== 'q=' || getQueryParam(props.match.params.search, 'a'))) {
-      console.log('it here')
       return true
     }
   }

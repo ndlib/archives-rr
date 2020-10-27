@@ -10,7 +10,7 @@
 .recordTypePage nav .prevButton,
 .recordTypePage nav .nextButton {
 	display: inline-block;
-	font-size: 0.6em;
+	font-size: 1.2rem;
 	font-weight: normal;
 	margin-left: 1em;
 	position: relative;
@@ -31,7 +31,7 @@
 }
 
 .printLabel {
-	font-size: 0.6em;
+	font-size: 1.2rem;
 	font-weight: normal;
 	margin-left: 1em;
 	position: relative;

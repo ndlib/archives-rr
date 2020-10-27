@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import DownloadAll from './DownloadAll'
 import './style.css'
 
 const RecordTypeNav = (props) => {
@@ -13,15 +14,16 @@ const RecordTypeNav = (props) => {
     nextRecord = props.recordTypes[recordIndex + 1]
   }
 
+  const queryString = props.location.search || ''
   return (
     <nav className='no-print' data-html2canvas-ignore>
       {prevRecord && (
-        <Link to={`/recordType/${prevRecord.sys.id}`} className='prevButton'>
+        <Link to={`/recordType/${prevRecord.sys.id}${queryString}`} className='prevButton'>
           <span className='prevArrow'>{'\u25C0'}</span>Previous
         </Link>
       )}
       {nextRecord && (
-        <Link to={`/recordType/${nextRecord.sys.id}`} className='nextButton'>
+        <Link to={`/recordType/${nextRecord.sys.id}${queryString}`} className='nextButton'>
           Next<span className='nextArrow'>{'\u25B6'}</span>
         </Link>
       )}
@@ -30,10 +32,7 @@ const RecordTypeNav = (props) => {
         <span className='printButton'>Download</span>
       </label>
       {(prevRecord || nextRecord) && (
-        <label className='printLabel' onClick={() => props.print(true)}>
-          <span role='img' aria-label=''>&#128190;</span>&nbsp;
-          <span className='printButton'>Download All</span>
-        </label>
+        <DownloadAll onClick={() => props.print(true)} />
       )}
     </nav>
   )
