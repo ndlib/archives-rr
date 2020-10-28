@@ -70,11 +70,22 @@ class RecordTypePage extends Component {
       // Save the pdf now that all pages have been added
       pdf.save('download.pdf')
 
-      document.body.classList.remove('noScroll')
-      this.setState({
-        isPrinting: false,
-      })
+      if (this.props.instantDownload) {
+        // Redirect back to the previous page they clicked on download from.
+        this.props.history.goBack()
+      } else {
+        document.body.classList.remove('noScroll')
+        this.setState({
+          isPrinting: false,
+        })
+      }
     })
+  }
+
+  componentDidUpdate () {
+    if (!this.props.isLoading && this.props.instantDownload && !this.state.isPrinting) {
+      this.print(this.props.recordList.length)
+    }
   }
 
   render () {
@@ -85,7 +96,12 @@ class RecordTypePage extends Component {
     return (
       <div className='recordTypePage'>
         {!this.state.isPrinting && (
-          <RecordTypeNav currentId={this.props.recordId} recordTypes={this.props.recordList} print={this.print} />
+          <RecordTypeNav
+            currentId={this.props.recordId}
+            recordTypes={this.props.recordList}
+            print={this.print}
+            location={this.props.location}
+          />
         )}
         {(this.state.isPrinting ? this.props.recordList : [this.props.recordType]).map(record => (
           <React.Fragment key={record.sys.id}>
@@ -119,12 +135,13 @@ const mapStateToProps = (state, ownProps) => {
   const recordType = recordList.find(s => {
     return s.sys.id === recordId
   })
-
+  const searchParams = new URLSearchParams(ownProps.location.search)
   return {
     isLoading: isLoading,
     recordId: recordId,
     recordList: recordList,
     recordType: recordType,
+    instantDownload: searchParams.get('download') === 'true',
   }
 }
 
