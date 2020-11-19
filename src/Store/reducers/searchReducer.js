@@ -13,6 +13,7 @@ const reducer = (state = {}, action) => {
         ...state,
         advancedSearch: action.advancedSearch,
         terms: action.terms,
+        field: action.field,
         searching: true,
         results: [],
       }

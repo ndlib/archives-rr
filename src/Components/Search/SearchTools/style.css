@@ -22,7 +22,8 @@
   padding: 0 10px;
 }
 
-.termMode {
+.termMode,
+.fieldSearch {
   flex: 0 1 auto;
   width: 250px;
   line-height: 1.8em;

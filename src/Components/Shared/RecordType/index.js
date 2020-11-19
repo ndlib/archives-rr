@@ -1,7 +1,7 @@
 import React from 'react'
 import { searchTerms } from 'Functions/searchHelpers'
 import RecordField from './RecordField'
-import { displayFields, hideableFields } from 'Constants/fields'
+import { displayFields, hideableFields, getLabel } from 'Constants/fields'
 import NotFound from 'Components/Shared/NotFound'
 
 import './style.css'
@@ -49,14 +49,6 @@ const RecordType = (props) => {
       <div className='recordTypeTrailer' />
     </div>
   )
-}
-
-const getLabel = (field) => {
-  return field
-    .replace(/([A-Z])/g, ' $1')
-    .replace(/^./, (str) => {
-      return str.toUpperCase()
-    })
 }
 
 export default RecordType

@@ -81,3 +81,12 @@ export const hideableFields = [
     ],
   },
 ]
+
+// Basically just proper camel case -> proper case
+export const getLabel = (field) => {
+  return field
+    .replace(/([A-Z])/g, ' $1')
+    .replace(/^./, (str) => {
+      return str.toUpperCase()
+    })
+}
