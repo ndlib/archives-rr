@@ -79,7 +79,7 @@ const SearchResult = ({ result, recordTypes, ...props }) => {
       <Link to={`/recordType/${result.id}?${props.match.params.search}`}>
         <Highligter
           highlightClassName='term-match'
-          searchWords={searchWords}
+          searchWords={result.fieldsWithTerm.includes('recordType') ? searchWords : []}
           autoEscape
           textToHighlight={recordFromResult.fields.recordType}
         />
@@ -99,7 +99,7 @@ const SearchResult = ({ result, recordTypes, ...props }) => {
             {
               makeSnippets(Highligter({
                 highlightClassName: 'term-match',
-                searchWords: searchWords,
+                searchWords: result.fieldsWithTerm.includes(field) ? searchWords : [],
                 autoEscape: true,
                 textToHighlight: recordFromResult.fields[field],
               }).props.children)

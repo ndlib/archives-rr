@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import Select from 'react-select'
 
+import { searchableFields, getLabel } from 'Constants/fields'
 import { submitSearch, clearSearch } from 'Store/actions/searchActions'
 import SubmitSearch from './SubmitSearch'
 import AdvancedSearch from './AdvancedSearch'
@@ -16,6 +17,13 @@ import {
 } from 'Functions/searchHelpers'
 import './style.css'
 
+const fieldSearchOptions = [
+  { value: 'all', label: 'All Fields' },
+].concat(searchableFields.map(fieldName => ({
+  value: fieldName,
+  label: getLabel(fieldName),
+})))
+
 const termModeOptions = [
   { value: 'and', label: 'Match ALL terms (AND)' },
   { value: 'or', label: 'Match ANY term (OR)' },
@@ -27,18 +35,21 @@ class SearchTools extends Component {
     super(props)
     this.state = {
       searchValue: hasSearch(props) ? getRawQueryTerms(this.props.match.params.search) : '',
+      fieldSearch: fieldSearchOptions.find(opt => opt.value === (getQueryParam(this.props.match.params.search, 'field') || 'all')),
       termMode: termModeOptions.find(opt => opt.value === (getQueryParam(this.props.match.params.search, 'termMode') || 'or')),
     }
     this.searchFieldOnChange = this.searchFieldOnChange.bind(this)
     this.searchSubmit = this.searchSubmit.bind(this)
     this.submitOnEnter = this.submitOnEnter.bind(this)
     this.onChangeTermMode = this.onChangeTermMode.bind(this)
+    this.onChangeFieldSearch = this.onChangeFieldSearch.bind(this)
   }
 
   componentDidMount () {
     this.props.search(
       splitTerms(this.state.searchValue),
       this.state.termMode.value,
+      this.state.fieldSearch.value,
       this.props.contentReducer.recordTypes,
       getAdvancedSearchFromUrl(this.props.match.params.search),
       this.props.dispatch,
@@ -51,6 +62,7 @@ class SearchTools extends Component {
       nextProps.search(
         splitTerms(this.state.searchValue),
         this.state.termMode.value,
+        this.state.fieldSearch.value,
         nextProps.contentReducer.recordTypes,
         getAdvancedSearchFromUrl(nextProps.match.params.search),
         nextProps.dispatch,
@@ -65,15 +77,21 @@ class SearchTools extends Component {
   // function called when search button pressed
   searchSubmit () {
     const advancedSearchQuery = buildAdvancedSearchQuery(this.props.searchReducer.advancedSearch)
-    const termModeString = `&termMode=${this.state.termMode.value}`
+    const queryParams = [
+      { key: 'q', value: this.state.searchValue },
+      { key: 'termMode', value: this.state.termMode.value },
+      { key: 'field', value: this.state.fieldSearch.value },
+    ].map(param => `${param.key}=${param.value}`).join('&')
+
     this.props.search(
       splitTerms(this.state.searchValue),
       this.state.termMode.value,
+      this.state.fieldSearch.value,
       this.props.contentReducer.recordTypes,
       getAdvancedSearchFromUrl(advancedSearchQuery),
       this.props.dispatch,
     )
-    this.props.history.push(`/search/q=${this.state.searchValue}${termModeString}${advancedSearchQuery}`)
+    this.props.history.push(`/search/${queryParams}${advancedSearchQuery}`)
   }
 
   // watch searchbox for changes, does not submit new value
@@ -91,6 +109,10 @@ class SearchTools extends Component {
 
   onChangeTermMode (selectedOption) {
     this.setState({ termMode: selectedOption })
+  }
+
+  onChangeFieldSearch (selectedOption) {
+    this.setState({ fieldSearch: selectedOption })
   }
 
   render () {
@@ -111,6 +133,7 @@ class SearchTools extends Component {
             }}
             autoComplete='off'
           />
+          <Select className='fieldSearch' options={fieldSearchOptions} value={this.state.fieldSearch} onChange={this.onChangeFieldSearch} />
           <Select className='termMode' options={termModeOptions} value={this.state.termMode} onChange={this.onChangeTermMode} />
           <SubmitSearch searchBoxValue={this.state.searchValue} props={this.props} onSubmit={this.searchSubmit} />
         </div>
@@ -127,8 +150,8 @@ const mapDispatchToProps = (dispatch) => ({ dispatch })
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   // normally dispatch should be called in mapDispatchToProps, but we need to
   // know the current route, which is unavailable until we merge props
-  const search = (terms, termMode, recordTypes, advancedSearch, dispatch) => {
-    dispatch(submitSearch(terms, termMode, recordTypes, advancedSearch))
+  const search = (terms, termMode, fieldSearch, recordTypes, advancedSearch, dispatch) => {
+    dispatch(submitSearch(terms, termMode, fieldSearch, recordTypes, advancedSearch))
   }
   return { ...stateProps, ...dispatchProps, ...ownProps, search }
 }
