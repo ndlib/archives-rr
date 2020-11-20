@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { logOut } from 'Store/actions/personalActions'
+import ViewDropdown from './ViewDropdown'
 import './style.css'
 
 const Navigation = () => {
@@ -22,6 +23,7 @@ const Navigation = () => {
         >Search
         </NavLink>
         <span className='right'>
+          <ViewDropdown />
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a
             href='#'

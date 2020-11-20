@@ -1,0 +1,13 @@
+.viewAsDropdown {
+  display: inline-block;
+}
+
+.viewAsDropdown select {
+  border-radius: 6px;
+  font-size: 1rem;
+  padding: 0.25rem;
+}
+
+.viewAsText {
+  margin-right: 0.5em;
+}

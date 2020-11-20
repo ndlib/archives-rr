@@ -18,7 +18,7 @@ const RecordType = (props) => {
 
   const hiddenFields = displayFields.filter(field => {
     return hideableFields.find(setting => setting.field === field) && !props.recordType.fields[field]
-  })
+  }).concat(props.hideFields)
 
   return (
     <div className='recordType' id={props.recordType.sys.id}>

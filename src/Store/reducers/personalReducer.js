@@ -3,6 +3,7 @@ import {
   RECEIVE_TOKEN,
   RECEIVE_NO_LOGIN,
   RECEIVE_VALIDATION_ERROR,
+  SET_VIEW,
   NOT_FETCHED,
   FETCHING,
   SUCCESS,
@@ -22,6 +23,8 @@ const reducer = (state = { status: NOT_FETCHED, token: null, error: null }, acti
         ...state,
         status: SUCCESS,
         token: action.token,
+        role: action.role,
+        view: action.role,
       }
     case RECEIVE_NO_LOGIN:
       return {
@@ -33,6 +36,11 @@ const reducer = (state = { status: NOT_FETCHED, token: null, error: null }, acti
         ...state,
         status: ERROR,
         error: action.error,
+      }
+    case SET_VIEW:
+      return {
+        ...state,
+        view: action.view,
       }
     default:
       return state

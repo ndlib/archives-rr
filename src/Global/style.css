@@ -57,6 +57,32 @@ mark.term-match {
   clear: both;
 }
 
+.prettyButton {
+  border: 0;
+	border-radius: 2em;
+  color: #FFFFFF;
+	display: inline-block;
+	padding: 0.3em 1.2em;
+	box-sizing: border-box;
+	text-decoration: none;
+	font-family: 'Roboto',sans-serif;
+	font-weight: 300;
+	background-color: #2F5496;
+	text-align: center;
+	transition: all 0.2s;
+}
+.prettyButton:hover {
+	background-color: #4095c6;
+  cursor: pointer;
+}
+
+@media all and (max-width: 30em) {
+ .prettyButton {
+		display: block;
+		margin: 0.2em auto;
+	}
+}
+
 @media screen and (max-width: 780px) {
   .row {
     margin: 0 !important;

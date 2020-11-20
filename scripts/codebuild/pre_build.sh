@@ -1,5 +1,6 @@
 #!/bin/bash
 
-# echo "----- Tests ------"
+echo "----- PRE-BUILD -----"
 
-# yarn test-inline || { echo "React Tests Failed"; exit 1; }
+echo -e "\nFetching application configuration..."
+node ./scripts/buildConfig.js stage=$STAGE || { echo "Building config file failed"; exit 1; }

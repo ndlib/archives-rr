@@ -9,6 +9,7 @@ import * as html2canvas from 'html2canvas'
 import * as jsPDF from 'jspdf'
 import LoadingOverlay from 'react-loading-overlay'
 import PrintFooter from './PrintFooter'
+import { restrictedFields } from 'Constants/fields'
 
 import './style.css'
 
@@ -96,16 +97,21 @@ class RecordTypePage extends Component {
     return (
       <div className='recordTypePage'>
         {!this.state.isPrinting && (
-          <RecordTypeNav
-            currentId={this.props.recordId}
-            recordTypes={this.props.recordList}
-            print={this.print}
-            location={this.props.location}
-          />
+          <React.Fragment>
+            <RecordTypeNav
+              currentId={this.props.recordId}
+              recordTypes={this.props.recordList}
+              print={this.print}
+              location={this.props.location}
+            />
+          </React.Fragment>
         )}
         {(this.state.isPrinting ? this.props.recordList : [this.props.recordType]).map(record => (
           <React.Fragment key={record.sys.id}>
-            <RecordType recordType={record} />
+            <RecordType
+              recordType={record}
+              hideFields={!this.props.isAdminView ? restrictedFields : []}
+            />
             <PrintFooter isSaving={this.state.isPrinting} recordId={record.sys.id} />
           </React.Fragment>
         ))}
@@ -142,6 +148,7 @@ const mapStateToProps = (state, ownProps) => {
     recordList: recordList,
     recordType: recordType,
     instantDownload: searchParams.get('download') === 'true',
+    isAdminView: (state.personalReducer.view || state.personalReducer.role) === 'admin',
   }
 }
 

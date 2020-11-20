@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "----- INSTALL -------"
+echo "----- INSTALL -----"
 
 # build the react app
 npm install -g yarn || { echo "Npm install failed" ;exit 1; }
