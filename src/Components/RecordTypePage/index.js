@@ -97,14 +97,12 @@ class RecordTypePage extends Component {
     return (
       <div className='recordTypePage'>
         {!this.state.isPrinting && (
-          <React.Fragment>
-            <RecordTypeNav
-              currentId={this.props.recordId}
-              recordTypes={this.props.recordList}
-              print={this.print}
-              location={this.props.location}
-            />
-          </React.Fragment>
+          <RecordTypeNav
+            currentId={this.props.recordId}
+            recordTypes={this.props.recordList}
+            print={this.print}
+            location={this.props.location}
+          />
         )}
         {(this.state.isPrinting ? this.props.recordList : [this.props.recordType]).map(record => (
           <React.Fragment key={record.sys.id}>
