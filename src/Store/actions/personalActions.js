@@ -1,9 +1,20 @@
 import OktaAuth from '@okta/okta-auth-js'
 
+// Fall back to using the example file if it doesn't exist. This will allow
+// the app to still run for development purposes without any additional setup (e.g. fetching the list from AWS)
+let authorization
+try {
+  authorization = require(`Constants/authorization${process.env.CI ? '.example' : ''}`)
+} catch (e) {
+  authorization = require('Constants/authorization.example')
+}
+const { fullAccessIds, fullAccessDepartments } = authorization
+
 export const REQUEST_TOKEN = 'REQUEST_TOKEN'
 export const RECEIVE_TOKEN = 'RECEIVE_TOKEN'
 export const RECEIVE_NO_LOGIN = 'RECEIVE_NO_LOGIN'
 export const RECEIVE_VALIDATION_ERROR = 'RECEIVE_VALIDATION_ERROR'
+export const SET_VIEW = 'SET_VIEW'
 
 export const NOT_FETCHED = 'API_STATUS_NOT_FETCHED'
 export const FETCHING = 'API_STATUS_FETCHING'
@@ -49,14 +60,15 @@ export const requestToken = () => {
   }
 }
 
-export const recieveToken = (token) => {
+export const receiveToken = (token, role) => {
   return {
     type: RECEIVE_TOKEN,
     token: token,
+    role: role,
   }
 }
 
-export const recieveNoLogin = () => {
+export const receiveNoLogin = () => {
   return {
     type: RECEIVE_NO_LOGIN,
   }
@@ -69,14 +81,25 @@ export const recieveValidationFailure = (error) => {
   }
 }
 
+export const setView = (view) => {
+  return (dispatch) => dispatch({
+    type: SET_VIEW,
+    view: view,
+  })
+}
+
 const handleToken = (dispatch, data) => {
   if (data.idToken) {
+    let role = 'staff'
+    if (fullAccessDepartments.includes(data.claims.primary_affiliation) || fullAccessIds.includes(data.claims.netid)) {
+      role = 'admin'
+    }
     dispatch(
-      recieveToken(data.idToken),
+      receiveToken(data.idToken, role),
     )
   } else {
     dispatch(
-      recieveNoLogin(),
+      receiveNoLogin(),
     )
   }
 }

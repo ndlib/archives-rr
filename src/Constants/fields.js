@@ -1,3 +1,9 @@
+export const restrictedFields = [
+  'systemOfRecord',
+  'archivesNotes',
+  'generalCounselNotes',
+]
+
 export const displayFields = [
   'recordType',
   'scheduleId',

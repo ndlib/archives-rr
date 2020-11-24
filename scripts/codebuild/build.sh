@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "---- BUILD ----"
+echo "----- BUILD -----"
 
 # build
 yarn build || { echo "React Build failed" ;exit 1; }
