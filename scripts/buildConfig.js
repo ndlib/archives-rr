@@ -52,7 +52,7 @@ const handler = async () => {
         }
         data = await secretsManager.getSecretValue(params).promise()
       } catch(err) {
-        console.error(`${RED}Unable to read ${psList[j].name} from parameter store.${NC}`)
+        console.error(`${RED}Unable to read ${mapping.secretPath} from secrets manager.${NC}`)
         if (process.env.CI) {
           console.error(err)
         }
