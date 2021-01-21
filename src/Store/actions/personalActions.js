@@ -4,7 +4,7 @@ import OktaAuth from '@okta/okta-auth-js'
 // the app to still run for development purposes without any additional setup (e.g. fetching the list from AWS)
 let authorization
 try {
-  authorization = require(`Constants/authorization${process.env.CI ? '.example' : ''}`)
+  authorization = require('Constants/authorization')
 } catch (e) {
   authorization = require('Constants/authorization.example')
 }
