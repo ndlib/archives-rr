@@ -24,6 +24,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: cp src/Constants/authorization.example.js src/Constants/authorization.js
     - run: yarn install --no-lockfile
     - name: Build Project
       run: yarn build
