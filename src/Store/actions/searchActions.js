@@ -9,12 +9,12 @@ export const CLEAR_SEARCH = 'CLEAR_SEARCH'
 export const SETADANCEDSEARCH = 'SETADANCEDSEARCH'
 export const REMOVEADANCEDSEARCH = 'REMOVEADANCEDSEARCH'
 
-export const submitSearch = (terms, termMode, fieldSearch, recordTypes, advancedSearch) => {
+export const submitSearch = (terms, termMode, fieldSearch, recordTypes, advancedSearch, role) => {
   return dispatch => {
     // dispatch message to store that we are starting the search
     dispatch(startSearch(terms, termMode, fieldSearch, advancedSearch))
 
-    let results = basicSearchResults(terms, termMode, fieldSearch, recordTypes)
+    let results = basicSearchResults(terms, termMode, fieldSearch, recordTypes, role)
     if (advancedSearch) {
       // if we don't have any terms basic search gave us no results.
       // start with all records as potential results and filter
@@ -31,7 +31,7 @@ export const submitSearch = (terms, termMode, fieldSearch, recordTypes, advanced
       if (advancedSearch.dateSearch) {
         results = dateSearchResults(results, recordTypes, advancedSearch.dateSearch)
       }
-      results = advancedSearchResults(results, recordTypes, advancedSearch)
+      results = advancedSearchResults(results, recordTypes, advancedSearch, role)
     }
 
     // order results by most hits

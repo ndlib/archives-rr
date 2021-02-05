@@ -1,9 +1,11 @@
-const advancedSearchResults = (results, recordTypes, advancedSearch) => {
+import { restrictedFields } from 'Constants/fields'
+
+const advancedSearchResults = (results, recordTypes, advancedSearch, role) => {
   // Get all the advanced searches as a list except dateSearch since that
   // is handled separately
   const searchFields = []
   Object.keys(advancedSearch).forEach(key => {
-    if (key !== 'dateSearch') {
+    if (key !== 'dateSearch' && (role === 'admin' || !restrictedFields.includes(key))) {
       searchFields.push(key)
     }
   })

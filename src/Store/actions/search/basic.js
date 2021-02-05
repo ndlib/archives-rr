@@ -1,12 +1,13 @@
-import { searchableFields } from 'Constants/fields'
+import { searchableFields, restrictedFields } from 'Constants/fields'
 
-const basicSearchResults = (terms, termMode, fieldSearch, recordTypes) => {
+const basicSearchResults = (terms, termMode, fieldSearch, recordTypes, role) => {
   let results = []
   // loop through all the searchable field type using each search term
   recordTypes.forEach(recordType => {
     const termsFound = []
     terms.forEach(term => {
       searchableFields
+        .filter(field => role === 'admin' || !restrictedFields.includes(field))
         .filter(field => !fieldSearch || fieldSearch === 'all' || field === fieldSearch)
         .forEach(field => {
           // check if the field exists and contains the search term
