@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import Select from 'react-select'
 
-import { searchableFields, getLabel } from 'Constants/fields'
+import { searchableFields, restrictedFields, getLabel } from 'Constants/fields'
 import { submitSearch, clearSearch } from 'Store/actions/searchActions'
 import SubmitSearch from './SubmitSearch'
 import AdvancedSearch from './AdvancedSearch'
@@ -17,13 +17,6 @@ import {
 } from 'Functions/searchHelpers'
 import './style.css'
 
-const fieldSearchOptions = [
-  { value: 'all', label: 'All Fields' },
-].concat(searchableFields.map(fieldName => ({
-  value: fieldName,
-  label: getLabel(fieldName),
-})))
-
 const termModeOptions = [
   { value: 'and', label: 'Match ALL terms (AND)' },
   { value: 'or', label: 'Match ANY term (OR)' },
@@ -35,7 +28,7 @@ class SearchTools extends Component {
     super(props)
     this.state = {
       searchValue: hasSearch(props) ? getRawQueryTerms(this.props.match.params.search) : '',
-      fieldSearch: fieldSearchOptions.find(opt => opt.value === (getQueryParam(this.props.match.params.search, 'field') || 'all')),
+      fieldSearch: props.fieldSearchOptions.find(opt => opt.value === (getQueryParam(this.props.match.params.search, 'field') || 'all')),
       termMode: termModeOptions.find(opt => opt.value === (getQueryParam(this.props.match.params.search, 'termMode') || 'or')),
     }
     this.searchFieldOnChange = this.searchFieldOnChange.bind(this)
@@ -56,16 +49,16 @@ class SearchTools extends Component {
     )
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentDidUpdate (prevProps) {
     // if the url changes we need to update the search store
-    if (nextProps.match.params.search !== this.props.match.params.search) {
-      nextProps.search(
+    if (prevProps.match.params.search !== this.props.match.params.search || prevProps.isAdminView !== this.props.isAdminView) {
+      this.props.search(
         splitTerms(this.state.searchValue),
         this.state.termMode.value,
         this.state.fieldSearch.value,
-        nextProps.contentReducer.recordTypes,
-        getAdvancedSearchFromUrl(nextProps.match.params.search),
-        nextProps.dispatch,
+        this.props.contentReducer.recordTypes,
+        getAdvancedSearchFromUrl(this.props.match.params.search),
+        this.props.dispatch,
       )
     }
   }
@@ -133,7 +126,7 @@ class SearchTools extends Component {
             }}
             autoComplete='off'
           />
-          <Select className='fieldSearch' options={fieldSearchOptions} value={this.state.fieldSearch} onChange={this.onChangeFieldSearch} />
+          <Select className='fieldSearch' options={this.props.fieldSearchOptions} value={this.state.fieldSearch} onChange={this.onChangeFieldSearch} />
           <Select className='termMode' options={termModeOptions} value={this.state.termMode} onChange={this.onChangeTermMode} />
           <SubmitSearch searchBoxValue={this.state.searchValue} props={this.props} onSubmit={this.searchSubmit} />
         </div>
@@ -144,14 +137,27 @@ class SearchTools extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { ...state }
+  const isAdminView = (state.personalReducer.view || state.personalReducer.role) === 'admin'
+  const searchFields = searchableFields.filter(field => isAdminView || !restrictedFields.includes(field))
+  const fieldSearchOptions = [
+    { value: 'all', label: 'All Fields' },
+  ].concat(searchFields.map(fieldName => ({
+    value: fieldName,
+    label: getLabel(fieldName),
+  })))
+  return {
+    ...state,
+    isAdminView,
+    fieldSearchOptions,
+  }
 }
 const mapDispatchToProps = (dispatch) => ({ dispatch })
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   // normally dispatch should be called in mapDispatchToProps, but we need to
   // know the current route, which is unavailable until we merge props
   const search = (terms, termMode, fieldSearch, recordTypes, advancedSearch, dispatch) => {
-    dispatch(submitSearch(terms, termMode, fieldSearch, recordTypes, advancedSearch))
+    const role = (stateProps.personalReducer.view || stateProps.personalReducer.role)
+    dispatch(submitSearch(terms, termMode, fieldSearch, recordTypes, advancedSearch, role))
   }
   return { ...stateProps, ...dispatchProps, ...ownProps, search }
 }
