@@ -26,7 +26,7 @@ const RecordField = ({
     <div className={`recordTypeField ${field} ${className}`}>
       <label htmlFor={field}>{label}</label>
       <div id={field}>
-        <ReactMarkdown source={text} />
+        <ReactMarkdown source={text} linkTarget='_blank' />
         {
           // Removing highlighting as markdown and/or html does not play well with it. If we want highlighting on this page we will have to do further investigation.
           // <Highlighter
