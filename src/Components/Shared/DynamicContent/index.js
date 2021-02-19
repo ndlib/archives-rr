@@ -21,11 +21,11 @@ const DynamicContent = ({ slug, children, ...props }) => {
       <>
         <h1>{page.fields.name}</h1>
         <div className='text-content'>
-          <ReactMarkdown source={page.fields.mainText} />
+          <ReactMarkdown source={page.fields.mainText} linkTarget='_blank' />
         </div>
         {children}
         {page.fields.afterText
-          ? <div className='text-content'><ReactMarkdown source={page.fields.afterText} /></div>
+          ? <div className='text-content'><ReactMarkdown source={page.fields.afterText} linkTarget='_blank' /></div>
           : null}
       </>
     )
