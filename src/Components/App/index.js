@@ -17,6 +17,7 @@ import Home from 'Components/Home'
 import Categories from 'Components/Categories'
 import Search from 'Components/Search'
 import RecordTypePage from 'Components/RecordTypePage'
+import Help from 'Components/Help'
 import NotFound from 'Components/Shared/NotFound'
 
 // create store
@@ -32,6 +33,7 @@ const App = () => {
             <Route exact path='/categories' component={Categories} />
             <Route exact path='/search/:search?' component={Search} />
             <Route exact path='/recordType/:id/:search?' component={RecordTypePage} />
+            <Route exact path='/help' component={Help} />
             <Route component={NotFound} />
           </Switch>
         </Page>

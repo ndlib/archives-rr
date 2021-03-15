@@ -2,13 +2,13 @@ import OktaAuth from '@okta/okta-auth-js'
 
 // Fall back to using the example file if it doesn't exist. This will allow
 // the app to still run for development purposes without any additional setup (e.g. fetching the list from AWS)
-let authorization
+let config
 try {
-  authorization = require('Constants/authorization')
+  config = require('Constants/config')
 } catch (e) {
-  authorization = require('Constants/authorization.example')
+  config = require('Constants/config.example')
 }
-const { fullAccessIds, fullAccessDepartments } = authorization
+const { fullAccessIds, fullAccessDepartments } = config
 
 export const REQUEST_TOKEN = 'REQUEST_TOKEN'
 export const RECEIVE_TOKEN = 'RECEIVE_TOKEN'

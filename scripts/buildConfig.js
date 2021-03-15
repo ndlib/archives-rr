@@ -16,6 +16,19 @@ const getStage = () => {
   return data[1]
 }
 
+const findExport = (pre, stage, post, data) => {
+  let key = (pre ? pre + '-' : '') + stage + (post ? '-' + post : '')
+
+  for(let i = 0; i < data.length; i++) {
+    if (data[i].Name == key) {
+      return data[i].Value
+    }
+  }
+
+  throw `${key} is not found in the cloudformation exports for stage "${stage}"`
+}
+
+
 const handler = async () => {
   try {
     const stage = getStage()
@@ -57,6 +70,7 @@ const handler = async () => {
           console.error(err)
         }
         error = true
+        continue
       }
 
       // Now process the individual fields that we have mapped to config values
@@ -82,9 +96,38 @@ const handler = async () => {
       process.exit(1)
     }
 
-    var stream = fs.createWriteStream(`${__dirname}/../src/Constants/authorization.js`);
+    // Get dependent service urls from exports
+    const apiList = [
+      'contentfuldirect',
+    ]
+    const exportResults = await exec('aws cloudformation list-exports')
+    const stdout = exportResults.stdout
+    const data = stdout ? JSON.parse(stdout) : {}
+    const services = {}
+
+    for(let i = 0; i < apiList.length; i++) {
+      try {
+        // In test, use prod version of other services
+        // Prod does not exist in testlibnd, so we have an environment variable to fake these service urls there
+        services[apiList[i]] = findExport(apiList[i], stage, 'api-url', data['Exports'])
+      } catch(err) {
+        console.error(`${RED}${err}${NC}`)
+        error = true
+      }
+    }
+
+    if (error) {
+      process.exit(1)
+    }
+
+    var stream = fs.createWriteStream(`${__dirname}/../src/Constants/config.js`);
     stream.once('open', function(fd) {
       stream.write(`module.exports = {\n`)
+      stream.write('  services: {\n')
+      for(let i = 0; i < apiList.length; i++) {
+        stream.write("    " + apiList[i].replace('-', '') + ": '" + services[apiList[i]] + "',\n")
+      }
+      stream.write('  },\n')
       Object.keys(secretsOutput).forEach(key => {
         if (Array.isArray(secretsOutput[key])) {
           stream.write(`  ${key}: [\n`)

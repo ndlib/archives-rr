@@ -22,6 +22,11 @@ const Navigation = () => {
           activeClassName='active'
         >Search
         </NavLink>
+        <NavLink
+          to='/help'
+          activeClassName='active'
+        >Help/Info/FAQ
+        </NavLink>
         <span className='right'>
           <ViewDropdown />
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
