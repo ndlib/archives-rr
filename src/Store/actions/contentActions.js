@@ -1,4 +1,10 @@
-import { contentfulBaseUrl } from 'Constants/endpoints'
+let config
+try {
+  config = require('Constants/config')
+} catch (e) {
+  config = require('Constants/config.example')
+}
+const contentfulBaseUrl = config.services.contentfuldirect
 
 // action types
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
